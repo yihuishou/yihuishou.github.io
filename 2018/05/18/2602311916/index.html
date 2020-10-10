@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Mysql 的索引应用 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Mysql 的索引应用</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/05/18/2602311916/">Mysql 的索引应用</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Mysql/">Mysql</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-05-18
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/05/18/2602311916/">Mysql 的索引应用</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-05-18
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Mysql/">Mysql</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="索引"><a href="#索引" class="headerlink" title="索引　　"></a>索引　　</h3><p>数据库的索引就像一本书的目录，能够加快数据库的查询速度。</p>
+<p>MYSQL索引有四种<code>PRIMARY</code>、<code>INDEX</code>、<code>UNIQUE</code>、<code>FULLTEXT</code>， 其中<code>PRIMARY</code>、<code>INDEX</code>、<code>UNIQUE</code>是一类，<code>FULLTEXT</code>是一类。</p>
+<p>这四种都是单列索引，也就是他们都是作用于单一列，所以也称单列索引；<br>但是所以一个索引也可以作用于多个列上，称为组合索引或复合索引。</p>
+<h3 id="单列索引"><a href="#单列索引" class="headerlink" title="单列索引"></a>单列索引</h3><p>新建一张测试表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> T_USER( <span class="keyword">ID</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,USERNAME <span class="built_in">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+
+<p>　　<br>（1）PRIMARY：主键索引。索引列唯一且不能为空；一张表只能有一个主键索引（主键索引通常在建表时就被指定）</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> T_USER(<span class="keyword">ID</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,USERNAME <span class="built_in">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,PRIMARY <span class="keyword">KEY</span>(<span class="keyword">ID</span>))</span><br></pre></td></tr></table></figure>
+
+<p>（2）NORMAL：普通索引。索引列没有任何限制；</p>
+<p>建表时指定：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> T_USER(<span class="keyword">ID</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,USERNAME <span class="built_in">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,<span class="keyword">INDEX</span> USERNAME_INDEX(USERNAME(<span class="number">16</span>))) //给列USERNAME建普通索引USERNAME_INDEX</span><br></pre></td></tr></table></figure>
+
+<p>ALTER语句指定：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> T_USER <span class="keyword">ADD</span> <span class="keyword">INDEX</span> U_INDEX (USERNAME) //给列USERNAME建普通索引 U_INDEX</span><br></pre></td></tr></table></figure>
+
+<p>删除索引：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> U_INDEX <span class="keyword">ON</span> t_user  //删除表t_user中的索引U_INDEX</span><br></pre></td></tr></table></figure>
+
+<p>（3）UNIQUE：唯一索引。索引列的值必须是唯一的，但允许有空；</p>
+<p>建表时指定：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t_user(<span class="keyword">ID</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,USERNAME <span class="built_in">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,<span class="keyword">UNIQUE</span> U_INDEX(USERNAME)) //给列USERNAME添加唯一索引T_USER</span><br></pre></td></tr></table></figure>
+
+<p>ALTER语句指定</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t_user <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> u_index(USERNAME) //给列T_USER添加唯一索引u_index</span><br></pre></td></tr></table></figure>
+
+<p>删除索引：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> U_INDEX <span class="keyword">ON</span> t_user</span><br></pre></td></tr></table></figure>
+
+<p>　　<br>（4）FULLTEXT：全文搜索的索引。FULLTEXT 用于搜索很长一篇文章的时候，效果最好。用在比较短的文本，如果就一两行字的，普通的 INDEX 也可以。<br>索引的新建和删除和上面一致，这里不再列举…</p>
+<h3 id="组合索引（复合索引）"><a href="#组合索引（复合索引）" class="headerlink" title="组合索引（复合索引）　　"></a>组合索引（复合索引）　　</h3><p>新建一张表</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> T_USER(<span class="keyword">ID</span> <span class="built_in">INT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,USERNAME <span class="built_in">VARCHAR</span>(<span class="number">16</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,CITY <span class="built_in">VARCHAR</span>(<span class="number">10</span>),PHONE <span class="built_in">VARCHAR</span>(<span class="number">10</span>),PRIMARY <span class="keyword">KEY</span>(<span class="keyword">ID</span>) )</span><br></pre></td></tr></table></figure>
+
+<p>组合索引就是把多个列加入到统一个索引中，如新建的表T_USER，我们给USERNAME+CITY+PHONE创建一个组合索引</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t_user <span class="keyword">ADD</span> <span class="keyword">INDEX</span> name_city_phone(USERNAME,CITY,PHONE)  //组合普通索引</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t_user <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> name_city_phone(USERNAME,CITY,PHONE) //组合唯一索引</span><br></pre></td></tr></table></figure>
+
+<p>这样的组合索引，其实相当于分别建立了（USERANME,CITY,PHONE   USERNAME,CITY   USERNAME,PHONE）三个索引。</p>
+<p>为什么没有（CITY,PHONE）索引呢？这是因为MYSQL组合查询“最左前缀”的结果。简单的理解就是只从最左边开始组合。</p>
+<p>并不是查询语句包含这三列就会用到该组合索引：<br>　　<br>以下的查询语句才会用到创建的组合索引</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> USERNAME=<span class="string">"parry"</span> <span class="keyword">and</span> CITY=<span class="string">"广州"</span> <span class="keyword">and</span> PHONE=<span class="string">"180"</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> USERNAME=<span class="string">"parry"</span> <span class="keyword">and</span> CITY=<span class="string">"广州"</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> USERNAME=<span class="string">"parry"</span> <span class="keyword">and</span> PHONE=<span class="string">"180"</span></span><br></pre></td></tr></table></figure>
+
+<p>以下的查询语句是不会用到创建的组合索引</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> CITY=<span class="string">"广州"</span> <span class="keyword">and</span> PHONE=<span class="string">"180"</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> CITY=<span class="string">"广州"</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t_user <span class="keyword">where</span> PHONE=<span class="string">"180"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="索引不足之处"><a href="#索引不足之处" class="headerlink" title="索引不足之处"></a>索引不足之处</h3><p>（1）索引提高了查询的速度，但是降低了INSERT、UPDATE、DELETE的速度，因为在插入、修改、删除数据时，还要同时操作一下索引文件；</p>
+<p>（2）建立索引未见会占用一定的磁盘空间。</p>
+<h3 id="索引的使用注意事项"><a href="#索引的使用注意事项" class="headerlink" title="索引的使用注意事项"></a>索引的使用注意事项</h3><p>（1）只要列中包含NULL值将不会被包含在索引中，组合索引只要有一列含有NULL值，那么这一列对于组合索引就是无效的<br>所以我们在设计数据库的时候最好不要让字段的默认值为NULL;</p>
+<p>（2）使用短索引</p>
+<p>如果可能应该给索引指定一个长度，例如：一个VARCHAR(255)的列，但真实储存的数据只有20位的话，在创建索引时应指定索引的长度为20，而不是默认不写。如下：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t_user <span class="keyword">add</span> <span class="keyword">INDEX</span> U_INDEX(USERNAME(<span class="number">16</span>)) 优于 <span class="keyword">ALTER</span> <span class="keyword">TABLE</span> t_user <span class="keyword">add</span> <span class="keyword">INDEX</span> U_INDEX(USERNAME)</span><br></pre></td></tr></table></figure>
+
+<p>使用短索引不仅能够提高查询速度，而且能节省磁盘操作以及I/O操作。</p>
+<p>（3）索引列排序</p>
+<p>Mysql在查询的时候只会使用一个索引，因此如果where子句已经使用了索引的话，那么order by中的列是不会使用索引的<br>所以order by尽量不要包含多个列的排序，如果非要多列排序，最好使用组合索引。</p>
+<p>（4）Like 语句</p>
+<p>一般情况下不是鼓励使用like,如果非使用，那么需要注意 like”%aaa%”不会使用索引；但like“aaa%”会使用索引。</p>
+<p>（5）不要使用 <code>NOT IN</code> 和 <code>&lt;&gt;</code> 操作</p>
+<h3 id="索引方式-HASH-和-BTREE-的比较"><a href="#索引方式-HASH-和-BTREE-的比较" class="headerlink" title="索引方式 HASH 和 BTREE 的比较"></a>索引方式 HASH 和 BTREE 的比较</h3><p>（1）HASH</p>
+<p>用于对等比较，如 <code>&quot;=&quot;</code> 和 <code>&quot;&lt;=&gt;&quot;</code></p>
+<p>（2）BTREE</p>
+<p>BTREE索引看名字就知道索引以树形结构存储，通常用在像 <code>&quot;=，&gt;，&gt;=，&lt;，&lt;=、BETWEEN、Like&quot;</code> 等操作符查询效率较高；<br>我们通用的就是BTREE索引方式，因为这是Mysql默认的。</p>
+<h3 id="索引的优缺点"><a href="#索引的优缺点" class="headerlink" title="索引的优缺点"></a>索引的优缺点</h3><h4 id="为什么要创建索引呢？"><a href="#为什么要创建索引呢？" class="headerlink" title="为什么要创建索引呢？"></a>为什么要创建索引呢？</h4><p>这是因为，创建索引可以大大提高系统的性能。</p>
+<p>第一、通过创建唯一性索引，可以保证数据库表中每一行数据的唯一性。 </p>
+<p>第二、可以大大加快 数据的检索速度，这也是创建索引的最主要的原因。 </p>
+<p>第三、可以加速表和表之间的连接，特别是在实现数据的参考完整性方面特别有意义。</p>
+<p>第四、在使用分组和排序子句进行数据检索时，同样可以显著减少查询中分组和排序的时间。</p>
+<p>第五、通过使用索引，可以在查询的过程中，使用优化隐藏器，提高系统的性能。</p>
+<p>也许会有人要问：增加索引有如此多的优点，为什么不对表中的每一个列创建一个索引呢？这种想法固然有其合理性，然而也有其片面性。<br>虽然，索引有许多优点， 但是，为表中的每一个列都增加索引，是非常不明智的。</p>
+<p>这是因为，增加索引也有许多不利的一个方面:</p>
+<p>第一、创建索引和维护索引要耗费时间，这种时间随着数据量的增加而增加。 </p>
+<p>第二、索引需要占物理空间，除了数据表占数据空间之外，每一个索引还要占一定的物理空间。如果要建立聚簇索引，那么需要的空间就会更大。 </p>
+<p>第三、当对表中的数据进行增加、删除和修改的时候，索引也要动态的维护，这样就降低了数据的维护速度。</p>
+<h4 id="什么样的字段适合创建索引"><a href="#什么样的字段适合创建索引" class="headerlink" title="什么样的字段适合创建索引"></a>什么样的字段适合创建索引</h4><p>索引是建立在数据库表中的某些列的上面。因此，在创建索引的时候，应该仔细考虑在哪些列上可以创建索引，在哪些列上不能创建索引。</p>
+<p>一般来说，应该在这些列上创建索引，例如：</p>
+<p>第一、在经常需要搜索的列上，可以加快搜索的速度； </p>
+<p>第二、在作为主键的列上，强制该列的唯一性和组织表中数据的排列结构； </p>
+<p>第三、在经常用在连接的列上，这些列主要是一些外键，可以加快连接的速度； </p>
+<p>第四、在经常需要根据范围进行搜索的列上创建索引，因为索引已经排序，其指定的范围是连续的； </p>
+<p>第五、在经常需要排序的列上创建索引，因为索引已经排序，这样查询可以利用索引的排序，加快排序查询时间； </p>
+<p>第六、在经常使用在WHERE子句中的列上面创建索引，加快条件的判断速度。</p>
+<p>建立索引，一般按照select的where条件来建立，比如： </p>
+<p>select的条件是where f1 and f2，那么如果我们在字段f1或字段f2上建立历索引是没有用的，只有在字段f1和f2上同时建立索引才有用等。</p>
+<h4 id="什么样的字段不适合创建索引"><a href="#什么样的字段不适合创建索引" class="headerlink" title="什么样的字段不适合创建索引"></a>什么样的字段不适合创建索引</h4><p>同样，对于有些列不应该创建索引。一般来说，不应该创建索引的的这些列具有下列特点：</p>
+<p>第一，对于那些在查询中很少使用或者参考的列不应该创建索引。这是因为，既然这些列很少使用到，因此有索引或者无索引，<br>并不能提高查询速度。相反，由于增加了索引，反而降低了系统的维护速度和增大了空间需求。 </p>
+<p>第二，对于那些只有很少数据值的列也不应该增加索引。这是因为，由于这些列的取值很少，例如人事表的性别列，<br>在查询的结果中，结果集的数据行占了表中数据行的很大比 例，即需要在表中搜索的数据行的比例很大。<br>增加索引，并不能明显加快检索速度。 </p>
+<p>第三，对于那些定义为text, image和bit数据类型的列不应该增加索引。这是因为，这些列的数据量要么相当大，要么取值相当少。 </p>
+<p>第四，当修改性能远远大于检索性能时，不应创建索引。这是因为，修改性能和检索性能是互相矛盾的。<br>当增加索引时，会提高检索性能，但是会降低修改性能。当减少索引时，会提高修改性能，降低检索性能。<br>因此，当修改性能远远大于检索性能时，不应创建索引。</p>
+<p>创建索引的方法:</p>
+<p>1、创建索引，例如 create index &lt;索引的名字&gt; on table_name (列的列表); </p>
+<p>2、修改表，例如 alter table table_name add index[索引的名字] (列的列表); </p>
+<p>3、创建表的时候指定索引，例如create table table_name ( […], INDEX [索引的名字] (列的列表) );</p>
+<p>查看表中索引的方法:</p>
+<p>show index from table_name; 查看索引</p>
+<p>索引的类型及创建例子:</p>
+<p>1.PRIMARY KEY （主键索引）</p>
+<p>MySQL&gt; alter table table_name add primary key ( <code>column</code> )</p>
+<p>2.UNIQUE 或 UNIQUE KEY (唯一索引)</p>
+<p>mysql&gt; alter table table_name add unique (<code>column</code>)</p>
+<p>3.FULLTEXT (全文索引)</p>
+<p>mysql&gt; alter table table_name add fulltext (<code>column</code> )</p>
+<p>4.INDEX (普通索引)</p>
+<p>mysql&gt; alter table table_name add index index_name ( <code>column</code> )</p>
+<p>5.多列索引 (聚簇索引)</p>
+<p>mysql&gt; alter table <code>table_name</code> add index index_name ( <code>column1</code>, <code>column2</code>, <code>column3</code> )</p>
+<p>修改表中的索引：</p>
+<p>alter table tablename drop primary key,add primary key(fileda,filedb)</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/18/3575145262/">JDK 字符串截取的坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/1499471298/">SpringBoot 中的 Json 格式化配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/22/1391388246/">TeamViewer 在局域网中使用的方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/26/1836404574/">Vuter 插件的简单配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/2700866660/">解决 IDEA 打包输出缺少 mybatis 配置的 SQL 文件问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/08/4211700064/">Mybatis 的缺陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/22/709887644/">Redis 的分布式锁 Redlock</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/05/167649745/">JVM 调优基本垃圾回收</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/05/18/2602311916/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/18/2602311916/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/18/2602311916/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 12.524918989357122px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 8.205710829827499px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 15.417309308327004px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 10.02830568719143px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 15.905292680750886px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 13.969591649742359px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 13.676906653762247px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 9.829491057717478px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.261167722352141px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 13.60306375802804px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 12.539900111250686px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 10.605379741731031px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 17.119806829644677px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 12.269520700530538px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 8.909060719207313px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 19.97786074971722px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 17.166727761469414px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 11.05297971197606px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 18.466521235165224px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 11.049882830555926px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 17.18236392528085px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 15.753688911070498px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 11.679329316776137px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 16.623060332204123px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 16.437861454234856px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 19.671068149937756px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

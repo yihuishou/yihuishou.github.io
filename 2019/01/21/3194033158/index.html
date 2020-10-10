@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Tensorflow 安装注意事项 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Tensorflow 安装注意事项</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/01/21/3194033158/">Tensorflow 安装注意事项</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Deepleanring/">Deepleanring</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-01-21
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/01/21/3194033158/">Tensorflow 安装注意事项</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-01-21
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Deepleanring/">Deepleanring</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>主要问题时 Tensorflow 对 GPU 加速的版本有兼容性要求</p>
+<p>下表是主要对应关系</p>
+<table>
+<thead>
+<tr>
+<th align="center">Tensorflow 版本</th>
+<th align="center">CPU/GPU</th>
+<th align="center">Python 版本</th>
+<th align="center">cuDNN</th>
+<th align="center">CUDA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tensorflow-1.8.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.8.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">7</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.7.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.7.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">7</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.6.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.6.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">7</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.5.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.5.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">7</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.4.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.4.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">6</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.3.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.3.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">6</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.2.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.2.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">5.1</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.1.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.1.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">5.1</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">tensorflow-1.0.0</td>
+<td align="center">CPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">N/A</td>
+<td align="center">N/A</td>
+</tr>
+<tr>
+<td align="center">tensorflow_gpu-1.0.0</td>
+<td align="center">GPU</td>
+<td align="center">2.7, 3.3-3.6</td>
+<td align="center">5.1</td>
+<td align="center">8</td>
+</tr>
+</tbody></table>
+<p><em>安装固定版本的 tensorflow</em></p>
+<p><code>pip install tensorflow_gpu==1.1.0</code></p>
+<p>安装CUDA的注意事项：</p>
+<p>环境变量需要自行配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\bin</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\lib\x64</span><br><span class="line">C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\libnvvp</span><br></pre></td></tr></table></figure>
+
+<p>cuDNN 解压放到 CUDA\v8.0 目录中</p>
+<p>检测python脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes  </span><br><span class="line"><span class="keyword">import</span> imp  </span><br><span class="line"><span class="keyword">import</span> sys  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span>  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        <span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf  </span><br><span class="line">        print(<span class="string">"TensorFlow successfully installed."</span>)  </span><br><span class="line">        <span class="keyword">if</span> tf.test.is_built_with_cuda():  </span><br><span class="line">            print(<span class="string">"The installed version of TensorFlow includes GPU support."</span>)  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            print(<span class="string">"The installed version of TensorFlow does not include GPU support."</span>)  </span><br><span class="line">        sys.exit(<span class="number">0</span>)  </span><br><span class="line">    <span class="keyword">except</span> ImportError:  </span><br><span class="line">        print(<span class="string">"ERROR: Failed to import the TensorFlow module."</span>)  </span><br><span class="line">  </span><br><span class="line">    candidate_explanation = <span class="literal">False</span>  </span><br><span class="line">  </span><br><span class="line">    python_version = sys.version_info.major, sys.version_info.minor  </span><br><span class="line">    print(<span class="string">"\n- Python version is %d.%d."</span> % python_version)  </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> (python_version == (<span class="number">3</span>, <span class="number">5</span>) <span class="keyword">or</span> python_version == (<span class="number">3</span>, <span class="number">6</span>)):  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">        print(<span class="string">"- The official distribution of TensorFlow for Windows requires "</span>  </span><br><span class="line">              <span class="string">"Python version 3.5 or 3.6."</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        _, pathname, _ = imp.find_module(<span class="string">"tensorflow"</span>)  </span><br><span class="line">        print(<span class="string">"\n- TensorFlow is installed at: %s"</span> % pathname)  </span><br><span class="line">    <span class="keyword">except</span> ImportError:  </span><br><span class="line">        candidate_explanation = <span class="literal">False</span>  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- No module named TensorFlow is installed in this Python environment. You may </span></span><br><span class="line"><span class="string">  install it using the command `pip install tensorflow`."""</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        msvcp140 = ctypes.WinDLL(<span class="string">"msvcp140.dll"</span>)  </span><br><span class="line">    <span class="keyword">except</span> OSError:  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- Could not load 'msvcp140.dll'. TensorFlow requires that this DLL be </span></span><br><span class="line"><span class="string">  installed in a directory that is named in your %PATH% environment </span></span><br><span class="line"><span class="string">  variable. You may install this DLL by downloading Microsoft Visual </span></span><br><span class="line"><span class="string">  C++ 2015 Redistributable Update 3 from this URL: </span></span><br><span class="line"><span class="string">  https://www.microsoft.com/en-us/download/details.aspx?id=53587"""</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        cudart64_80 = ctypes.WinDLL(<span class="string">"cudart64_80.dll"</span>)  </span><br><span class="line">    <span class="keyword">except</span> OSError:  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- Could not load 'cudart64_80.dll'. The GPU version of TensorFlow </span></span><br><span class="line"><span class="string">  requires that this DLL be installed in a directory that is named in </span></span><br><span class="line"><span class="string">  your %PATH% environment variable. Download and install CUDA 8.0 from </span></span><br><span class="line"><span class="string">  this URL: https://developer.nvidia.com/cuda-toolkit"""</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        nvcuda = ctypes.WinDLL(<span class="string">"nvcuda.dll"</span>)  </span><br><span class="line">    <span class="keyword">except</span> OSError:  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- Could not load 'nvcuda.dll'. The GPU version of TensorFlow requires that </span></span><br><span class="line"><span class="string">  this DLL be installed in a directory that is named in your %PATH% </span></span><br><span class="line"><span class="string">  environment variable. Typically it is installed in 'C:\Windows\System32'. </span></span><br><span class="line"><span class="string">  If it is not present, ensure that you have a CUDA-capable GPU with the </span></span><br><span class="line"><span class="string">  correct driver installed."""</span>)  </span><br><span class="line">  </span><br><span class="line">    cudnn5_found = <span class="literal">False</span>  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        cudnn5 = ctypes.WinDLL(<span class="string">"cudnn64_5.dll"</span>)  </span><br><span class="line">        cudnn5_found = <span class="literal">True</span>  </span><br><span class="line">    <span class="keyword">except</span> OSError:  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- Could not load 'cudnn64_5.dll'. The GPU version of TensorFlow </span></span><br><span class="line"><span class="string">  requires that this DLL be installed in a directory that is named in </span></span><br><span class="line"><span class="string">  your %PATH% environment variable. Note that installing cuDNN is a </span></span><br><span class="line"><span class="string">  separate step from installing CUDA, and it is often found in a </span></span><br><span class="line"><span class="string">  different directory from the CUDA DLLs. You may install the </span></span><br><span class="line"><span class="string">  necessary DLL by downloading cuDNN 5.1 from this URL: </span></span><br><span class="line"><span class="string">  https://developer.nvidia.com/cudnn"""</span>)  </span><br><span class="line">  </span><br><span class="line">    cudnn6_found = <span class="literal">False</span>  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        cudnn = ctypes.WinDLL(<span class="string">"cudnn64_6.dll"</span>)  </span><br><span class="line">        cudnn6_found = <span class="literal">True</span>  </span><br><span class="line">    <span class="keyword">except</span> OSError:  </span><br><span class="line">        candidate_explanation = <span class="literal">True</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cudnn5_found <span class="keyword">or</span> <span class="keyword">not</span> cudnn6_found:  </span><br><span class="line">        print()  </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> cudnn5_found <span class="keyword">and</span> <span class="keyword">not</span> cudnn6_found:  </span><br><span class="line">            print(<span class="string">"- Could not find cuDNN."</span>)  </span><br><span class="line">        <span class="keyword">elif</span> <span class="keyword">not</span> cudnn5_found:  </span><br><span class="line">            print(<span class="string">"- Could not find cuDNN 5.1."</span>)  </span><br><span class="line">        <span class="keyword">else</span>:  </span><br><span class="line">            print(<span class="string">"- Could not find cuDNN 6."</span>)  </span><br><span class="line">            print(<span class="string">""" </span></span><br><span class="line"><span class="string">  The GPU version of TensorFlow requires that the correct cuDNN DLL be installed </span></span><br><span class="line"><span class="string">  in a directory that is named in your %PATH% environment variable. Note that </span></span><br><span class="line"><span class="string">  installing cuDNN is a separate step from installing CUDA, and it is often </span></span><br><span class="line"><span class="string">  found in a different directory from the CUDA DLLs. The correct version of </span></span><br><span class="line"><span class="string">  cuDNN depends on your version of TensorFlow: </span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">  * TensorFlow 1.2.1 or earlier requires cuDNN 5.1. ('cudnn64_5.dll') </span></span><br><span class="line"><span class="string">  * TensorFlow 1.3 or later requires cuDNN 6. ('cudnn64_6.dll') </span></span><br><span class="line"><span class="string"> </span></span><br><span class="line"><span class="string">  You may install the necessary DLL by downloading cuDNN from this URL: </span></span><br><span class="line"><span class="string">  https://developer.nvidia.com/cudnn"""</span>)  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> candidate_explanation:  </span><br><span class="line">        print(<span class="string">""" </span></span><br><span class="line"><span class="string">- All required DLLs appear to be present. Please open an issue on the </span></span><br><span class="line"><span class="string">  TensorFlow GitHub page: https://github.com/tensorflow/tensorflow/issues"""</span>)  </span><br><span class="line">  </span><br><span class="line">    sys.exit(<span class="number">-1</span>)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:  </span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/12/14/3255864385/">Dart 的进制转换</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/29/472996778/">Jackson 序列化 Hibernate 对象问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/3226173500/">Java 中的占位符</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/1615584056/">Java 配置类与 XML</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/10/15/1193253562/">PL/SQL Developer 使用 Oracle 压缩备份</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/05/3348988487/">SpringBoot 中使用非 Maven 仓库中的 Jar 包</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/04/3950067579/">优雅地使用枚举</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/3823926681/">巴克斯·诺尔范式语法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/18/2144847318/">RPC 与 Restful</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/01/21/3194033158/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/01/21/3194033158/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/01/21/3194033158/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 17.229838623743444px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 12.621927004078655px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 17.368040304684474px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 10.931925299034074px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 16.189215108865554px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 16.697616121611954px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 19.327481723202997px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 14.406330770569628px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.696085732655591px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 12.627444812161997px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 11.167903695530223px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 10.718555625673456px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 16.143935868686903px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 19.24045492884231px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 9.154181052821158px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 11.951707357179407px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 16.705428380347414px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 9.736204824756072px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 14.443416255915103px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 9.867766241029393px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 10.786722733071688px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 14.019943581156012px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 13.991651207128353px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 9.554440767336928px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 14.318657652449055px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.736505771609885px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

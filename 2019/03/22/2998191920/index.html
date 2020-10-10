@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>让 SpringBoot 以系统服务方式启动 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>让 SpringBoot 以系统服务方式启动</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/03/22/2998191920/">让 SpringBoot 以系统服务方式启动</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-03-22
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/03/22/2998191920/">让 SpringBoot 以系统服务方式启动</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-03-22
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>在linux下部署springboot项目是一件很简单的事，直接后台运行就行了，最多写个shell脚本开机自启就行了。我们最近做的项目需要在windows上部署，在windows上运行jar有一个问题，运行的时候会弹出一个cmd窗口，并且不能关闭，关闭的话程序就停止了。spring官方推荐使用winsw来将springboot项目作为服务运行。</p>
+<p>winsw的使用比较简单。从github上下载：winsw下载，要下载的文件有两个：1.winsw.exe程序；2.xml配置文件。我下载的是最新版本的WinSW.NET4.exe和sample-minimal.xml。下载完成后，将下载的两个文件及springboot项目的jar包放在同一个文件夹中。</p>
+<p>需要将winsw执行程序跟xml改成同样的名字，推荐使用项目名+Service的命名方式，比如：WinSW.NET4.exe改成myProjectService.exe，sample-minmal.xml改成myProjectService.xml。</p>
+<p>bat 脚本头添加如下脚本可开启管理员模式启动</p>
+<figure class="highlight vb"><table><tr><td class="code"><pre><span class="line">%<span class="number">1</span> mshta vbscript:CreateObject(<span class="string">"Shell.Application"</span>).ShellExecute(<span class="string">"cmd.exe"</span>,<span class="string">"/c %~s0 ::"</span>,<span class="string">""</span>,<span class="string">"runas"</span>,<span class="number">1</span>)(window.close)&amp;&amp;<span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，命令行进入winsw所在的文件夹，执行“myProjectService.exe install”，其中myProjectService是你修改后的名称。</p>
+<p>注意：命令提示符界面要用管理员权限进入，否则安装服务会失败，提示“WMI Operation failure: AccessDenied”</p>
+<p>命令提示符界面输入命令“net start myProject”启动服务。</p>
+<p>删除服务分为两步：1停止服务；2删除服务，都是在命令行界面实现。</p>
+<p>输入“net stop myProject”停止运行服务。</p>
+<p>输入“myProjectService.exe uninstall”删除服务。</p>
+<p>现实生活中，我们使用windows系统的电脑的时候，可能会遇到这么一种情况：想把一些应用程序添加为开机启动项。对于有图形界面的应用程序，一般不存在问题。但是如果想运行命令行应用程序，就不是那么方便了。一种笨办法就是写个bat，放到启动文件夹里，就可以开机启动了。开机之后，你就会发现，这样会一直显示着一个CMD窗口，而且这个窗口不能关，关了程序就停了。</p>
+<p>其实Windows系统自带后台程序管理的功能，也就是我们经常用到的服务。但是Windows的服务只有程序的开发者在写程序的时候引用到这个功能，我们才能利用服务来控制程序的启动和关闭。对于一般的命令行程序来说，没办法利用服务。</p>
+<p>今天要介绍的WinSW，它就是一个可以将Windows上的任何一个程序注册为服务的工具。同样也可以进行卸载该服务。</p>
+<p>配置文件编写完之后，将配置文件与WinSW.exe放在同一目录中。注意对应WinSW.exe的配置文件名称应该是WinSW.xml。此时，WinSW.exe、WinSW.xml以及你的应用程序应该都是在同一目录中。然后用管理员权限打开一个命令提示符窗口，cd进入到应用程序所在目录，可以通过输入下面的命令来进行控制应用程序对应的服务：</p>
+<p>winsw install 安装服务</p>
+<p>winsw uninstall 卸载服务</p>
+<p>winsw start 开启服务</p>
+<p>winsw stop 停止服务</p>
+<p>winsw restart 重新启动服务</p>
+<p>winsw status 检查服务的当前状态</p>
+<p>安装服务命令执行后，如果返回值为0，就表示服务已经安装成功。此时在windows服务的窗口，就能看到你刚才安装的服务了。</p>
+<p>3、配置项说明</p>
+<p>（1）id</p>
+<p>指定在Windows系统内部使用的识别服务的ID。在系统中安装的所有服务中，这必须是唯一的，它应该完全由字母数字字符组成。</p>
+<p>（2）name</p>
+<p>服务的简短名称，它可以包含空格和其他字符。尽量简短，就像“id”一样，在系统的所有服务名称中，也要保持唯一。</p>
+<p>（3）description</p>
+<p>该服务可读描述。当选中该服务时，它将显示在Windows服务管理器中。</p>
+<p>（4）executable</p>
+<p>该元素指定要启动的可执行文件。它可以是绝对路径，也可以指定可执行文件的名称，然后从环境变量“PATH”中搜索（需要注意的是，服务经常在不同的用户账户中运行，因此它可能需要有不同于你设置在环境变量Path中的路径）。</p>
+<p>（5）startmode</p>
+<p>该元素指定Windows服务的启动模式。它可以是下列值之一：开机、系统、自动或手动。有关详细信息，请参阅MSDN【<a href="https://msdn.microsoft.com/en-us/library/aa384896%28v=vs.85%29.aspx】。默认值是“Automatic”。" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/aa384896%28v=vs.85%29.aspx】。默认值是“Automatic”。</a></p>
+<p>（6）delayedAutoStart</p>
+<p>这个布尔选项允许在定义“自动”启动模式时延时启动。关于延时启动模式，可参阅【<a href="https://blogs.technet.microsoft.com/askperf/2008/02/02/ws2008-startup-processes-and-delayed-automatic-start】。" target="_blank" rel="noopener">https://blogs.technet.microsoft.com/askperf/2008/02/02/ws2008-startup-processes-and-delayed-automatic-start】。</a></p>
+<p>请注意，延时启动模式在早于Windows 7和Windows Server 2008的操作系统中可能失效。在这种情况下，Windows服务安装可能会失败。</p>
+<p>（7）depend</p>
+<p>指定该服务所依赖的其他服务的id。当服务“X”依赖于服务“Y”时，“X”只能在“Y”运行后运行。可以使用多个元素来指定多个依赖项。</p>
+<p>（8）logging</p>
+<p>关于服务进程的日志以及错误信息，有单独的一个配置说明文档【WinSW Logging and Error Reporting】，咱们下次再详细说。</p>
+<p>（9）argument</p>
+<p>该元素指定要传递给可执行文件的参数。</p>
+<p>如果有必要，Winsw会给每一个参数外加引号（“”），所以为了避免双重引号，尽量不要在参数中使用引号。</p>
+<p>为了向后兼容，可以使用“arguments”来指定单个元素中的整个命令行。</p>
+<p>（10）stopargument/stopexecutable</p>
+<p>请求停止服务时，winsw通过调用终止进程的API函数来立即终结服务。然而，如果存在“stopargument”元素，winsw将通过使用”stopargument“作为参数，来启动“executable“元素（或者是”stopexecutable“元素）中配置的进程，来代替调用终止进程的API函数。期望通过这种方式来优雅的关闭服务进程。</p>
+<p>然后，Winsw将等待两个进程自行退出，然后向Windows报告该服务已经终止。</p>
+<p>当你使用“stopargument”元素时，你必须使用“startargument”元素代替“argument”元素。参见下面的完整示例：</p>
+<p>catalina.sh</p>
+<p>jpda</p>
+<p>run</p>
+<p>catalina.sh</p>
+<p>stop</p>
+<p>注意，元素的名称是“startargument”，而不是“startarguments”。因此，要指定多个参数，你必须指定多个元素。</p>
+<p>（11）stoptimeout</p>
+<p>当服务被要求停止时，winsw首先尝试调用GenerateConsoleCtrlEvent 方法（类似于Ctrl+C），然后等待长达15秒的时间，让进程自行退出。</p>
+<p>如果这样做了，进程关闭还是失败了（或者如果进程没有控制台），</p>
+<p>然后winsw会调用终止进程的API函数来立即终止服务。</p>
+<p>这个可选元素允许您改变这个“15秒”的值，这样您就可以控制winsw等待服务进程自行关闭的时间。</p>
+<p>如何指定时间期限，可参考下面的“onfailure”元素的设置：</p>
+<p>10sec</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/1615584056/">Java 配置类与 XML</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/09/30/4240243490/">MDUI v1版本的迁移记录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/21/1183918086/">Return 与 Finally 的执行顺序</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/3798124554/">SpringBoot 使用 Redis 和 StringRedisTemplate</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/2230869343/">我喜欢的排序算法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/03/1811262184/">用于分析问题的 SMART 原则</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/19/2336528398/">不那么安全的 Raid5</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/3165008964/">跟上Java8 时间的魔术</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/03/22/2998191920/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/22/2998191920/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/22/2998191920/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 18.174792765635647px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 13.89551008046652px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 13.092395138635677px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 11.16331618635833px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.545096096377929px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 18.132209292024356px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 15.01234719152746px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 14.810702776121492px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 19.354631738092802px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 16.95826142846355px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 17.6159925528317px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 10.239873955470129px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 12.01307816362954px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 14.269709547724611px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 15.158895382654652px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 14.371056524977067px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 16.702703994689355px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 10.786659084635112px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 19.27513129674734px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 14.696940743250522px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 13.296174481650965px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 18.118071204178396px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 11.127385762038985px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 19.360238759265872px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 15.446017083452277px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.846111939516735px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>SpringDataJPA 生成表列名的控制选项 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>SpringDataJPA 生成表列名的控制选项</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-11-09
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-11-09
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>使用默认配置的SpringBoot的Jpa，自动建表的时候会将驼峰命名的Bean对象的属性</p>
+<p>在数据库中格式化为<code>xxx_xxx</code>的形式。</p>
+<p>修改配置文件中的<code>spring.jpa.hibernate.naming.physical-strategy</code>属性可以开启或关闭该功能</p>
+<ul>
+<li><p><code>org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl</code>不进行格式化</p>
+</li>
+<li><p><code>org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy</code>进行格式化（默认使用）</p>
+</li>
+</ul>
+<p><strong>JPA 语义大全</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">关键字</th>
+<th align="center">示例</th>
+<th align="center">生成的SQL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">And</td>
+<td align="center">findByLastnameAndFirstname</td>
+<td align="center">… where x.lastname = ?1 and x.firstname = ?2</td>
+</tr>
+<tr>
+<td align="center">Or</td>
+<td align="center">findByLastnameOrFirstname</td>
+<td align="center">… where x.lastname = ?1 or x.firstname = ?2</td>
+</tr>
+<tr>
+<td align="center">Is,Equals</td>
+<td align="center">findByFirstnameIs,findByFirstnameEquals</td>
+<td align="center">… where x.firstname = ?1</td>
+</tr>
+<tr>
+<td align="center">Between</td>
+<td align="center">findByStartDateBetween</td>
+<td align="center">… where x.startDate between ?1 and ?2</td>
+</tr>
+<tr>
+<td align="center">LessThan</td>
+<td align="center">findByAgeLessThan</td>
+<td align="center">… where x.age &lt; ?1</td>
+</tr>
+<tr>
+<td align="center">LessThanEqual</td>
+<td align="center">findByAgeLessThanEqual</td>
+<td align="center">… where x.age &lt;= ?1</td>
+</tr>
+<tr>
+<td align="center">GreaterThan</td>
+<td align="center">findByAgeGreaterThan</td>
+<td align="center">… where x.age &gt; ?1</td>
+</tr>
+<tr>
+<td align="center">GreaterThanEqual</td>
+<td align="center">findByAgeGreaterThanEqual</td>
+<td align="center">… where x.age &gt;= ?1</td>
+</tr>
+<tr>
+<td align="center">After</td>
+<td align="center">findByStartDateAfter</td>
+<td align="center">… where x.startDate &gt; ?1</td>
+</tr>
+<tr>
+<td align="center">Before</td>
+<td align="center">findByStartDateBefore</td>
+<td align="center">… where x.startDate &lt; ?1</td>
+</tr>
+<tr>
+<td align="center">IsNull</td>
+<td align="center">findByAgeIsNull</td>
+<td align="center">… where x.age is null</td>
+</tr>
+<tr>
+<td align="center">IsNotNull,NotNull</td>
+<td align="center">findByAge(Is)NotNull</td>
+<td align="center">… where x.age not null</td>
+</tr>
+<tr>
+<td align="center">Like</td>
+<td align="center">findByFirstnameLike</td>
+<td align="center">… where x.firstname like ?1</td>
+</tr>
+<tr>
+<td align="center">NotLike</td>
+<td align="center">findByFirstnameNotLike</td>
+<td align="center">… where x.firstname not like ?1</td>
+</tr>
+<tr>
+<td align="center">StartingWith</td>
+<td align="center">findByFirstnameStartingWith</td>
+<td align="center">… where x.firstname like ?1 (parameter bound with appended %)</td>
+</tr>
+<tr>
+<td align="center">EndingWith</td>
+<td align="center">findByFirstnameEndingWith</td>
+<td align="center">… where x.firstname like ?1 (parameter bound with prepended %)</td>
+</tr>
+<tr>
+<td align="center">Containing</td>
+<td align="center">findByFirstnameContaining</td>
+<td align="center">… where x.firstname like ?1 (parameter bound wrapped in %)</td>
+</tr>
+<tr>
+<td align="center">OrderBy</td>
+<td align="center">findByAgeOrderByLastnameDesc</td>
+<td align="center">… where x.age = ?1 order by x.lastname desc</td>
+</tr>
+<tr>
+<td align="center">Not</td>
+<td align="center">findByLastnameNot</td>
+<td align="center">… where x.lastname &lt;&gt; ?1</td>
+</tr>
+<tr>
+<td align="center">In</td>
+<td align="center">findByAgeIn(Collection ages)</td>
+<td align="center">… where x.age in ?1</td>
+</tr>
+<tr>
+<td align="center">NotIn</td>
+<td align="center">findByAgeNotIn(Collection age)</td>
+<td align="center">… where x.age not in ?1</td>
+</tr>
+<tr>
+<td align="center">TRUE</td>
+<td align="center">findByActiveTrue()</td>
+<td align="center">… where x.active = true</td>
+</tr>
+<tr>
+<td align="center">FALSE</td>
+<td align="center">findByActiveFalse()</td>
+<td align="center">… where x.active = false</td>
+</tr>
+<tr>
+<td align="center">IgnoreCase</td>
+<td align="center">findByFirstnameIgnoreCase</td>
+<td align="center">… where UPPER(x.firstame) = UPPER(?1)</td>
+</tr>
+</tbody></table>
+<p>嵌套实体:</p>
+<p>findBy<code>主实体中子实体的属性名称_子实体的属性名称</code></p>
+<p>例如：</p>
+<p>List findByAddress_ZipCode(ZipCode zipCode) </p>
+<p>表示查询所有 Address（地址）的 zipCode（邮编）为指定值的所有Person(人员，主实体)</p>
+<p><strong>Bean类的注解</strong></p>
+<p>@Entity</p>
+<p>声明一个类为实体Bean。</p>
+<p>@Table</p>
+<p>说明此实体类映射的表名，目录，schema的名字。</p>
+<p>@Id</p>
+<p>声明此表的主键。</p>
+<p>@GeneratedValue</p>
+<p>定义主键的增长策略。我这里一般交给底层数据库处理，所以调用了名叫generator的增长方式，由下边的@GenericGenerator实现</p>
+<p>@GenericGenerator</p>
+<p>hibernate内部的主键增长方式</p>
+<p>@UniqueConstraint</p>
+<p>将对应的字段设置唯一性标识</p>
+<p>(注：UniqueConstraint只在hibernate.hbm2ddl.auto设置为create-drop才会起作用)</p>
+<p>@Version </p>
+<p>注解用于支持乐观锁版本控制。一般可以用 数字 或者 timestamp 类型来支持 version。</p>
+<p>@Column</p>
+<p>用于映射对应的字段,其中参数详解如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">name = “columnName”;</td>
+<td align="center">name 可选，列名(默认值是属性名)</td>
+</tr>
+<tr>
+<td align="center">boolean unique() default false;</td>
+<td align="center">unique 可选，是否在该列上设置唯一约束(默认值false)</td>
+</tr>
+<tr>
+<td align="center">boolean nullable() default true;</td>
+<td align="center">nullable 可选，是否设置该列的值可以为空(默认值true)</td>
+</tr>
+<tr>
+<td align="center">boolean insertable() default true;</td>
+<td align="center">insertable 可选，该列是否作为生成的insert语句中的一个列(默认值true)</td>
+</tr>
+<tr>
+<td align="center">boolean updatable() default true;</td>
+<td align="center">updatable 可选，该列是否作为生成的update语句中的一个列(默认值true)</td>
+</tr>
+<tr>
+<td align="center">String columnDefinition() default “”;</td>
+<td align="center">columnDefinition 可选，为这个特定列覆盖SQL DDL片段 (这可能导致无法在不同数据库间移植)</td>
+</tr>
+<tr>
+<td align="center">String table() default “”;</td>
+<td align="center">table 可选，定义对应的表(默认为主表)</td>
+</tr>
+<tr>
+<td align="center">int length() default 255;</td>
+<td align="center">length 可选，列长度(默认值255)</td>
+</tr>
+<tr>
+<td align="center">int precision() default 0;</td>
+<td align="center">precision 可选，列十进制精度(decimal precision)(默认值0)</td>
+</tr>
+<tr>
+<td align="center">int scale() default 0;</td>
+<td align="center">scale 可选，如果列十进制数值范围(decimal scale)可用,在此设置(默认值0)</td>
+</tr>
+</tbody></table>
+<p>@Transient<br>被注解成 @Transient 的 getter 方法或属性，将不会被持久化</p>
+<p>@Basic<br>所有没有定义注解的属性，等价于在其上面添加了 @Basic注解可以声明属性的获取策略 ( fetch strategy )</p>
+<p>fetch:抓取策略,延时加载与立即加载，optional:指定在生成数据库结构时字段是否允许为 null.</p>
+<p>@Temporal<br>在核心的 Java API 中并没有定义时间精度 ( temporal precision )。因此处理时间类型数据时，你还需要定义将其存储在数据库中所预期的精度。<br>在数据库中，表示时间类型的数据有 DATE，TIME，和 TIMESTAMP 三种精度 ( 即单纯的日期，时间，或者两者兼备 )。 可使用 @Temporal 注解来调整精度。</p>
+<p>第一种：@Temporal(TemporalType.DATE) 实体类会封装成日期“yyyy-MM-dd”的 Date类型。</p>
+<p>第二种：@Temporal(TemporalType.TIME) 实体类会封装成时间“hh-MM-ss”的 Date类型。</p>
+<p>第三种：@Temporal(TemporalType.TIMESTAMP) 实体类会封装成完整的时间“yyyy-MM-dd hh:MM:ss”的 Date类型。</p>
+<p>@Index<br>给某一字段加索引</p>
+<p>如果视图是只读的，您应该使用 @Immutable 注解告诉 Hibernate。 然后它将忽略对该实体的所有更改。只读声明</p>
+<p>JPA 规范的 @GeneratedValue 注解允许您定义用于创建唯一主键值的策略。您可以选择 SEQUENCE、IDENTITY、TABLE 和 AUTO。</p>
+<p>一般来说，我建议使用 SEQUENCE 策略，因为它允许 Hibernate 使用 JDBC 批处理和其他需要延迟执行 SQL INSERT 语句的优化策略。</p>
+<p>然而，您不能将此策略与 MySQL 数据库一起使用。因为它需要一个数据库序列，恰好 MySQL 不支持此功能。</p>
+<p>因此，您需要在 IDENTITY 和 TABLE 之间进行选择。考虑到 TABLE 策略的性能和可扩展性问题，这很容易作出决定。</p>
+<p>如果您正在使用 MySQL 数据库，则应始终使用 GenerationType.IDENTITY。它使用自动增量（autoincremented ）的数据库列，这是最有效的可用方法。</p>
+<p>您可以通过使用 @GeneratedValue(strategy = GenerationType.IDENTITY) 注解主键属性来执行此操作。</p>
+<p>Hibernate 5 中 GenerationType.AUTO</p>
+<p>在旧版本中，Hibernate 为 MySQL 数据库选择 GenerationType.IDENTITY。 这是一个不错的选择。如之前所述，这是最有效的方法。</p>
+<p>不幸的是此行为在 Hibernate 5 中发生了改变。现在是选择 GenerationType.TABLE，它使用数据库表来生成主键。 这种方法需要大量数据库查询和悲观锁来生成唯一值。</p>
+<p>您可以通过定义一个 @GenericGenerator 来避免这一点，以下代码告诉 Hibernate 使用本地策略生成主键值。</p>
+<p>@GenericGenerator(name = “native”, strategy = “native”)</p>
+<p>@Convert 属性转换器</p>
+<p>需要一个现实 AttributeConverter 接口类的转换器，来在实体属性存取数据库时进行转换操作</p>
+<p>AttributeConverter 的两个方法：</p>
+<p>convertToDatabaseColumn（X attribute）用于把输入的类型转成数据库存储的类型</p>
+<p>convertToEntityAttribute (Y dbData) 用于把数据库搜出来的类型转成实体中想要的类型</p>
+<p>为实体设置默认值的方法，直接在属性上给出初始值。@Column 的 columnDefinition 属性设置初始值仅在</p>
+<p>表重新建立时生效</p>
+<p>使用UUID做为主键的问题</p>
+<ol>
+<li><p>将数据库中的主键，设置为varchar(32)。</p>
+</li>
+<li><p>在entity中类头部写入@GenericGenerator(name = “jpa-uuid”, strategy = “uuid”)</p>
+</li>
+<li><p>在entity中id主键顶部写入@GeneratedValue(generator = “jpa-uuid”)，注意generator中的值必须与注释@GenericGenerator中name属性完全一致。</p>
+</li>
+<li><p>设置entity中主键ID为string类型。设置长度为32</p>
+</li>
+<li><p>GenericGenerator是Hibernate中的注释，有两个参数。name是system-uuid“” ，策略strategy是uuid 。</p>
+</li>
+<li><p>@GenericGenerator支持13种策略，分别是：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> &#123;  </span><br><span class="line">  GENERATORS.put(<span class="string">"uuid"</span>, UUIDHexGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"hilo"</span>, TableHiLoGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"assigned"</span>, Assigned.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"identity"</span>, IdentityGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"select"</span>, SelectGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"sequence"</span>, SequenceGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"seqhilo"</span>, SequenceHiLoGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"increment"</span>, IncrementGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"foreign"</span>, ForeignGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"guid"</span>, GUIDGenerator.class);  </span><br><span class="line">  GENERATORS.put(<span class="string">"uuid.hex"</span>, UUIDHexGenerator.class); <span class="comment">//uuid.hex is deprecated  </span></span><br><span class="line">  GENERATORS.put(<span class="string">"sequence-identity"</span>, SequenceIdentityGenerator.class);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的12种策略，再加上native，一共是13种。</p>
+<ol start="7">
+<li><p>@GeneratedValue注解属于一个JPA接口（从JAVA EE 5开始，存在于javax.persistence包下），其接口下包含了两个抽象的参数，GenerationType类型的strategy和String类型的generator，并且两个参数都有相应的默认值。 </p>
+</li>
+<li><p>GenerationType同样也位于javax.persistence包下，并且还继承了Enum枚举类，然后其中有4个值供我们使用，分别是：<br>TABLE：使用一个特定的数据库表格来保存主键。<br>SEQUENCE：根据底层数据库的序列来生成主键，条件是数据库支持序列。 这个值要与generator一起使用，generator 指定生成主键使用的生成器（可能是orcale中自己编写的序列）。<br>IDENTITY：主键由数据库自动生成（主要是支持自动增长的数据库，如mysql）<br>AUTO：主键由程序控制，也是GenerationType的默认值。</p>
+</li>
+<li><p>两个数据库对GenerationType的支持</p>
+</li>
+</ol>
+<p>mysql<br>GenerationType.TABLE<br>GenerationType.AUTO<br>GenerationType.IDENTITY<br>不支持GenerationType.SEQUENCE</p>
+<p>oracle<br>strategy=GenerationType.AUTO<br>GenerationType.SEQUENCE<br>GenerationType.TABLE<br>不支持GenerationType.IDENTITY</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/17/3032697242/">Go 看这一篇就够了</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/723704985/">Java 中判断字符串是否为纯数字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/3798124554/">SpringBoot 使用 Redis 和 StringRedisTemplate</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/14/766019691/">SpringBoot 使用 Swagger2 生成接口说明</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/20/3328494696/">Vue-Router 看这一篇就够了</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/04/3950067579/">优雅地使用枚举</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/2644766663/">开发中的独孤九剑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/16/4275925800/">消灭 Tomcat中的 淇℃伅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/1593155822/">永远不一致的分布式系统</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/3512719846/">跟上Java8 流中的数据</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2017/11/09/3649790665/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/11/09/3649790665/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/11/09/3649790665/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 18.99501268850399px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 18.982111479433968px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 15.217295905642231px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 8.235477331555257px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 16.89405580537195px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 11.77347096572592px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 19.595680417368865px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.729424514195424px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 9.383039580571381px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 10.536604926045067px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 8.8723487818581px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 18.531286695040613px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 10.13666969252914px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.707292947281001px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 11.020009702211809px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 10.155792000523345px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 19.57747785561905px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 19.05691225662202px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 8.70046261429344px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 14.476455390692273px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 9.122803684024571px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 18.48460624370009px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 13.755222017937916px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 14.249725937668028px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 13.524193913988416px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 11.039401563011237px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

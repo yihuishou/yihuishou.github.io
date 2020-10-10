@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Gui 与 Cli 的抉择 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Gui 与 Cli 的抉择</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/05/28/2119795723/">Gui 与 Cli 的抉择</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-05-28
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/05/28/2119795723/">Gui 与 Cli 的抉择</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-05-28
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <blockquote>
+<p>by Addone [天堂鱿鱼]</p>
+</blockquote>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>自Linux渐渐风行起来，有关图形界面（GUI，Graphical User Interface）和命令行界面（CLI，Command Line Interface）之争就一直闹个不停。看了众多评论之后，总有些郁闷之意想要发泄一下，虽然觉得有混水摸鱼的嫌疑，却还是不吐不快。</p>
+<p>首先先声明一下本人的立场。我个人希望自己是站在一个比较中立的角度上看的。但实际应用上，我用图形界面的时间远远超过命令行界面，所以看问题难免会有一些偏颇，请读者见谅。</p>
+<p>其次，本文的目的，不是对GUI和CLI进行比较从而得出何者更佳的结论，而是希望探讨一下为何关于两者的讨论会演变成一种对立的状况，以及试图触及一下两种界面方式所代表的截然不同的哲学观。本文热烈欢迎全文转载，恳请注明出处。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>所谓GUI，我的定义是以图形作为工作元素并以鼠标、键盘协同作为主要输入工具的工作方式。GUI通常使用大量的图标来标识命令，并且通过组织按钮、工具栏、对话框等元素的方式来试图提高界面的直观性和易用性。通常来说，GUI由于使用了大量的图形元素，看起来会比较美观。</p>
+<p>而CLI则自然是指主要以文本方式作为工作元素，并主要以键盘作为输入工具的工作方式。CLI采用直接输入命令和参数的方式直接向计算机发送各种指令，通过组织参数和命令的输入方法来试图提高工作效率。CLI中同样可以采用图形组件以使得界面更为美观，但这些图形组件并不像GUI中的那样具备实际的命令功能（否则就不该称为CLI了）。</p>
+<p>谈一些奇怪的论点</p>
+<p>一直很奇怪，为何很多人把GUI和“易用性”划上等号，而把CLI和“高效”划上等号。尽管从两者的出发点来说是没有错的，但如果说所有应用这些界面的软件都达到了其期望目标，那无异于一个泡沫般的梦想。</p>
+<p>让我们来看看这个软件。这是一个著名的GUI软件的默认界面。说起GUI易用性，大概很多人都能猜到我会选择这个软件作为反面教材。</p>
+<p>图1：不那么易用的GUI</p>
+<p>很显然，这种将按钮隐藏起来的设计是为了使得界面更加美观和简洁。但这种设计实际上大大降低了软件的易用性和效率。我相信没有什么人愿意通过先找到那个用来显示按钮的按钮，点一下，再找到剪切、复制或粘贴按钮，以此来实现剪贴功能。事实上，大多数人会使用快捷键的方式。 </p>
+<p> 像Office这类功能非常复杂的软件，设计一个良好的GUI界面会非常费神，其设计难度不亚于一个集成开发环境（IDE，Intergrated Developing Environment）。但复杂性不应该是界面设计糟糕的借口。如上例，事实上用户根本无法选择哪个按钮应该隐藏，哪个不该。把剪切、复制、粘贴、格式刷这样常用的按钮隐藏起来的唯一作用，就是敦促用户通过快捷键而非按钮去使用这些功能。不过既然如此，又何必把这些功能做成按钮呢？直接拿掉不是更简洁么？ </p>
+<p> 同样，并非所有的CLI软件都是高效的。以下是一个著名的CLI软件的一种典型用法： </p>
+<blockquote>
+<p>不怎么高效的CLI</p>
+</blockquote>
+<p><code>ffmpeg.exe -i &quot;D:\Video\Fearless\Fearless.avi&quot;</code><br><code>-target film-dvd -s 720x352</code><br><code>-padtop 64 -padbottom 64 -maxrate 7350000</code><br><code>-b 3700000 -sc_threshold 1000000000</code><br><code>-trellis -cgop -g 12 -bf 2 -qblur 0.3 -qcomp 0.7</code><br><code>-me full -dc 10 -mbd 2</code><br><code>-aspect 16:9 -pass 2 -passlogfile &quot;D:\Video\ffmpegencode&quot;</code><br><code>-an -f mpeg2video &quot;D:\Fearless.m2v&quot;</code></p>
+<p>如果用户是要使用完全相同的参数进行大量的批量转换，以上命令也还勉强算得上“高效”。因为事实上，如果是需要经常使用的话，用户通常并不会选择每次都输入这堆参数，而会使用脚本的方式把以上的命令“包装”起来，以便于将来的调用。但实际情形则常常更为复杂，用户实际上很少使用完全同样的选项进行转换，而进行“微调”则会成为一件很麻烦的事情，于是就会出现把脚本“包装”起来以提供更灵活的微调功能的脚本，如此周而复始，层层包裹。</p>
+<p>对于这类软件来说，由于所提供的功能选项非常丰富，设计参数列表和设计GUI同样是一件很麻烦的事情。CLI实质上是通过简化操作步骤和提供批量处理选项，来提高进行重复工作时的操作效率的。如果这个软件使用的机会并不多，而且每次使用时的选项都不完全一致，那么不仅不易用，而且也很难“高效”起来。</p>
+<h3 id="两者的特点"><a href="#两者的特点" class="headerlink" title="两者的特点"></a>两者的特点</h3><p>尽管如此，在大多数情况下，GUI确实比CLI更易于使用，而CLI确实要比GUI更高效，因为两者的设计目标就是如此。</p>
+<p>GUI由于采用了大量的图形元素，界面会更显得具有艺术性，富有人性化。相较于枯燥的文本来说，精致且合理的图形大大增强了界面的易用性。</p>
+<p>图2: 漂亮的GUI</p>
+<p>GUI所提供的像单选框、多选框这样的简洁明了的图形控件使得软件操作起来更为直观。</p>
+<p>图3: 伟大的设计——GUI控件</p>
+<p>相较于GUI而言，CLI通常就不具备什么美观程度了。为了提高性能，CLI通常采用纯文本方式工作。</p>
+<p>图4: 一片漆黑的经典CLI界面</p>
+<p>当然，也有例外的。</p>
+<p>图5: 现代Linux上的常见CLI界面</p>
+<p>为了提高工作效率，CLI通常都能够以很自然的方式支持批量操作。例如删除当前目录下的所有obj文件：</p>
+<p><code>rm *.obj</code></p>
+<p>这种精确的指令可以保证得到严格执行，不会像采用GUI方式一样，说不定一个不小心会漏掉了一两个文件。</p>
+<p>由于使用了文本方式直接输入命令，描述起来也比GUI方式轻松得多。例如前面所示命令行的操作，如果需要以GUI方式描述出来的话，少不了一大堆截图，否则很难让广大的菜鸟从浩如烟海的选项中找到自己真正所需要的东西。</p>
+<p>最后要提一下快捷键。快捷键取材于CLI，实质上是一种直接向系统发送指令的操作方式，但由于依赖于GUI，我把它归为GUI的工作元素，并视为GUI为提高工作效率而向CLI所作的折衷，下文会详细说明这一点。</p>
+<h3 id="CLI的哲学"><a href="#CLI的哲学" class="headerlink" title="CLI的哲学"></a>CLI的哲学</h3><p>CLI可以说是人机界面的远祖，哪怕是远古时期的纸带式计算机，也同样需要使用“命令行”方式工作（当然载体不同）。可以说命令行是最符合计算机工作方式的操作方式。</p>
+<p>CLI的身上，带有编程的“影子”。各种选项以命令参数的方式传递给系统，我们所需要做的唯一事情就是查阅手册并选择适当的参数，然后用键盘一股脑儿敲进去，然后就是回车并等待执行结果。如前所述，这种操作方式具有很便利的可重复性，我们可以把这条命令保存为一个脚本以供将来直接调用，也可以粘贴到网络上，任何人都能直接复制并粘贴到自己的电脑上执行并得到同样的结果。</p>
+<p>由于主要使用文本作为界面，CLI软件对计算机的要求也低得多，在同等配置的机器上也要比GUI软件的性能好得多。也正因此，CLI软件得以在广大的服务器系统上大行其道，在这些系统上，性能是最重要的。同时，由于具备了比GUI软件好得多的可伸缩性，CLI的适用范围也远比GUI广泛，在很多嵌入式平台上，我们甚至只能看到CLI的身影。</p>
+<p>但毕竟人不是计算机，符合计算机的工作方式的同时也就意味着不那么人性化。为了用好一个CLI软件，用户不得不反反复复地查阅参数手册，有时还需要做各种参数组合的测试。而且如前所述，对于一些参数复杂的CLI软件，用起来是颇为令人头痛的，甚至有时根本就无法发挥CLI本身应有的“高效”。</p>
+<p>另外，对于CLI软件来说，执行结果往往并不是那么清晰的。用户常常不得不面对满屏滚动的反馈信息体验黑客帝国一般的快感，或者是仿效真正的黑客一般从浩瀚的log海洋中寻觅那条丝毫不起眼的提示信息。</p>
+<p>有人把CLI软件的工作方式称为“WYTIWYG”（What You Think Is What You Get，所想即所得）。这种方式的特点在于，虽然没有直观地反应出执行结果，但却能保证执行结果可以和你的意图一致。从某种程度上来说，这种说法是正确的，因为用户的意图总是以命令＋参数的方式精确地传递给系统，最后虽然不能直观地看到执行结果，却总能发现系统已经出色并严格地完成了工作。但从某种意义上来说，这种说法是不准确的，因为当面对着长长的参数手册时，用户往往已经搞不清自己的意图到底是什么了。</p>
+<h3 id="GUI的哲学"><a href="#GUI的哲学" class="headerlink" title="GUI的哲学"></a>GUI的哲学</h3><p>GUI是为了使操作直观而生，最初被苹果公司应用在其操作系统上。后来苹果公司更是大胆率先采用鼠标作为输入设备，从而进一步使得电脑操作更为直观和易用。不过在那个年代受限于硬件的机能，更由于苹果一贯的高价策略，GUI长期被视为一种不必要的“奢侈品”，直到微软的“平民系统”Windows出现，在大量抄袭了苹果系统的图形元素后，Windows成功地在低端市场蔓延开来，GUI才终于得以大行其道。从这点上来说，微软公司还是起到了很积极的作用，对计算机的平民化和易用化作出了不小的贡献。</p>
+<p>GUI的设计目标就是为了摆脱CLI的弊病，把软件的输入和输出都以更为人性化的形式来展现，从而使得软件更为易用和直观。从这种意义上来说，GUI的出现，可以看作是一种“进步”。通过提供一组图形“控件”，用户得以以更为自然的方式与计算机进行互动。通过简洁明了的图标，用户可以对软件的功能一目了然。通过使用新的输入设备——鼠标，用户可以以更符合人类习惯的方式“Point &amp; Click”，舒服地向计算机传递各种指令。不难想象，GUI的出现对于计算机的发展来说，不啻于一场伟大的革命。</p>
+<p>GUI软件可以通过使用大量的图形元素和图形特效，从根本上改变软件的表现形式，“美观”和“人性化”渐渐成为软件界面设计的讨论主题。随着计算机处理能力的发展，我们甚至能够以3D的形式来呈现和操作软件。大量GUI软件的出现大大降低了学习和使用计算机的门槛，赏心悦目的操作界面吸引了各行各业的人投入其中。如果说CLI适应了各种各样的计算机，GUI则适应了各种各样的人。可以说，要是没有GUI，也就没有今天如此繁盛的计算机产业。GUI的出现顺应了人们的需求，也是历史的必然。</p>
+<p>然而无论多么精美的界面，电脑程序就是电脑程序，其本质上却还是需要通过“命令”传递给计算机才能发挥作用的。由于中间需要进行“人的习惯”到“计算机的习惯”的转换，GUI软件不可能做到如CLI软件一般的高效和精确。可以说，GUI避免了CLI的弊端，但CLI的优点却恰恰成为了GUI的缺点。</p>
+<p>由于大量图形元素的使用，GUI软件带动了计算机硬件的发展，人们对良好界面的追求推动了计算机处理能力的飞速发展。但这同时也说明GUI软件对计算机硬件的依赖性很强，在需要将GUI软件移植到其他平台时，这种依赖性的弊端就会凸现出来。而且即使是在同一平台上，GUI软件所耗费的资源要比相同功能的CLI软件高得多，但所能达到的性能则要低得多。尽管GUI提供了良好的易用性，极大地填补了人机对话的鸿沟，但在另一方面看来，实际上增加了软件开发的成本，缩小了软件的适用范围，同时降低了软件的工作性能。</p>
+<p>由于能够以非常灵活的方式进行设计，GUI软件的表现形式也是千差万别。这本来是件好事情，但由于存在太多的GUI设计方式，开发人员在设计复杂的GUI软件时往往会陷入一种无所适从的困境。为了设计出真正易用好用的GUI软件，开发商往往不得不求助于艺术家和心理学家，甚至不惜采用“仿真”的方式来设计软件界面，这大大增加了软件开发的成本。尽管因此带动了计算机图形学和人机界面设计学的发展，但更多的“无良”开发商基于成本的考虑，选择了滥竽充数得过且过，无视用户的操作习惯和软件的易用性，甚至创造出一些难以使用的“GUI”，企图用更符合自身利益的界面设计来“改善”用户本身自然的“习惯”和“体验”，如上面所提到的那个著名的GUI软件。以操作系统开发商为例，可以说，如今最能坚守易用性阵地的当属苹果公司。尽管其产品同样存在一些瑕疵，但直到今天，苹果公司仍然坚持发展人机界面设计学，其创造的GUI软件大都是艺术性和易用性结合的典范。而在微软Windows系统横行的国内，在其所推行的“廉价GUI”的理念影响下，能以谨慎的态度学习和应用哪怕是“图标设计学”的人都已经几乎绝迹了。这在实际上导致了部分用户对GUI的反感和抵触。</p>
+<p>图6：“仿真”式的GUI软件</p>
+<p>图7：不同操作系统对“图标一致性”的不同理解</p>
+<p>(注：复合式图标设计的一个基本原则是，图标的基本部分能够清楚地表明项目的大类。图中所列出的图标均为文档项目，但Windows的图标基本上没有遵循这个原则。KDE的图标基本遵循，但使用的不同色彩容易引起混淆。而Mac本身的图标系统就直接支持复合图标，因此这些图标的叠加工作实际上是直接由系统完成的。) </p>
+<p>和CLI相对的，GUI的哲学是“WYSIWYG”（What You See Is What You Get，所见即所得），用户以自己所习惯的方式向系统传递指令，并可以立刻在屏幕上以最自然的方式看到执行结果，系统可以保证展示出来的东西和实际处理（如打印、渲染）后的结果基本保持一致。不过这事实上仅仅是GUI的一个设计目标，很多软件是根本达不到令人满意的效果的。而且对于用户来说，如何能把心目中的蓝图展现在计算机上，即使是在GUI高度发达的今天，也还同样是个问题。</p>
+<h3 id="协同工作"><a href="#协同工作" class="headerlink" title="协同工作"></a>协同工作</h3><p>在如今的大多数软件产品中，纯GUI并没有所期望的那么“易用”，而纯CLI系统也没有所想象的那么“高效”。作为一名程序员，我在从Windows平台向Linux平台转换的过程中，发现了一个很有趣的现象。</p>
+<p>Linux在继承了Unix的血统的同时，也继承了其庞大的CLI软件基础（这种说法很不准确，姑且这么说吧），这跟早期Linux主要应用在服务器市场上有关。随着Linux系统被越来越多地应用到桌面市场上，对Linux下GUI软件的呼声也越来越高，也由此而引发了一系列关于Linux系统的争议，例如“Linux不是Windows”、“Linux根本不适合用作桌面系统”、“现在的Linux已经不再是Linux了”、“Linux就应该做自己的服务器，不该到桌面市场瞎掺和”。很多人都忘记了Linux仅仅是一个系统核心而已，这不仅能说明为何Linux核心会如此优秀，也能说明为何Linux会具有惊人的伸缩性。Linux核心既能够和Unix移植过来的大量CLI软件一起组成一个稳固的服务器系统，自然也能够搭载各种GUI软件从而组成一个漂亮的桌面系统，这两者并不矛盾。</p>
+<p>有些跑题了，但从上面的描述可以看出，Linux进入桌面领域的时间不长，其基础则主要是建立在过去的大量CLI软件上的。为了在增强Linux的易用性的同时保留原先的CLI优势，Linux下的许多GUI软件采用了GUI前端＋CLI后端的方式，也就是编写一个用于与原CLI软件进行互动的GUI软件，两者协同工作。这种工作方式和我们平常所说的“前台＋后台”方式并不相同，其CLI部分是一个独立的软件，而GUI部分则仅仅是该软件的一个“Shell”（外壳）而已。GUI部分无法独立工作，而且开发目的仅仅是为了使该软件更易用，而并没有增加任何功能。</p>
+<p>这种引人注目的方式具有很多优点，并且在最近得到了越来越广泛的利用。这种方式结合了GUI和CLI的优点，在使得软件的易用性得到大大增强的同时，其跨平台能力以及性能和效率并没有受到显著削弱。由于同一个后端程序可以搭配不同的各种前端，从而能够以较低的开发成本实现较好的跨平台效果。由于前后端的分开，核心开发人员可以专注于系统性能，而无需受软件表现形式和输入方式的影响；而界面开发人员也可以无需关注核心的实现，只需着力于改善界面的易用性和美观程度即可。这类系统的耦合度通常较低，用户甚至可以选择完全使用CLI来工作而无需理会GUI，这也大大降低了系统的维护成本。</p>
+<p>图8: 漂亮的前端和强大的后端：Texshop＋Texlive</p>
+<p>这是GUI和CLI协同工作的一个好例子，但它也同样存在缺陷。最显而易见的问题在于，对于很多对跨平台没有特别要求的纯GUI软件，为了提高效率而分离并开发一个独立后端显得完全没有必要。于是，一些开发商把CLI的一些理念“借”到了GUI软件中，最常见且有效的莫过于快捷键了。快捷键本身实际上是一种直接使用键盘向系统发送命令的方式，只不过采用按键组合的方式来代替了传统的字符串命令，用户只需记忆各种按键组合即可轻松调用。这种方式既符合GUI的哲学，又引入了CLI的高效，实在是一大创举，自诞生伊始就被广泛采用。如今，一个成熟完善的GUI软件已经根本离不开设计合理的快捷键了。</p>
+<p>图9：无孔不入的快捷键</p>
+<p>尽管快捷键在一定程度上提高了GUI的效率，但对于复杂的应用来说还是很不足够，一种“类CLI”方式呼之欲出。微软Office中Word的域命令方式虽然为Word的易用性蒙上了阴影，却也为Word带来了更灵活的工作方式和更强大的功能，我把这种方式称之为“嵌入GUI中的CLI”。Autodesk公司的AutoCAD则走得更远，索性大胆地应用了GUI和CLI联合构建的“复合界面”，用户需要联合使用菜单、按钮、命令工作，以学习难度的增大为代价，带来的是软件功能的强大和Autodesk公司的富有。</p>
+<p>图10：无所不能的复合界面</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如今我们可以看到广大的GUI拥趸在Windows下使用“Win＋R”来输入命令以快速调用程序，也可以看到坚定的CLI信徒在Linux下使用FB（Frame Buffer）来为自己的终端界面增光添彩。GUI和CLI不是敌对的，灵活运用两者的特点才能开发出更符合用户需求的人机界面。所以，我真的很不明白，为何有这么多人陷入在“GUI还是CLI”这样的争论中无法自拔，甚至还出现了很多宣称“自己喜欢哪个就选哪个好了，吵什么吵”的和事佬。</p>
+<p>其实，对于用户来说，直观、易用且高效的操作方式才是受欢迎的，开发者又何必拘泥于一种固定的操作方式呢？而且，正如很多人所指出的一样，高效、直观，其实有时仅仅取决于用户的习惯而已。如其争论“GUI好还是CLI好”这样的话题，倒还不如多花点时间来研究个更好用的操作界面吧。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/21/1183918086/">Return 与 Finally 的执行顺序</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/895793596/">SQL 中 in or 和 exist 区别</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/30/4109869837/">SpringBoot 解决无法访问静态资源的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/10/09/1453987926/">关于 ShadowSocksR 端口转发</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/09/3227681912/">对 Java 日志的改造</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/2206723729/">常用 Chrome 扩展</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/08/4211700064/">Mybatis 的缺陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/01/14/2168753306/">太阳可能没有核聚变</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/04/1923366184/">微服务与单体应用的故事</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/18/2561778058/">用纯注解方式来使用 Mybatis</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/05/28/2119795723/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/05/28/2119795723/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/05/28/2119795723/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 9.32434315753484px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 15.77300639549632px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 19.987346325543584px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 14.128339567486883px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 19.01278915757975px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 10.823116246490713px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 17.095792105141562px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 19.570246532736714px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 17.496112262947776px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 16.41275234895018px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 13.729970186523392px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 18.746495561701114px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 16.280101426831976px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 13.063343085028453px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 13.816641689522122px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 12.106422964831705px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 13.267325922854651px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 19.223797512073773px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 10.61535014506469px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 14.244362651652278px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 10.968679471174118px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 9.83427554676527px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 13.696914049338893px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 16.140815654572457px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 16.0038854531114px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 16.716674613945624px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

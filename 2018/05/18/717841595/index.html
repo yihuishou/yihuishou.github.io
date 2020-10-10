@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>前端规范 CSS | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>前端规范 CSS</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/05/18/717841595/">前端规范 CSS</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/大前端/">大前端</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-05-18
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/05/18/717841595/">前端规范 CSS</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-05-18
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/大前端/">大前端</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h1 id="前端代码规范-—-css"><a href="#前端代码规范-—-css" class="headerlink" title="前端代码规范 —- css"></a>前端代码规范 —- css</h1><blockquote>
+<p>本文档的目标是使 css 代码风格保持一致，容易被理解和被维护。</p>
+</blockquote>
+<h3 id="样式属性顺序"><a href="#样式属性顺序" class="headerlink" title="样式属性顺序"></a>样式属性顺序</h3><p>以Positioning Model &gt; Box Model &gt; Typographic &gt; Visual 的顺序书写，提高代码的可读性。</p>
+<ul>
+<li>Positioning Model 布局方式、位置，相关属性包括：position, top, z-index, display, float等</li>
+<li>Box Model 盒模型，相关属性包括：width, height, padding, margin，border,overflow</li>
+<li>Typographic 文本排版，相关属性包括：font, line-height, text-align</li>
+<li>Visual 视觉外观，相关属性包括：color, background, list-style, transform, animation</li>
+</ul>
+<h3 id="CSS选择器命名规则"><a href="#CSS选择器命名规则" class="headerlink" title="CSS选择器命名规则"></a>CSS选择器命名规则</h3><ul>
+<li>一律小写,使用” - “横线来命名css,不要使用 “ _ “ 下划线</li>
+<li>尽量不用缩写</li>
+<li>去掉小数点前面的0： 0.9rem =&gt; .9rem</li>
+<li>使用简写：margin： 0 1rem 3rem</li>
+<li>id采用驼峰式命名(不要乱用id)</li>
+<li>css/less中，层级嵌套最好不超过3层</li>
+<li>less中的变量、函数、混合、placeholder采用驼峰式命名</li>
+</ul>
+<h3 id="Css性能优化"><a href="#Css性能优化" class="headerlink" title="Css性能优化"></a>Css性能优化</h3><h4 id="慎重选择高消耗的样式"><a href="#慎重选择高消耗的样式" class="headerlink" title="慎重选择高消耗的样式"></a>慎重选择高消耗的样式</h4><p>高消耗属性在绘制前需要浏览器进行大量计算：</p>
+<ul>
+<li>box-shadows</li>
+<li>border-radius</li>
+<li>transparency</li>
+<li>transforms</li>
+<li>CSS filters（性能杀手）</li>
+</ul>
+<h4 id="避免过分重排"><a href="#避免过分重排" class="headerlink" title="避免过分重排"></a>避免过分重排</h4><p>当发生重排的时候，浏览器需要重新计算布局位置与大小，更多详情。</p>
+<p>常见的重排元素:</p>
+<ul>
+<li>width</li>
+<li>height</li>
+<li>padding</li>
+<li>margin</li>
+<li>display</li>
+<li>border-width</li>
+<li>position</li>
+<li>top</li>
+<li>left</li>
+<li>right</li>
+<li>bottom</li>
+<li>font-size</li>
+<li>float</li>
+<li>text-align</li>
+<li>overflow-y</li>
+<li>font-weight</li>
+<li>overflow</li>
+<li>font-family</li>
+<li>line-height</li>
+<li>vertical-align</li>
+<li>clear</li>
+<li>white-space</li>
+<li>min-height</li>
+</ul>
+<h4 id="正确使用-Display-的属性"><a href="#正确使用-Display-的属性" class="headerlink" title="正确使用 Display 的属性"></a>正确使用 Display 的属性</h4><p>Display 属性会影响页面的渲染，请合理使用。</p>
+<ul>
+<li><p>display: inline后不应该再使用 width、height、margin、padding 以及 float；</p>
+</li>
+<li><p>display: inline-block 后不应该再使用 float；</p>
+</li>
+<li><p>display: block 后不应该再使用 vertical-align；</p>
+</li>
+<li><p>display: table-* 后不应该再使用 margin 或者 float；</p>
+</li>
+</ul>
+<h4 id="不滥用-Float"><a href="#不滥用-Float" class="headerlink" title="不滥用 Float"></a>不滥用 Float</h4><p>Float在渲染时计算量比较大，尽量减少使用。</p>
+<h4 id="动画性能优化"><a href="#动画性能优化" class="headerlink" title="动画性能优化"></a>动画性能优化</h4><p>动画的实现原理，是利用了人眼的“视觉暂留”现象，在短时间内连续播放数幅静止的画面，使肉眼因视觉残象产生错觉，而误以为画面在“动”。</p>
+<p>动画的基本概念：</p>
+<ul>
+<li>帧：在动画过程中，每一幅静止画面即为一“帧”;</li>
+<li>帧率：即每秒钟播放的静止画面的数量，单位是fps(Frame per second);</li>
+<li>帧时长：即每一幅静止画面的停留时间，单位一般是ms(毫秒);</li>
+<li>跳帧(掉帧/丢帧)：在帧率固定的动画中，某一帧的时长远高于平均帧时长，导致其后续数帧被挤压而丢失的现象。</li>
+</ul>
+<p>一般浏览器的渲染刷新频率是 60 fps，所以在网页当中，帧率如果达到 50-60 fps 的动画将会相当流畅，让人感到舒适。</p>
+<ul>
+<li>如果使用基于 javaScript 的动画，尽量使用 requestAnimationFrame. 避免使用 setTimeout, setInterval.</li>
+<li>避免通过类似 jQuery animate()-style 改变每帧的样式，使用 CSS 声明动画会得到更好的浏览器优化。</li>
+<li>使用 translate 取代 absolute 定位就会得到更好的 fps，动画会更顺滑。</li>
+</ul>
+<p><img src="images/css.png" alt></p>
+<h4 id="多利用硬件能力，如通过-3D-变形开启-GPU-加速"><a href="#多利用硬件能力，如通过-3D-变形开启-GPU-加速" class="headerlink" title="多利用硬件能力，如通过 3D 变形开启 GPU 加速"></a>多利用硬件能力，如通过 3D 变形开启 GPU 加速</h4><p>一般在 Chrome 中，3D或透视变换（perspective transform）CSS属性和对 opacity 进行 CSS 动画会创建新的图层，<br>在硬件加速渲染通道的优化下，GPU 完成 3D 变形等操作后，将图层进行复合操作（Compesite Layers），从而避免触发浏览器大面积重绘和重排。</p>
+<p>注：3D 变形会消耗更多的内存和功耗。</p>
+<p>使用 translate3d 右移 500px 的动画流畅度要明显优于直接使用 left：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.ball-1</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: -webkit-transform .<span class="number">5s</span> ease;</span><br><span class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.ball-1</span><span class="selector-class">.slidein</span>&#123;</span><br><span class="line">  <span class="attribute">-webkit-transform</span>: <span class="built_in">translate3d</span>(500px, 0, 0);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.ball-2</span> &#123;</span><br><span class="line">  transition: left .5s ease; left：0;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.ball-2</span><span class="selector-class">.slidein</span> &#123;</span><br><span class="line">  left：500px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="提升-CSS-选择器性能"><a href="#提升-CSS-选择器性能" class="headerlink" title="提升 CSS 选择器性能"></a>提升 CSS 选择器性能</h4><p>CSS 选择器对性能的影响源于浏览器匹配选择器和文档元素时所消耗的时间，所以优化选择器的原则是应尽量避免使用消耗更多匹配时间的选择器。而在这之前我们需要了解 CSS 选择器匹配的机制， 如子选择器规则：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#header</span> &gt; <span class="selector-tag">a</span> &#123;<span class="attribute">font-weight</span>:blod;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们中的大多数人都是从左到右的阅读习惯，会习惯性的设定浏览器也是从左到右的方式进行匹配规则，推测这条规则的开销并不高。</p>
+<p>我们会假设浏览器以这样的方式工作：寻找 id 为 header 的元素，然后将样式规则应用到直系子元素中的 a 元素上。我们知道文档中只有一个 id 为 header 的元素，并且它只有几个 a 元素的子节点，所以这个 CSS 选择器应该相当高效。</p>
+<p>事实上，却恰恰相反，CSS 选择器是从右到左进行规则匹配。了解这个机制后，例子中看似高效的选择器在实际中的匹配开销是很高的，浏览器必须遍历页面中所有的 a 元素并且确定其父元素的 id 是否为 header 。</p>
+<p>如果把例子的子选择器改为后代选择器则会开销更多，在遍历页面中所有 a 元素后还需向其上级遍历直到根节点。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-id">#header</span>  <span class="selector-tag">a</span> &#123;<span class="attribute">font-weight</span>:blod;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>理解了CSS选择器从右到左匹配的机制后，明白只要当前选择符的左边还有其他选择符，样式系统就会继续向左移动，直到找到和规则匹配的选择符，或者因为不匹配而退出。我们把最右边选择符称之为关键选择器。——更多详情</p>
+<p><strong>1、避免使用通用选择器</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line"><span class="selector-class">.content</span> * &#123;<span class="attribute">color</span>: red;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>浏览器匹配文档中所有的元素后分别向上逐级匹配 class 为 content 的元素，直到文档的根节点。因此其匹配开销是非常大的，所以应避免使用关键选择器是通配选择器的情况。</p>
+<p><strong>2、避免使用标签或 class 选择器限制 id 选择器</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line">button#backButton &#123;…&#125;</span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line">#newMenuIcon &#123;…&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、避免使用标签限制 class 选择器</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line">treecell.indented &#123;…&#125;</span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line">.treecell-indented &#123;…&#125;</span><br><span class="line"><span class="comment">/* Much to recommended */</span></span><br><span class="line">.hierarchy-deep &#123;…&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4、避免使用多层标签选择器。使用 class 选择器替换，减少css查找</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line">treeitem[mailfolder="true"] &gt; treerow &gt; treecell &#123;…&#125;</span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line">.treecell-mailfolder &#123;…&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5、避免使用子选择器</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line">treehead treerow treecell &#123;…&#125;</span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line">treehead &gt; treerow &gt; treecell &#123;…&#125;</span><br><span class="line"><span class="comment">/* Much to recommended */</span></span><br><span class="line">.treecell-header &#123;…&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>6、使用继承</strong></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Not recommended */</span></span><br><span class="line"><span class="selector-id">#bookmarkMenuItem</span> &gt; <span class="selector-class">.menu-left</span> &#123; <span class="attribute">list-style-image</span>: <span class="built_in">url</span>(blah) &#125;</span><br><span class="line"><span class="comment">/* Recommended */</span></span><br><span class="line"><span class="selector-id">#bookmarkMenuItem</span> &#123; <span class="attribute">list-style-image</span>: <span class="built_in">url</span>(blah) &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="统一语义理解和命名"><a href="#统一语义理解和命名" class="headerlink" title="统一语义理解和命名"></a>统一语义理解和命名</h3><ul>
+<li>布局</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">语义</th>
+<th align="center">命名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">文档</td>
+<td align="center">doc</td>
+</tr>
+<tr>
+<td align="center">头部</td>
+<td align="center">head</td>
+</tr>
+<tr>
+<td align="center">主体</td>
+<td align="center">body</td>
+</tr>
+<tr>
+<td align="center">尾部</td>
+<td align="center">foot</td>
+</tr>
+<tr>
+<td align="center">主栏</td>
+<td align="center">main</td>
+</tr>
+<tr>
+<td align="center">侧栏</td>
+<td align="center">side</td>
+</tr>
+<tr>
+<td align="center">盒容器</td>
+<td align="center">wrap/box</td>
+</tr>
+</tbody></table>
+<ul>
+<li>模块 、元件 </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">语义</th>
+<th align="center">命名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">导航</td>
+<td align="center">nav</td>
+</tr>
+<tr>
+<td align="center">面包屑</td>
+<td align="center">crumb</td>
+</tr>
+<tr>
+<td align="center">菜单</td>
+<td align="center">menu</td>
+</tr>
+<tr>
+<td align="center">选项卡</td>
+<td align="center">tab</td>
+</tr>
+<tr>
+<td align="center">标题区</td>
+<td align="center">head/title</td>
+</tr>
+<tr>
+<td align="center">内容区</td>
+<td align="center">body/content</td>
+</tr>
+<tr>
+<td align="center">列表</td>
+<td align="center">list</td>
+</tr>
+<tr>
+<td align="center">表格</td>
+<td align="center">table</td>
+</tr>
+<tr>
+<td align="center">表单</td>
+<td align="center">form</td>
+</tr>
+<tr>
+<td align="center">热点</td>
+<td align="center">hot</td>
+</tr>
+<tr>
+<td align="center">排行</td>
+<td align="center">top</td>
+</tr>
+<tr>
+<td align="center">登录</td>
+<td align="center">login</td>
+</tr>
+<tr>
+<td align="center">标志</td>
+<td align="center">logo</td>
+</tr>
+<tr>
+<td align="center">广告</td>
+<td align="center">advertise</td>
+</tr>
+<tr>
+<td align="center">搜索</td>
+<td align="center">search</td>
+</tr>
+<tr>
+<td align="center">幻灯</td>
+<td align="center">slide</td>
+</tr>
+<tr>
+<td align="center">提示</td>
+<td align="center">tips</td>
+</tr>
+<tr>
+<td align="center">帮助</td>
+<td align="center">help</td>
+</tr>
+<tr>
+<td align="center">新闻</td>
+<td align="center">news</td>
+</tr>
+<tr>
+<td align="center">下载</td>
+<td align="center">download</td>
+</tr>
+<tr>
+<td align="center">注册</td>
+<td align="center">regist</td>
+</tr>
+<tr>
+<td align="center">投票</td>
+<td align="center">vote</td>
+</tr>
+<tr>
+<td align="center">版权</td>
+<td align="center">vcopyright/cprt</td>
+</tr>
+<tr>
+<td align="center">结果</td>
+<td align="center">result</td>
+</tr>
+<tr>
+<td align="center">标题</td>
+<td align="center">title</td>
+</tr>
+<tr>
+<td align="center">按钮</td>
+<td align="center">button/btn</td>
+</tr>
+<tr>
+<td align="center">输入</td>
+<td align="center">input</td>
+</tr>
+</tbody></table>
+<ul>
+<li>状态</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">语义</th>
+<th align="center">命名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">选中</td>
+<td align="center">selected</td>
+</tr>
+<tr>
+<td align="center">当前</td>
+<td align="center">current</td>
+</tr>
+<tr>
+<td align="center">显示</td>
+<td align="center">show</td>
+</tr>
+<tr>
+<td align="center">隐藏</td>
+<td align="center">hide</td>
+</tr>
+<tr>
+<td align="center">打开</td>
+<td align="center">open</td>
+</tr>
+<tr>
+<td align="center">关闭</td>
+<td align="center">close</td>
+</tr>
+<tr>
+<td align="center">出错</td>
+<td align="center">error</td>
+</tr>
+<tr>
+<td align="center">不可用</td>
+<td align="center">disabled</td>
+</tr>
+</tbody></table>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/30/740759514/">&lt;![CDATA[]]&gt;和转义字符</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/20/2562261201/">LocalStorage SessionStorage Cookie 的区别及用法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/1333242850/">RESTFUL API 中的那些事</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/05/3348988487/">SpringBoot 中使用非 Maven 仓库中的 Jar 包</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/20/3328494696/">Vue-Router 看这一篇就够了</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/15/1954507039/">WinRar 常用自解压路径及命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/10/16/844506532/">制作文字的半透明渐变网点图案描边效果</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/23/3808206341/">杰克鸡的传送门</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/05/18/717841595/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/18/717841595/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/18/717841595/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 14.217871076416415px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.521654896349933px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 8.694096721980793px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 17.110088576605243px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 18.24015445007631px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 10.625540933006713px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 15.105430969555407px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 17.816076184568978px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 17.931667300772055px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 16.04576110945187px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 17.7233467859572px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 19.485182417300493px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 9.505590596582305px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.980973750105601px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 11.502425580051405px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 12.538479609762836px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 10.563459589878228px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 9.059575940142302px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 14.368001641734713px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 17.288105508586437px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 9.22166801153444px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 13.610227492189143px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 10.014427936207616px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 19.573398954144643px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 9.935698918081707px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 11.546844061768102px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

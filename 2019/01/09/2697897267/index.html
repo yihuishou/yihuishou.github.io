@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Java 8 中的模板字符串 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Java 8 中的模板字符串</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/01/09/2697897267/">Java 8 中的模板字符串</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-01-09
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/01/09/2697897267/">Java 8 中的模板字符串</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-01-09
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h4 id="String-fomat"><a href="#String-fomat" class="headerlink" title="String.fomat"></a>String.fomat</h4><p>例如：</p>
+<p><code>String.format(&quot;%s 今年%d 岁&quot;,&quot;我&quot;, 24);</code></p>
+<p>该方法的缺点是必须指定模板的参数类型，例如<code>%s</code>必须传入String类型否则将抛出异常</p>
+<p>并且<code>%s</code>不能重用。</p>
+<p>例如下面的代码是错误的：</p>
+<p><code>String.format(&quot;%s 今年%d 岁，%s 回来了&quot;,&quot;我&quot;, &quot;24&quot;);</code></p>
+<p>填充模板的变量不得少于模板中定义的参数，否则将抛出异常，而多出来的变量会被忽略。</p>
+<h4 id="MessageFormat-fomat"><a href="#MessageFormat-fomat" class="headerlink" title="MessageFormat.fomat"></a>MessageFormat.fomat</h4><p>例如：</p>
+<p><code>MessageFormat.fomat(&quot;{0}今年{1}岁&quot;,&quot;我&quot;, 24);</code></p>
+<p>模板参数不要求参数类型，即使是null也会被格式化为null。</p>
+<p>但特殊字符仍然需要转义才可被格式化。</p>
+<p>填充模板的变量少于模板中定义的参数，会显示为模板{0}，而多出来的变量会被忽略，不会抛出异常。</p>
+<p>模板参数可以被重用。</p>
+<p>例如下面的代码是正确的的：</p>
+<p>String.format(“{0}今年{1}岁，{0}回来了”,”我”, 24);</p>
+<h4 id="字符串的快速分割与合并"><a href="#字符串的快速分割与合并" class="headerlink" title="字符串的快速分割与合并"></a>字符串的快速分割与合并</h4><p>例如如下的字符串可以通过split方法来快速分割来转化为数组</p>
+<p>String intStr = “1,2,3,4,5,6,7,8,9”;</p>
+<p>String[] splitStr = intStr.split(“,”);</p>
+<p>但快速的逆向操作则是Java8新增的join方法来提供</p>
+<p>String joinStr = String.join(“,”, splitStr);</p>
+<p>join方法的第一个参数为每个元素前追加的分隔符，第二个参数为可迭代的数据源，例如数组之类的。</p>
+<p>最终会返回合并之后的数组。</p>
+<h4 id="String-fomat的模板参数大全"><a href="#String-fomat的模板参数大全" class="headerlink" title="String.fomat的模板参数大全"></a>String.fomat的模板参数大全</h4><p>String.format 作为文本处理工具，为我们提供强大而丰富的字符串格式化功能，为了不止步于简单调用 String.format(“Hello %s”, “John”);</p>
+<p>，下面将笔记整理并记录下来。</p>
+<p>二、重载方法　　　　　　　　　　　　　　　　　　　　　　　　　　</p>
+<p>// 使用当前本地区域对象（Locale.getDefault()）格式化字符串<br>String String.format(String fmt, Object… args);</p>
+<p>// 自定义本地区域对象格式化字符串<br>String String.format(Locale locale, String fmt, Object… args);</p>
+<p>三、占位符　　　　　　　　　　　　　　　　　　　　　　　            </p>
+<p>占位符完整格式为： %[index$][标识]*[最小宽度][.精度]转换符 。</p>
+<p>针对不同数据类型的格式化，占位符的格式将有所裁剪。</p>
+<p>% ，占位符的其实字符，若要在占位符内部使用%，则需要写成 %% 。</p>
+<p>[index$] ，位置索引从1开始计算，用于指定对索引相应的实参进行格式化并替换掉该占位符。</p>
+<p>[标识] ，用于增强格式化能力，可同时使用多个 [标识] ，但某些标识是不能同时使用的。</p>
+<p>[最小宽度] ，用于设置格式化后的字符串最小长度，若使用 [最小宽度] 而无设置 [标识] ，那么当字符串长度小于最小宽度时，则以左边补空格的方式凑够最小宽度。</p>
+<p>[.精度] ，对于浮点数类型格式化使用，设置保留小数点后多少位。</p>
+<p>转换符 ，用于指定格式化的样式，和限制对应入参的数据类型。</p>
+<p>四、对字符、字符串进行格式化　　　　　　　　　　　　　　　　　　　　</p>
+<p>占位符格式为： %[index$][标识][最小宽度]转换符 </p>
+<p>示例——将”hello”格式化为”  hello”</p>
+<p>String raw = “hello”;<br>String str = String.format(“%1$7s”, raw);<br>// 简化<br>//String str = String.format(“%7s”, raw);<br>示例——将”hello”格式化为”hello  “</p>
+<p>String raw = “hello”;<br>String str = String.format(“%1$-7s”, raw);<br>// 简化<br>//String str = String.format(“%-7s”, raw);<br>可用标识：</p>
+<p>-，在最小宽度内左对齐，右边用空格补上。</p>
+<p>可用转换符：</p>
+<p>s，字符串类型。</p>
+<p>c，字符类型，实参必须为char或int、short等可转换为char类型的数据类型，否则抛IllegalFormatConversionException异常。</p>
+<p>b，布尔类型，只要实参为非false的布尔类型，均格式化为字符串true，否则为字符串false。</p>
+<p>n，平台独立的换行符（与通过 System.getProperty(“line.separator”) 是一样的）</p>
+<p>五、对整数进行格式化　　　　　　　　　　　　　　　　　　　　　　 </p>
+<p>占位符格式为： %[index$][标识]*[最小宽度]转换符 </p>
+<p>示例——将1显示为0001</p>
+<p>int num = 1;<br>String str = String.format(“%04d”, num)<br>示例——将-1000显示为(1,000)</p>
+<p>int num = -1000;<br>String str = String.format(“%(,d”, num)<br>可用标识：</p>
+<ul>
+<li><code>-</code>在最小宽度内左对齐,不可以与0标识一起使用。</li>
+<li><code>0</code>若内容长度不足最小宽度，则在左边用0来填充。</li>
+<li><code>#</code>对8进制和16进制，8进制前添加一个0,16进制前添加0x。</li>
+<li><code>+</code>结果总包含一个+或-号。</li>
+<li><code>空格</code>正数前加空格，负数前加-号。</li>
+<li><code>,</code>只用与十进制，每3位数字间用,分隔。</li>
+<li><code>()</code>若结果为负数，则用括号括住，且不显示符号。</li>
+</ul>
+<p>可用转换符：</p>
+<p>b，布尔类型，只要实参为非false的布尔类型，均格式化为字符串true，否则为字符串false。<br>d，整数类型（十进制）。<br>x，整数类型（十六进制）。<br>o，整数类型（八进制）<br>n，平台独立的换行符, 也可通过System.getProperty(“line.separator”)获取</p>
+<p>六、对浮点数进行格式化　　　　　　　　　　　　　　　　　　　　　　　　</p>
+<p>占位符格式为： %[index$][标识]*[最小宽度][.精度]转换符 </p>
+<p>示例：</p>
+<p>double num = 123.4567899;<br>System.out.print(String.format(“%f %n”, num)); // 123.456790<br>System.out.print(String.format(“%a %n”, num)); // 0x1.edd3c0bb46929p6<br>System.out.print(String.format(“%g %n”, num)); // 123.457<br>可用标识：</p>
+<p>-，在最小宽度内左对齐,不可以与0标识一起使用。<br>0，若内容长度不足最小宽度，则在左边用0来填充。<br>#，对8进制和16进制，8进制前添加一个0,16进制前添加0x。<br>+，结果总包含一个+或-号。<br>空格，正数前加空格，负数前加-号。<br>,，只用与十进制，每3位数字间用,分隔。<br>(，若结果为负数，则用括号括住，且不显示符号。</p>
+<p>可用转换符：</p>
+<p>b，布尔类型，只要实参为非false的布尔类型，均格式化为字符串true，否则为字符串false。<br>n，平台独立的换行符, 也可通过System.getProperty(“line.separator”)获取。<br>f，浮点数型（十进制）。显示9位有效数字，且会进行四舍五入。如99.99。<br>a，浮点数型（十六进制）。<br>e，指数类型。如9.38e+5。<br>g，浮点数型（比%f，%a长度短些，显示6位有效数字，且会进行四舍五入）</p>
+<p>七、对日期时间进行格式化　　　　　　　　　　　　　　　　　　　　　　</p>
+<p>占位符格式为： %[index$]t转换符 </p>
+<p>示例：</p>
+<p>Date now = new Date();<br>String str = String.format(“%tF”, now); // 2014-10-12<br>可用转换符</p>
+<ol>
+<li>日期的转换符</li>
+</ol>
+<p>c，星期六 十月 27 14:21:20 CST 2007<br>F，2007-10-27<br>D，10/27/07<br>r，02:25:51 下午<br>T，14:28:16<br>R，14:28<br>b, 月份简称<br>B, 月份全称<br>a, 星期简称<br>A, 星期全称<br>C, 年前两位（不足两位补零）<br>y, 年后两位（不足两位补零）<br>j, 当年的第几天<br>m, 月份（不足两位补零）<br>d, 日期（不足两位补零）<br>e, 日期（不足两位不补零）</p>
+<ol start="2">
+<li>时间的转换符</li>
+</ol>
+<p>H, 24小时制的小时（不足两位补零）<br>k, 24小时制的小时（不足两位不补零）<br>I, 12小时制的小时（不足两位补零）<br>i, 12小时制的小时（不足两位不补零）<br>M, 分钟（不足两位补零）<br>S, 秒（不足两位补零）<br>L, 毫秒（不足三位补零）<br>N, 毫秒（不足9位补零）<br>p, 小写字母的上午或下午标记，如中文为“下午”，英文为pm<br>z, 相对于GMT的时区偏移量，如+0800<br>Z, 时区缩写，如CST<br>s, 自1970-1-1 00:00:00起经过的秒数<br>Q, 自1970-1-1 00:00:00起经过的豪秒</p>
+<p>八、其他转换符　　　　　　　　　　　　　　　　　　　　　　　　　　</p>
+<p>&lt;，用于格式化前一个转换符所描述的参数。</p>
+<p>示例：</p>
+<p>int num = 1000;<br>String str = String.format(“%d %&lt;,d”, num);<br>// 结果”1000 1,000</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/08/4119657311/">BAT 出身的人就很厉害吗？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/18/3575145262/">JDK 字符串截取的坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/09/27/2553549325/">Telnet 与 SSH</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/02/3826197500/">TinyPNG PS 本地插件安装步骤</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/1584671401/">一次由 Mysql 驱动引发的 Bug</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/182889867/">优雅地更新 Github 上 Fork 的项目</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/18/2023601047/">汉化 IDEA 的各种坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/16/4275925800/">消灭 Tomcat中的 淇℃伅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/03/1811262184/">用于分析问题的 SMART 原则</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/05/167649745/">JVM 调优基本垃圾回收</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/01/09/2697897267/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/01/09/2697897267/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/01/09/2697897267/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 12.666070192838479px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 14.935553894878286px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 8.5412699303237px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 12.136058032362776px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 17.551132452795038px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 11.75538140243599px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 14.554626597347355px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.942537063593772px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 16.29770596313194px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 19.687143721552477px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 19.161971565343997px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 18.77885953699223px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 11.735453610532398px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 16.69298261954727px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 13.867920974292405px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 10.32447900082193px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 14.410803986488995px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 13.049457809973127px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 17.441066560753352px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 18.694534594640928px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 14.504483935024782px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 19.56729701094177px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 18.723424334373668px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 10.395441076711975px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 10.202870517116825px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 12.461839114409532px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Git 提交消息模板规范 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Git 提交消息模板规范</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/06/04/2575550749/">Git 提交消息模板规范</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-06-04
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/06/04/2575550749/">Git 提交消息模板规范</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-06-04
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>以下git提交建议的文字描述来自alibaba的开源项目egg.js，git-commit规范；符号部分来自github里部分项目的emoji表情提交建议。</p>
+<p>一、文字规范</p>
+<p>commit一共由五部分组成，具体内容如下。</p>
+<ol>
+<li>type</li>
+</ol>
+<p>提交 commit 的类型，包括以下几种</p>
+<table>
+<thead>
+<tr>
+<th align="center">关键字</th>
+<th align="center">说明</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">feat</td>
+<td align="center">新功能</td>
+<td align="center">[feat] 新功能</td>
+</tr>
+<tr>
+<td align="center">fix</td>
+<td align="center">修复问题</td>
+<td align="center">[fix] 修复问题</td>
+</tr>
+<tr>
+<td align="center">docs</td>
+<td align="center">修改文档</td>
+<td align="center">[docs] 修改文档</td>
+</tr>
+<tr>
+<td align="center">style</td>
+<td align="center">修改代码格式，不影响代码逻辑</td>
+<td align="center">[style] 修改代码格式</td>
+</tr>
+<tr>
+<td align="center">refactor</td>
+<td align="center">重构代码，理论上不影响现有功能</td>
+<td align="center">[refactor] 重构代码</td>
+</tr>
+<tr>
+<td align="center">perf</td>
+<td align="center">提升性能</td>
+<td align="center">[perf] 提升性能</td>
+</tr>
+<tr>
+<td align="center">chore</td>
+<td align="center">修改工具相关（包括但不限于文档、代码生成等）</td>
+<td align="center">[chore] 修改工具</td>
+</tr>
+<tr>
+<td align="center">deps</td>
+<td align="center">升级依赖</td>
+<td align="center">[deps] 升级依赖</td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li>scope</li>
+</ol>
+<p>修改文件的范围（包括但不限于 doc, middleware, core, config, plugin）</p>
+<ol start="3">
+<li>subject</li>
+</ol>
+<p>用一句话清楚的描述这次提交做了什么</p>
+<ol start="4">
+<li>body</li>
+</ol>
+<p>补充 subject，适当增加原因、目的等相关因素，也可不写。</p>
+<ol start="5">
+<li>footer</li>
+</ol>
+<p>当有非兼容修改(Breaking Change)时必须在这里描述清楚<br>关联相关 issue，如 Closes #1, Closes #2, #3<br>如果功能点有新增或修改的，还需要关联文档 doc<br>二、emoji规范</p>
+<p>注：以下emoji表情在git提交时已经完全支持，哪怕下面的表情显示不完整也不用慌，可以直接在git-submit里使用。</p>
+<table>
+<thead>
+<tr>
+<th align="center">emoji</th>
+<th align="center">emoji代码</th>
+<th align="center">commit说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">🎨 (调色板)</td>
+<td align="center">:art:</td>
+<td align="center">改进代码结构/代码格式</td>
+</tr>
+<tr>
+<td align="center">⚡️ (闪电)</td>
+<td align="center">:zap:</td>
+<td align="center">提升性能</td>
+</tr>
+<tr>
+<td align="center">🐎 (赛马)</td>
+<td align="center">:racehorse:</td>
+<td align="center">提升性能</td>
+</tr>
+<tr>
+<td align="center">🔥 (火焰)</td>
+<td align="center">:fire:</td>
+<td align="center">移除代码或文件</td>
+</tr>
+<tr>
+<td align="center">🐛 (bug)</td>
+<td align="center">:bug:</td>
+<td align="center">修复 bug</td>
+</tr>
+<tr>
+<td align="center">🚑 (急救车)</td>
+<td align="center">:ambulance:</td>
+<td align="center">重要补丁</td>
+</tr>
+<tr>
+<td align="center">✨ (火花)</td>
+<td align="center">:sparkles:</td>
+<td align="center">引入新功能</td>
+</tr>
+<tr>
+<td align="center">📝 (铅笔)</td>
+<td align="center">:pencil:</td>
+<td align="center">撰写文档</td>
+</tr>
+<tr>
+<td align="center">🚀 (火箭)</td>
+<td align="center">:rocket:</td>
+<td align="center">部署功能</td>
+</tr>
+<tr>
+<td align="center">💄 (口红)</td>
+<td align="center">:lipstick:</td>
+<td align="center">更新 UI 和样式文件</td>
+</tr>
+<tr>
+<td align="center">🎉 (庆祝)</td>
+<td align="center">:tada:</td>
+<td align="center">初次提交</td>
+</tr>
+<tr>
+<td align="center">✅ (白色复选框)</td>
+<td align="center">:white_check_mark:</td>
+<td align="center">增加测试</td>
+</tr>
+<tr>
+<td align="center">🔒 (锁)</td>
+<td align="center">:lock:</td>
+<td align="center">修复安全问题</td>
+</tr>
+<tr>
+<td align="center">🍎 (苹果)</td>
+<td align="center">:apple:</td>
+<td align="center">修复 macOS 下的问题</td>
+</tr>
+<tr>
+<td align="center">🐧 (企鹅)</td>
+<td align="center">:penguin:</td>
+<td align="center">修复 Linux 下的问题</td>
+</tr>
+<tr>
+<td align="center">🏁 (旗帜)</td>
+<td align="center">:checked_flag:</td>
+<td align="center">修复 Windows 下的问题</td>
+</tr>
+<tr>
+<td align="center">🔖 (书签)</td>
+<td align="center">:bookmark:</td>
+<td align="center">发行/版本标签</td>
+</tr>
+<tr>
+<td align="center">🚨 (警车灯)</td>
+<td align="center">:rotating_light:</td>
+<td align="center">移除 linter 警告</td>
+</tr>
+<tr>
+<td align="center">🚧 (施工)</td>
+<td align="center">:construction:</td>
+<td align="center">工作进行中</td>
+</tr>
+<tr>
+<td align="center">💚 (绿心)</td>
+<td align="center">:green_heart:</td>
+<td align="center">修复 CI 构建问题</td>
+</tr>
+<tr>
+<td align="center">⬇️ (下降箭头)</td>
+<td align="center">:arrow_down:</td>
+<td align="center">降级依赖</td>
+</tr>
+<tr>
+<td align="center">⬆️ (上升箭头)</td>
+<td align="center">:arrow_up:</td>
+<td align="center">升级依赖</td>
+</tr>
+<tr>
+<td align="center">👷 (工人)</td>
+<td align="center">:construction_worker:</td>
+<td align="center">添加 CI 构建系统</td>
+</tr>
+<tr>
+<td align="center">📈 (上升趋势图)</td>
+<td align="center">:chart_with_upwards_trend:</td>
+<td align="center">添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td align="center">🔨 (锤子)</td>
+<td align="center">:hammer:</td>
+<td align="center">重大重构</td>
+</tr>
+<tr>
+<td align="center">➖ (减号)</td>
+<td align="center">:heavy_minus_sign:</td>
+<td align="center">减少一个依赖</td>
+</tr>
+<tr>
+<td align="center">🐳 (鲸鱼)</td>
+<td align="center">:whale:</td>
+<td align="center">相关工作</td>
+</tr>
+<tr>
+<td align="center">➕ (加号)</td>
+<td align="center">:heavy_plus_sign:</td>
+<td align="center">增加一个依赖</td>
+</tr>
+<tr>
+<td align="center">🔧 (扳手)</td>
+<td align="center">:wrench:</td>
+<td align="center">修改配置文件</td>
+</tr>
+<tr>
+<td align="center">🌐 (地球)</td>
+<td align="center">:globe_with_meridians:</td>
+<td align="center">国际化与本地化</td>
+</tr>
+<tr>
+<td align="center">✏️ (铅笔)</td>
+<td align="center">:pencil2:</td>
+<td align="center">修复 typo</td>
+</tr>
+</tbody></table>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/546886075/">Java 变量第二个字母大写的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/3798124554/">SpringBoot 使用 Redis 和 StringRedisTemplate</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/09/159298361/">Thymeleaf 中JavaScript 如何获取后台传入的值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/24/3889357332/">三大定律</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/22/1749531889/">使用 Docker 来部署应用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/24/3043579305/">合理设计条件分支</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/16/4275925800/">消灭 Tomcat中的 淇℃伅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/672772678/">位运算的常用技巧</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/2921176476/">跟上Java8 Lambda</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/06/04/2575550749/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/06/04/2575550749/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/06/04/2575550749/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 15.986260735768315px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 12.135160600025095px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 19.899160647780334px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 18.259337080272594px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.542353050121639px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 17.42975292806671px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 18.85982808040974px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 12.844534640642621px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 12.711714100894808px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 17.138252822605374px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 11.654622850093139px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 15.564823370949778px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 13.800847899746156px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 14.807275215787353px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 10.797464116132824px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 17.30657204031096px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 8.776737564408513px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 11.21953332820619px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 9.536874421522498px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 9.637332654436053px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 15.865513369751767px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 19.163656325503904px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 14.140617474391517px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 18.46424682023409px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 18.87550317265874px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 16.675969783357317px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

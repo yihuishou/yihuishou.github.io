@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>SpringDataJPA 踩坑集锦 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>SpringDataJPA 踩坑集锦</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/03/13/1800538801/">SpringDataJPA 踩坑集锦</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-03-13
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/03/13/1800538801/">SpringDataJPA 踩坑集锦</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-03-13
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h3><p>JPA实现为Hibernate，具有三种状态：</p>
+<ol>
+<li>瞬时态(Transient) 未于数据库进行关联状态</li>
+<li>持久态(Persistent) 与数据库关联状态</li>
+<li>脱管态(Detached) 脱离了Hibernate关联的状态</li>
+</ol>
+<h3 id="事务与缓存"><a href="#事务与缓存" class="headerlink" title="事务与缓存"></a>事务与缓存</h3><p>事务注解 <code>@Transcation</code>，定义在 service 层或者 dao 层。对于 更新和删除操作必须声明事务。</p>
+<p>默认情况下，Spring Data JPA 实现的方法都是使用事务的。针对查询类型的方法，其等价于 @Transactional(readOnly=true)；</p>
+<p>增删改类型的方法，等价于 @Transactional。可以看出，除了将查询的方法设为只读事务外，其他事务属性均采用默认值。</p>
+<p>如果用户觉得有必要，可以在接口方法上使用 @Transactional 显式指定事务属性，该值覆盖 Spring Data JPA 提供的默认值。</p>
+<p>同时，开发者也可以在业务层方法上使用 @Transactional 指定事务属性，这主要针对一个业务层方法多次调用持久层方法的情况。</p>
+<p>持久层的事务会根据设置的事务传播行为来决定是挂起业务层事务还是加入业务层的事务。</p>
+<p>缓存注解 <code>@Cacheable</code> 为 Hibernate 的二级缓存注解，需要开启并指定第三方缓存。</p>
+<p>往往不如 spring 自身缓存管理好用，而且对于 hibernate 来说需要使用 <code>@QueryHint</code> 声明查询才行。</p>
+<h3 id="JPQL"><a href="#JPQL" class="headerlink" title="JPQL"></a>JPQL</h3><h4 id="基础语句"><a href="#基础语句" class="headerlink" title="基础语句"></a>基础语句</h4><p>只有 select update delete 三种语句操作</p>
+<p>update 和 delete 语句必须使用 <code>@Modifying</code> 注解</p>
+<p>是否执行 insert 操作基于操作对象是否包含实体主键，如果实体具有有效的主键执行 update</p>
+<p>否则执行 insert。</p>
+<p>update 会更新有修改过的实体属性，并返回更新或插入后的实体对象。</p>
+<p><strong>注意：null 也被算做属性值之一，故更新时需要注意空值</strong></p>
+<p><code>@Modifying</code> 注解开启自动清理缓存 <code>@Modifying(clearAutomatically = true)</code> 可有效清理 update 操作产生的脏数据。</p>
+<p>save()方法与 update 语句的区别是 update 可在语句中指定更新字段，而 save() 方法则更新整个对象中所有发生过修改的字段，</p>
+<p>尤其会导致 null 更新问题。使用save () 方法建议先查询对象 再修改对象的对应属性 最后执行 save()。</p>
+<p>delete 返回 integer 或 int 数值，表示受影响的对象数量</p>
+<p>select 则和 SQL 中的 select 差不多，需要注意查询时要使用首字母大写，表示对象</p>
+<p>不能使用 <code>*</code> 进行查询所有属性，当不指定select 字段时，相当于 <code>*</code> 查询，例如：</p>
+<p>JPQL <code>from User u where u.id = 1</code> 等效于  <code>select * from user u where u.id = 1</code> </p>
+<p>对象通常使用 <code>as</code> 指定别名用于在查询条件中使用，也可用于指定投影属性别名，大部分情况可省略。</p>
+<p>对于表之间的关联关系必须在实体中声明，单纯使用关联语句并不生效。</p>
+<p>JPQL语句中的关联关系共 <code>inner join</code> <code>join</code> <code>left join</code> 三种，没有 <code>on</code> 。也没有 <code>right join</code>。</p>
+<p><code>join</code> 默认为 <code>inner join</code></p>
+<p>关联方式为：join 主表别名.从表 从表别名（可省略，当使用从表字段作为查询条件时需指定）例如：</p>
+<p>无从表查询条件 <code>from User u join u.dept</code></p>
+<p>有从表查询条件 <code>from User u join u.dept p where p.id = :id</code> 或者</p>
+<p>select 和 update 所返回的结果对象，仍然为<strong>持久态</strong>对象。</p>
+<p>当执行<code>flush()</code>方法时，对结果对象的修改会被同步到数据库中。</p>
+<p>使用 spring 自带的 Bean 复制工具类 BeanUtitls 的 Copy 方法可脱离持久态。</p>
+<p>对集合类应使用深拷贝才能脱离Hibernate的管理。</p>
+<p>JPA 支持基础聚合函数以及排序</p>
+<h4 id="语句参数"><a href="#语句参数" class="headerlink" title="语句参数"></a>语句参数</h4><p>JPA 支持传递普通参数和对象参数，支持 <code>?</code> 和 <code>:参数别名</code> 两种占位符。</p>
+<p><code>?</code> 为参数顺序占位符，例如在语句中 <code>?1</code> 表示第一个参数，一旦参数顺序发生变化会出现问题，故不推荐使用。</p>
+<p><code>:参数别名</code> 为参数别名占位符 参数注解前必须添加 <code>@Param</code> 注解。<strong>普通参数和对象参数都必须使用该注解</strong></p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Query</span>(<span class="string">"from User u join u.dept p where p.id = :userid"</span>)</span><br><span class="line"><span class="function">User <span class="title">queryUser</span><span class="params">(@Param (<span class="string">"userid"</span>)</span> Long id)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于对象参数，需要使用spring的SPEL表达式：<code>:#{``#参数对象别名.参数对象属性}</code> </p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Query</span>(<span class="string">"from User u join u.dept p where p.id = :#&#123;#ParamUser.userid&#125;"</span>)</span><br><span class="line"><span class="function">User <span class="title">queryUser</span><span class="params">(@Param (<span class="string">"ParamUser"</span>)</span> User user)</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h3><p>投影主要解决返回的实体属性过多或需要使用自定义属性的情景</p>
+<p>投影不同于实体，没有Hibernate的状态，修改投影不会影响数据库。</p>
+<p>投影可以在原生 SQL 和 JPQL 中使用。</p>
+<h4 id="接口投影"><a href="#接口投影" class="headerlink" title="接口投影"></a>接口投影</h4><p>普通接口，内声明属性的get方法。</p>
+<p>接口投影支持嵌套投影，类投影不支持。</p>
+<p>例如一个具有name属性的User对象：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">User</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    getName();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>嵌套投影中获取嵌套投影中的get方法的属性名必须为实体中关联属性名</strong></p>
+<p>下面示例中的 getPermissionList 方法，PermissionList 是 User 中关联实体的属性：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Entiy</span></span><br><span class="line"><span class="keyword">public</span> Class User&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@OneToMany</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Permission&gt; permissionList;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>嵌套投影示例：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">User</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    getName();</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;Permission&gt; <span class="title">getPermissionList</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Permission</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    getPermission();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意get必须小写</strong></p>
+<p>错误示例：</p>
+<p><strong>getUserName();</strong> <strong>getuserName();</strong></p>
+<h4 id="类投影（DTO）"><a href="#类投影（DTO）" class="headerlink" title="类投影（DTO）"></a>类投影（DTO）</h4><p>Bean类，必须提供包含全部属性的构造方法，可使用 Lombok 的 <code>@Value</code> 注解简化。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多表关联对应关系"><a href="#多表关联对应关系" class="headerlink" title="多表关联对应关系"></a>多表关联对应关系</h3><p>首先 @OneToMany 的含义 @当前实体To关联实体</p>
+<p>所以 @OneToMany 关联实体应为集合，@ManyToOne 不能为属性</p>
+<p>默认维护关系端都为 Many 一侧，由于实体只能维护自身表结构，所以 @OneToMany 在不指定  @JoinColumn 时</p>
+<p>将使用额外的关系表来维护关系。</p>
+<p>对于 @OneToOne 则由 mappedBy 指定关系方来确定，默认单向关系维护方在自身。</p>
+<p><strong>在使用延迟加载的实体上添加 <code>@JsonIgnoreProperties(&quot;hibernateLazyInitializer&quot;)</code> 格式化注解可消除 hibernate 生成的延迟加载标识</strong></p>
+<h4 id="单向一对一"><a href="#单向一对一" class="headerlink" title="单向一对一"></a>单向一对一</h4><p>@OneToOne</p>
+<p>标注在关联属性对象上，表明一对一关联关系</p>
+<p>主要参数：</p>
+<ol>
+<li><p>targetEntity 属性标时关联的实体类，默认为当前标注的实体。</p>
+</li>
+<li><p>cascade 属性表示与此实体一对一关联的实体的级联类型。级联类型指对当前实体进行操作时关联实体执行的操作策略。</p>
+</li>
+</ol>
+<p>其中，在定义关系时，经常会考虑是否要定义cascade属性的问题。</p>
+<p>若不定义，则对关系表不会产生影响，默认没有定义；</p>
+<p><strong>未定义级联类型又操作了关联实体将会导致异常</strong></p>
+<p>五种级联类型：</p>
+<ul>
+<li><p>CasacdeType.PERSIST，级联新建</p>
+</li>
+<li><p>CascadeTypE.REMOVE，级联删除</p>
+</li>
+<li><p>CascadeType.REFRESH，级联刷新</p>
+</li>
+<li><p>CascadeType.MERGE，级联更新</p>
+</li>
+<li><p>CascadeType.ALL，表示选择上述四种。</p>
+</li>
+</ul>
+<ol start="3">
+<li>fetch 属性表示该级联实体的加载方式，有 LAZY 和 EAGER 两种方式</li>
+</ol>
+<ul>
+<li>FetchType.LAZY：延迟加载，关联实体不会立即从数据库中加载</li>
+</ul>
+<p><strong>默认为 FetchType.EAGER 延迟加载的实体一旦被调用将会立即加载，延迟加载会导致 N+1 问题</strong></p>
+<p><strong>使用 BeanUtitls 的 copy 方法的第三个参数 可忽略指定属性，可防止延迟加载失效</strong></p>
+<ul>
+<li>FetchType.EAGER：立即加载，关联实体立即从数据库中加载</li>
+</ul>
+<ol start="4">
+<li>optional 属性表示关联的实体是否允许为 null，默认为true，表示可以为 null。</li>
+</ol>
+<p><strong>当 optional 为 false 时 关联实体一旦为 null 则整个查询结果为 null，生成的查询语句为 inner join</strong></p>
+<p><strong>当 optional 为 true 时 即使关联实体为 null 仍能获取查询结果，只有关联属性为 null，生成的查询语句为 left join</strong></p>
+<ol start="5">
+<li><p>mappedBy 属性用于双向关联实体时，标注在不需要保存关联关系的实体中，值为保存实体关系的实体属性名，非表名。默认为空，不指定则关联的双方都会生成关联外键。</p>
+</li>
+<li><p>orphanRemoval 属性用于在关联实体中自动清理无效的从表实体，且只能使用在 one 一侧。</p>
+</li>
+</ol>
+<p><strong>在关联关系中单向级联中，将主表实体中的从表实体设置为 null 并不能删除从表实体，仅仅是将维护关系字段设置为 null</strong></p>
+<p><strong>当 orphanRemoval 为 ture 时，就可以自动删除关系字段为 null 的从表实体了</strong></p>
+<p>@JoinColumn</p>
+<p>标注在关联属性对象上，标明维护关联关系表字段的相关设置</p>
+<ol>
+<li>name 属性用来标记表中自动生成的关联字段的名称（通常为外键）</li>
+</ol>
+<p>如果不设置，则默认为 <code>关联表_关联表主键</code></p>
+<ol start="2">
+<li><p>referencedColumnName 属性用于标明从表的关联字段，默认使用从表的主键用来作外键。</p>
+</li>
+<li><p>foreignKey 属性用于外键建立策略例如： <code>foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)</code></p>
+</li>
+</ol>
+<p>表示不建立外键，<strong>该属性仅影响外键是否生成，不影响关系字段生成</strong></p>
+<ul>
+<li><p>ConstraintMode.CONSTRAINT，建立外键</p>
+</li>
+<li><p>ConstraintMode.NO_CONSTRAINT，不建立外键</p>
+</li>
+<li><p>ConstraintMode.PROVIDER_DEFAULT，默认配置</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>insertable 和 updatable 可插入可更新，默认为 true。两个属性同时设置为 false 一般用在 @ManyToOne 中避免字段重复映射</p>
+</li>
+<li><p>unique 唯一约束 默认为 false  默认不唯一</p>
+</li>
+<li><p>nullable 空值约束 默认ture 默认可为空</p>
+</li>
+</ol>
+<p>@JoinColumns</p>
+<p>可传入多个 @JoinColumn ，和一个 foreignKey 指定复杂的维护关系，示例：</p>
+<p><code>@JoinColumns(value = { @JoinColumn(name = &quot;A&quot;),@JoinColumn(name = &quot;B&quot;) },foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))</code></p>
+<h4 id="双向一对一"><a href="#双向一对一" class="headerlink" title="双向一对一"></a>双向一对一</h4><p>@OneToOne</p>
+<p>大部分注解同一对一，注意需要指定关系维护实体，配置 mappedBy 指定关系维护方</p>
+<p><strong>在双向一对一中，延迟加载在不维护关系的实体一方不生效</strong> 解决办法为更换成 @OneToMany 影响最小</p>
+<p>或者不声明 mappedBy 主从实体都维护关联关系，此缺点为级联操作时将影响两个表。</p>
+<h4 id="单向一对多"><a href="#单向一对多" class="headerlink" title="单向一对多"></a>单向一对多</h4><p>@OneToMany</p>
+<p>属性与@OneToOne相同</p>
+<p><strong>默认为延迟加载</strong></p>
+<p><strong>需要标注在集合属性上且必须指定泛型类型</strong></p>
+<p><strong>如果没有使用 @JoinColumn 的 name 属性指定本表维护关系的字段，JPA会生成额外的中间表来维护关系。</strong></p>
+<p>清空关联集合时应get集合实体的 clear() 方法，由于放入新的空集合不受Hibernate管理将导致异常</p>
+<h4 id="双向一对多"><a href="#双向一对多" class="headerlink" title="双向一对多"></a>双向一对多</h4><p>@OneToMany 声明在多端，实体属性必须为集合</p>
+<p>@ManyToOne 声明在一端，实体属性不可为集合，没有 mapperby 属性</p>
+<p><strong>@ManyToOne 中要使用 FetchType.LAZY，否则会导致性能降低。</strong></p>
+<p>属性与 @OneToOne 相同</p>
+<p>需要指定关系维护实体，配置 mappedBy 指定关系维护方</p>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><p>@JoinTable</p>
+<ol>
+<li><p>name 属性为连接两个表的表名称，若不指定,则使用默认的表名称 <code>表1_表2</code></p>
+</li>
+<li><p>joinColumn 属性表示，在保存关系的表中，所保存关联关系的外键的字段，并配合 @JoinColumn 标记使用</p>
+</li>
+<li><p>inverseJoinColumn 属性与 joinColumn 类似，它保存的是保存关系的另外一个外键字段</p>
+</li>
+<li><p>atalog 和 schema 属性表示实体指定点目录名称或数据库名称</p>
+</li>
+<li><p>uniqueConstraints 属性表示该实体所关联的唯一约束条件，一个实体可以有多个唯一约束条件，默认没有约束</p>
+</li>
+</ol>
+<h3 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h3><p>@Query 中识别 SQL IFNULL 的解决办法</p>
+<p>使用 coalesce() 函数 </p>
+<p>@Embedded  @Embeddable 注解的使用</p>
+<h4 id="无限递归错误"><a href="#无限递归错误" class="headerlink" title="无限递归错误"></a>无限递归错误</h4><p>在使用Json来序列化对象时，会产生无限递归（Infinite recursion）的错误。这里有2个解决方法：</p>
+<ol>
+<li><p>在@ManyToOne下面使用 @JsonIgnore 。</p>
+</li>
+<li><p>在@OneToMany下面使用 @JsonManagedReference ,在 @ManyToOne 下面使用 @JsonBackReference。</p>
+</li>
+</ol>
+<p>@JsonBackReference 和 @JsonManagedReference：</p>
+<p>@JsonBackReference 标注的属性在序列化（serialization)时，会被忽略。</p>
+<p>@JsonManagedReference 标注的属性则会被序列化。在序列化时，@JsonBackReference 的作用相当于@JsonIgnore，</p>
+<p>此时可以没有@JsonManagedReference。但在反序列化（deserialization）时，如果没有@JsonManagedReference，</p>
+<p>则不会自动注入@JsonBackReference标注的属性；如果有@JsonManagedReference，则会自动注入@JsonBackReference标注的属性。  </p>
+<p>@JsonIgnore：直接忽略某个属性，以断开无限递归，序列化或反序列化均忽略。当然如果标注在get、set方法中，则可以分开控制，序列化对应的是get方法，反序列化对应的是set方法。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/12/14/3255864385/">Dart 的进制转换</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/04/2575550749/">Git 提交消息模板规范</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/546886075/">Java 变量第二个字母大写的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/18/2028463303/">前端规范 JS</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/2206723729/">常用 Chrome 扩展</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/23/3808206341/">杰克鸡的传送门</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/18/2602311916/">Mysql 的索引应用</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/04/1923366184/">微服务与单体应用的故事</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/08/3607390463/">架构混乱之谜</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/03/13/1800538801/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/13/1800538801/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/13/1800538801/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 11.741912765930074px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 19.865582312282093px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 10.839033744837803px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 10.79104660317125px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.806419230020747px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 18.72423279850235px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 16.561628512888067px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 18.8178075046216px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 9.725756091905716px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 11.85985634840116px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 16.241620785308925px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 14.117465580095207px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 13.306218227982136px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 11.160111146741919px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 16.9809886228922px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 11.722392125087392px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 9.602533808655618px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 14.699760857283957px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 19.89062104255478px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 18.452042914121797px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 17.406408461490113px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 14.724354036992965px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 11.801650917011836px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 18.4950856710872px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 13.766325709904255px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 14.974873465549646px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

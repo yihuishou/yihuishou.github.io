@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>SpringSecurity 中的注解使用详解 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>SpringSecurity 中的注解使用详解</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/08/28/3993534631/">SpringSecurity 中的注解使用详解</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringSecurity/">SpringSecurity</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-08-28
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/08/28/3993534631/">SpringSecurity 中的注解使用详解</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-08-28
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringSecurity/">SpringSecurity</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="启用注解模式"><a href="#启用注解模式" class="headerlink" title="启用注解模式"></a>启用注解模式</h3><p>在SpringSecurity配置类上添加<code>@EnableGlobalMethodSecurity</code>注解</p>
+<p>用于启用SpringSecurity注解模式。默认SpringSecurity关闭全局注解模式</p>
+<p>有三种注解模式，通过注解中的参数进行调配，分别是 secured JSR-250 prePost</p>
+<h4 id="securedEnabled-注解模式"><a href="#securedEnabled-注解模式" class="headerlink" title="securedEnabled 注解模式"></a>securedEnabled 注解模式</h4><p>启用方式：</p>
+<p>@EnableGlobalMethodSecurity(securedEnabled=ture)</p>
+<p>@Secured</p>
+<p>可用注解：</p>
+<h4 id="JSR-250-注解模式"><a href="#JSR-250-注解模式" class="headerlink" title="JSR-250 注解模式"></a>JSR-250 注解模式</h4><p>启用方式：</p>
+<p>@EnableGlobalMethodSecurity(jsr250Enabled=ture)</p>
+<p>RolesAllowed表示访问对应方法时所应该具有的角色。</p>
+<p>其可以标注在类上，也可以标注在方法上，当标注在类上时表示其中所有方法的执行都需要对应的角色，</p>
+<p>当标注在方法上表示执行该方法时所需要的角色，当方法和类上都使用了@RolesAllowed进行标注，则方法上的@RolesAllowed将覆盖类上的@RolesAllowed，</p>
+<p>即方法上的@RolesAllowed将对当前方法起作用。@RolesAllowed的值是由角色名称组成的数组。</p>
+<p>PermitAll表示允许所有的角色进行访问，也就是说不进行权限控制。</p>
+<p>@PermitAll可以标注在方法上也可以标注在类上，当标注在方法上时则只对对应方法不进行权限控制，而标注在类上时表示对类里面所有的方法都不进行权限控制。</p>
+<p>（1）当@PermitAll标注在类上，而@RolesAllowed标注在方法上时则按照@RolesAllowed将覆盖@PermitAll，即需要@RolesAllowed对应的角色才能访问。</p>
+<p>（2）当@RolesAllowed标注在类上，而@PermitAll标注在方法上时则对应的方法也是不进行权限控制的。</p>
+<p>（3）当在方法上同时使用了@PermitAll和@RolesAllowed时先定义的将发生作用，而都定义在类上时则是反过来的，即后定义的将发生作用<br>（这个没多大的实际意义，实际应用中不会有这样的定义）。</p>
+<p>DenyAll是和PermitAll相反的，表示无论什么角色都不能访问。@DenyAll只能定义在方法上。</p>
+<p>你可能会有疑问使用@DenyAll标注的方法无论拥有什么权限都不能访问，那还定义它干啥呢？</p>
+<p>使用@DenyAll定义的方法只是在我们的权限控制中不能访问，脱离了权限控制还是可以访问的。</p>
+<p>可用注解：</p>
+<h4 id="prePostEnabled-注解模式"><a href="#prePostEnabled-注解模式" class="headerlink" title="prePostEnabled 注解模式"></a>prePostEnabled 注解模式</h4><p>启用方式：<br>@EnableGlobalMethodSecurity(prePostEnabled=ture)</p>
+<p>可用注解：</p>
+<p>@PreAuthorize 在方法调用之前,基于表达式的计算结果来限制对方法的访问</p>
+<p>@PostAuthorize 允许方法调用,但是如果表达式计算结果为false,将抛出一个安全性异常</p>
+<p>@PostFilter 允许方法调用,但必须按照表达式来过滤方法的结果</p>
+<p>@PreFilter 允许方法调用,但必须在进入方法之前过滤输入值</p>
+<p>Spring Security中定义了四个支持使用表达式的注解，分别是@PreAuthorize、@PostAuthorize、@PreFilter和@PostFilter。其中前两者可以用来在方法调用前或者调用后进行权限检查，后两者可以用来对集合类型的参数或者返回值进行过滤。</p>
+<h3 id="spring-Security4种方法安全性的区别"><a href="#spring-Security4种方法安全性的区别" class="headerlink" title="spring Security4种方法安全性的区别"></a>spring Security4种方法安全性的区别</h3><p>使用@Secured注解方法，这是spring自带的注解方法。@Secured（””）内部的字符串不具有SpEL特性，只能是具体的权限。</p>
+<p>使用@JSR-250 @RelosAllowed注解的方法。作用和使用方法与@Secured一样，不同在于它不是spring框架的，所以可以做到和spring框架的解耦。</p>
+<p>使用Spring方法调用前和调用后注解方法。这些方法支持SpEL。匹配一个或多个明确声明的切点方法。</p>
+<p>Spring Security 支持的所有SpEL表达式如下：</p>
+<table>
+<thead>
+<tr>
+<th>安全表达式</th>
+<th align="center">计算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>authentication()</td>
+<td align="center">用户认证对象</td>
+</tr>
+<tr>
+<td>denyAll()</td>
+<td align="center">结果始终为false</td>
+</tr>
+<tr>
+<td>hasAnyRole(list of roles)</td>
+<td align="center">如果用户被授权指定的任意权限，结果为true</td>
+</tr>
+<tr>
+<td>hasRole(role)</td>
+<td align="center">如果用户被授予了指定的权限，结果 为true</td>
+</tr>
+<tr>
+<td>hasIpAddress(IP Adress)</td>
+<td align="center">用户地址</td>
+</tr>
+<tr>
+<td>isAnonymous()</td>
+<td align="center">是否为匿名用户</td>
+</tr>
+<tr>
+<td>isAuthenticated()</td>
+<td align="center">不是匿名用户</td>
+</tr>
+<tr>
+<td>isFullyAuthenticated()</td>
+<td align="center">不是匿名也不是remember-me认证</td>
+</tr>
+<tr>
+<td>isRemberMe()</td>
+<td align="center">remember-me认证</td>
+</tr>
+<tr>
+<td>permitAll()</td>
+<td align="center">始终true</td>
+</tr>
+<tr>
+<td>principal()</td>
+<td align="center">用户主要信息对象</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Oauth2 安全表达式</th>
+<th align="center">计算结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>oauth2.hasScope()</td>
+<td align="center">用户授权</td>
+</tr>
+<tr>
+<td>oauth2.hasAnyScope()</td>
+<td align="center">用户有任何一个授权</td>
+</tr>
+<tr>
+<td>oauth2.hasScopeMatching()</td>
+<td align="center">用户授权，正则匹配</td>
+</tr>
+<tr>
+<td>oauth2.hasAnyScopeMatching()</td>
+<td align="center">用户有任何一个授权，正则匹配</td>
+</tr>
+<tr>
+<td>oauth2.clientHasRole()</td>
+<td align="center">客户端有任何一个角色</td>
+</tr>
+<tr>
+<td>oauth2.clientHasAnyRole()</td>
+<td align="center">客户端角色</td>
+</tr>
+</tbody></table>
+<p>autoApprove 在调用链中设置为 true 可以跳过认证，默认为 true</p>
+<p>AuthorizationEndpoint 根据用户认证获得授权码，有下面两个方法：</p>
+<p>/oauth/authorize - GET</p>
+<p>/oauth/authorize - POST</p>
+<p>TokenEndpoint 客户端根据授权码获取 token </p>
+<p>/oauth/token - GET</p>
+<p>/oauth/token - POST</p>
+<p>CheckTokenEndpoint 可以用于远程解码令牌 </p>
+<p>/oauth/check_token</p>
+<p>WhitelabelApprovalEndpoint 显示授权服务器的确认页。 </p>
+<p>/oauth/confirm_access</p>
+<p>WhitelabelErrorEndpoint 显示授权服务器的错误页 </p>
+<p>/oauth/error</p>
+<p>在官方的示例中，通过下面代码直接指定了视图：</p>
+<p>registry.addViewController(“/oauth/confirm_access”).setViewName(“authorize”);<br>如果想跳过这个认证确认的过程，设置autoApprove 为true。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/27/2001433166/">PS 快速将多张图片导入到同一图片中</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/2173211200/">Pojo 与 JavaBean 的理解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/1499471298/">SpringBoot 中的 Json 格式化配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/09/27/2553549325/">Telnet 与 SSH</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/1584671401/">一次由 Mysql 驱动引发的 Bug</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/10/09/1453987926/">关于 ShadowSocksR 端口转发</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/10/16/844506532/">制作文字的半透明渐变网点图案描边效果</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/18/717841595/">前端规范 CSS</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/12/691142694/">解决用 exe4J 封装的 SpringBoot 应用无法运行的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/29/552068435/">认证 Authentication 和授权 Authorization 的区别</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/08/28/3993534631/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/08/28/3993534631/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/08/28/3993534631/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 17.830244178440513px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 14.796609762255107px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 18.938859921428012px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 13.707225772668048px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 18.533848281597308px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 8.891141618455364px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 12.283578419066554px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 15.773173168032358px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 10.31012889281254px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 9.466501573279977px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 14.417405618073314px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.754000162087198px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 17.431247429461852px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 16.30310794278632px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 17.249861383116922px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 16.499419470360188px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 17.872165831494947px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 9.723624664921966px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 11.67819260550343px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 15.659774425083647px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 11.721052153016075px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 18.644459141153334px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 17.17337608952486px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 10.569335696864654px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.239779574727862px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 11.207926555717503px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

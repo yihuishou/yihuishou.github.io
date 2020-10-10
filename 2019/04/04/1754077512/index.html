@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>SpringSecurity 前后分离的选择 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>SpringSecurity 前后分离的选择</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/04/04/1754077512/">SpringSecurity 前后分离的选择</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringSecurity/">SpringSecurity</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-04-04
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/04/04/1754077512/">SpringSecurity 前后分离的选择</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-04-04
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringSecurity/">SpringSecurity</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>SpringSecurity 前后分离的实现有几种不同的组合方式，在网上收集了各种各样的实现之后</p>
+<p>总结一下两种实现方式</p>
+<h4 id="不同的验证结构"><a href="#不同的验证结构" class="headerlink" title="不同的验证结构"></a>不同的验证结构</h4><ol>
+<li>只使用 Securtiy ，通过添加自行实现的 JWT 过滤器到 Security 的过滤器链中。来实现鉴权，</li>
+</ol>
+<p>通过重写各种逻辑 handeler 来实现更改默认的页面跳转为Json 数据响应。</p>
+<ol start="2">
+<li>使用 oauth2 的 Password 模式，通过 oauth2 来进行鉴权。由于可以直接使用本身的 handeler</li>
+</ol>
+<p>可以不重写，但是由于自身处理的响应信息内容过少，还是需要重写。</p>
+<p><strong>注意：使用oauth2时 clien_id 和 grant_type 不可缺少，否则将会进入 Http Basic 模式</strong></p>
+<p>scope 虽然在当前模式没有什么意义，但是至少需要在客户端或服务端定义一个。在Jwt 签名中需要使用它。</p>
+<h4 id="oauth2注意的问题"><a href="#oauth2注意的问题" class="headerlink" title="oauth2注意的问题"></a>oauth2注意的问题</h4><p>oauth2 实际上需要维护 客户端 和 用户 两个身份的信息，需要额外注意这一点。它比只使用 Securtiy 来说</p>
+<p>多出了 客户端  的身份信息。需要注意维护这个身份相关的内容，在不提供第三方授权时，也可使用内存维护。</p>
+<p>使用 oauth2 协议不需要配置 WebSecurity 只需要配置 oauth2 的两个认证服务器和资源服务器即可。</p>
+<h4 id="SpringSecurity-oauth2"><a href="#SpringSecurity-oauth2" class="headerlink" title="SpringSecurity-oauth2"></a>SpringSecurity-oauth2</h4><p>主要使用ouath2的password模式进行认证，依赖使用 spring-security-oauth2 扩展 spring-boot-starter-security</p>
+<p>由于使用了oauth2 协议，所以除了可以使用密码模式以为，也可以使用其他三种模式，来授权第三方登陆。</p>
+<p>但对于单体应用来说，使用 oauth2 协议 需要资源服务器和认证服务器配置在同一应用下，拦截器链很可能产生冲突。</p>
+<p>不过 ouath2 提供了自带的Token 刷新，可以减少部分开发工作。配合 spring-security-oauth2-jose 可以使用 JWT 进行认证。</p>
+<p>其中JOSE 是指 Javascript 对象签名和加密 它包含以下4个组件</p>
+<ul>
+<li><p>JSON Web Token (JWT)</p>
+</li>
+<li><p>JSON Web Signature (JWS)</p>
+</li>
+<li><p>JSON Web Encryption (JWE)</p>
+</li>
+<li><p>JSON Web Key (JWK)</p>
+</li>
+</ul>
+<p>需要注意的 oauth2 是三方信任的关系，保证了 用户-资源-客户端 的相互信任，所以有两条信任链，与基础的 用户-资源 信任方式不同。</p>
+<p>它还有一个基于cloud的自动配置 spring-cloud-starter-oauth2 。</p>
+<p>这里需要注意springBoot 的版本 由于 springBoot 1.5.x 使用的时 security 4 而 2.x.x 使用的是 security 5</p>
+<p>相关配置和依赖项都有所不同，其中  springBoot 1.5.x 使用 spring-security-oauth2 和 spring-security-jwt</p>
+<p>不能使用 2.x.x 的 spring-cloud-starter-oauth2 和 spring-security-oauth2-jose。</p>
+<p>而且 2.x.x 的 httpbasic 配置方式也发生了改变，配置文件配置 basicHttp 不再生效，BasicHttp 验证页面变得好看了。</p>
+<p>但严格来说，对于前后分离来讲，页面路由应由前端进行路由，后端只需提供数据。但 oauth2 授权码模式 会跳转到自己的登陆页面上，而不是返回数据。</p>
+<p>提示前端来进行路由，这就需要重写SpringSecurity的各种处理器来实现发送数据，由于SpringSecurity早先是基于后端渲染级权限控制的。</p>
+<p>所以它的一系列的登陆逻辑处理器都需要被重写。</p>
+<h4 id="SpringSecurity-jwt"><a href="#SpringSecurity-jwt" class="headerlink" title="SpringSecurity-jwt"></a>SpringSecurity-jwt</h4><p>依赖 spring-security-jwt 两种方法都需要 spring-boot-starter-security。</p>
+<p>完成依靠重写 SpringSecurity 的各种处理器来实现分离控制。不进行跳转。由于基本完全基于手工代码重写实现，</p>
+<p>基本不会存在 oauth2 的多服务器拦截器链冲突问题，但相关的令牌生命周期和令牌刷新都需要自行实现。</p>
+<h4 id="oauth2-的相关问题"><a href="#oauth2-的相关问题" class="headerlink" title="oauth2 的相关问题"></a>oauth2 的相关问题</h4><p>首先是4种模式：</p>
+<ol>
+<li>授权码</li>
+<li>简化码</li>
+<li>密码</li>
+<li>客户端</li>
+</ol>
+<p>授权码是最安全也最复杂的模式，对于第三方客户端来说，可以完全保护用户资源和用户信息。</p>
+<p>简化码主要是在授权码基础上减少了一步由第三方客户端后台使用授权码换取资源访问许可令牌的环节，</p>
+<p>从而令第三方直接获得资源访问令牌，无需使用授权码。</p>
+<p>密码模式则是通过 用户名 密码 和 客户端ID 及客户端密码 发送到认证服务器，直接换取资源访问令牌。</p>
+<p>客户端模式由认证服务器直接验证客户端身份信息，只需要客户端ID和客户端密码即可换取资源访问令牌。</p>
+<p>对于刷新令牌，客户端和简化码模式不支持刷新。</p>
+<h4 id="令牌刷新问题"><a href="#令牌刷新问题" class="headerlink" title="令牌刷新问题"></a>令牌刷新问题</h4><p>主要有两种刷新方式：</p>
+<h5 id="浏览器主动刷新"><a href="#浏览器主动刷新" class="headerlink" title="浏览器主动刷新"></a>浏览器主动刷新</h5><p>浏览器每次访问后端端口前先对存储在浏览器中的token解析，获取过期时间。然后与当前系统时间进行比较，</p>
+<p>小于一定时间则调用服务器的令牌刷新端口获取新的访问令牌，最后用新的访问令牌去访问服务器资源。</p>
+<p>不过由于浏览器需要更新令牌之后才能访问资源，所以在执行刷新令牌时浏览器访问延迟会提高。</p>
+<h5 id="服务器被动刷新"><a href="#服务器被动刷新" class="headerlink" title="服务器被动刷新"></a>服务器被动刷新</h5><p>浏览器每次访问后对令牌进行检查与存储在本地的令牌进行比较，如果令牌刷新则进行更新本地存储。</p>
+<p><strong>使用JWT则不应使用服务器被动刷新，因为JWT无状态特性不应在服务器上保存状态</strong></p>
+<p>一般来说，服务器对接口的访问每次都会进行验证，如果令牌过期但可以刷新那么就继续执行访问，返回时发送新的令牌。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/05/928293067/">IDEA 导出 Jar 包执行报错</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/18/3575145262/">JDK 字符串截取的坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/15/410376202/">RPG Maker MV 状态触发事件以及开关</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/23/432974338/">Swagger 注解说明</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/01/14/1112713561/">倒车原理示意图</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/2644766663/">开发中的独孤九剑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/3721925788/">敏捷软件开发宣言</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/21/3314626403/">理解函数式编程中的 Side Effects</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/07/11/1146712470/">自然码辅助码入门教程</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/2119795723/">Gui 与 Cli 的抉择</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/04/04/1754077512/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/04/04/1754077512/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/04/04/1754077512/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 17.80080831190314px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.07512125263943px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 13.003011525994784px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 14.41592390940723px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 19.69968289725284px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 9.971607129821663px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 13.306006314602952px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 8.666196481582208px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 11.091528621706717px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 15.71727118205969px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 15.670158295774726px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 11.320423565987973px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 9.684396543173461px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 8.914754217773828px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 11.852293901232503px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 17.757405101666347px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 13.78761624048952px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 16.54733891849794px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 17.490621719612104px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 17.453199935660255px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 8.29047398770767px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 8.144971302243725px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 13.25170469102795px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 10.009143683561025px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 15.013428487656707px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 17.715187584902132px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

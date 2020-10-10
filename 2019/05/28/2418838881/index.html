@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>JavaScript 中的分号战争 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>JavaScript 中的分号战争</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/05/28/2418838881/">JavaScript 中的分号战争</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/JavaScript/">JavaScript</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-05-28
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/05/28/2418838881/">JavaScript 中的分号战争</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-05-28
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/JavaScript/">JavaScript</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <blockquote>
+<p>转自知乎 By贺师俊</p>
+</blockquote>
+<p>当初鉴于本答案过长而可能导致部分“分号党”无法catch到我的主要论点，原本打算重新修订本答案。但是因时间精力因素未予重写，且从本答案的支持来看，为分号正本清源的目的已经达到，所以不再修订本答案。这里仅总结下“分号党”推崇的“总是写分号”风格的最主要缺陷：</p>
+<ol>
+<li>人总是有可能忘记写分号。ASI导致无法区分是无意中忘记还是有意不写（代码折行）。</li>
+<li>“总是写分号”并不能完全解决ASI缺陷（如return后换行会自动插入分号）。</li>
+<li>“}”后是否要加分号需要回溯到对应“{”之前进行语义判断（是否是函数表达式），成本远高于前置分号判断。<br>只要对行首字符进行token判断：是否是<code>[</code> <code>(</code> <code>+</code> <code>-</code> <code>/</code> 五个符号之一） </li>
+</ol>
+<p>【以下为原答案】</p>
+<p>首先，加还是不加，这是一个书写风格问题。而书写风格通常有一些外在的考量，比如团队所建立的规则或习惯。@玉伯  的答案就是基于此。我对此基本赞同，不过这其实有点避重就轻，呵呵。另外，即使团队有这样的规则，也未必要通过强制在写代码的时候就要这样写，而可以通过工具达成。比如在源码管理工具上挂上钩子，对提交的源代码自动整理格式。</p>
+<p>其次，很多人提到代码压缩问题。我觉得这是<strong>非常扯淡</strong>的理由。如果2012年的今天一个JS压缩器还不能正确处理分号，这只能说明这个JS压缩器没有达到基本的质量要求，根本不值得信任。</p>
+<p>网友提到的jslint也是一个工具的反面例子。工具是帮助人的，而不应该是强迫人的。不明白这一点，你就不会理解为什么在已经有jslint很多年的情况下，还会出现jshint。</p>
+<p>jshint对于不写分号会报warn，但可以通过asi选项关闭（在文件头加上/* jshint asi:true */即可）。</p>
+<p>在asi选项说明里，jshint的文档是这样写的：</p>
+<blockquote>
+<p>There is a lot of FUD                 (fear, uncertainty and doubt) spread about &gt; &gt; semicolon  spreaded by quite a few people                 in the community. The common myths are that semicolons  are required all the time (they are not) and that they are unreliable.  JavaScript has rules about semicolons which are                 followed by all browsers so it is up to you to decide whether you                 should or should not use semicolons in your code.</p>
+</blockquote>
+<p>翻译如下（【】里是我添加的说明）：</p>
+<blockquote>
+<p>关于分号有大量的FUD，且是由社区里的一小撮人【你知道是指谁】散布的。一个常见的流言是必须写分号，不写分号不可靠【流言的意思是不写分号会导致代码行为不确定】。实际上JS有明确的分号规则，并且所有浏览器【居然】都忠实遵守了规则。所以是否应该在你的代码里使用分号，完全可以由你自己决定【而不是由一小撮流言散布者或二逼工具强加于你】。</p>
+</blockquote>
+<p>所以对于可不可以不加分号这个问题，社区是有结论的。</p>
+<p>然后所谓“应该不应该”，就只是利弊分析，而不是非黑即白。其中也必定有一些如“可维护性”、“可理解性”甚至“代码美感”之类的貌似“贱人贱智”的问题。不过我相信有经验的程序员还是会在大多数问题上找到共识的。</p>
+<p>这个世界上有许多语言。大量语言是不用分号作为EOS（End of Statement）的。有些偏执狂认为不用分号的语言都是垃圾，对此我没啥好说的。</p>
+<p>有些语言也是可选分号，比如python。python是可以加分号作为语句结束的。当然绝大多数python程序员是不会加分号的（除了在一行里写多个语句）。所以python和js一样是可选分号！并且python的习惯是不写分号（仅在极少数情况下写）！</p>
+<p>也有不少人会指摘python的语法太特殊，比如缩进啥的……不能算是c-style的。不过即使是C风格的语言，也有不写分号的，比如groovy。groovy和js一样是可选分号！并且groovy的习惯是不写分号（仅在极少数情况下写）！</p>
+<p>所以至少从同样两个是可选分号的语言来看，不写分号在实践上是可行的。毕竟，既然被设计为可选，那么合理的推断是：语言的设计初衷是倾向于鼓励不写分号。</p>
+<p>实际上，不少人（包括我）认为，c-style的分号<strong>本来就是多余的</strong>。为什么这么说？因为明确的EOS只是给编译器的提示而已。如果漏了分号，编译器会报错。既然它都报错了，显然它知道这里应该有EOS。既然它知道，那么干嘛还要我写？</p>
+<p>给编译器以hint，这在几十年前是一个平衡编译器和用户成本的设计。某些语言（如Fortran、Basic等）选择用换行来作为EOS，这样每行只能一个语句，并且一个语句折行必须用特殊的接续符号。某些语言（如C）则选择了通过分号来达成，这样每行可以多个语句，并且一个语句也可以分布在多行。平心而论，我更喜欢前一种策略。不过现实是c-style的语法流传更广，至少当前的工业主流语言都是c-style的。</p>
+<p>在c-style语言中，如果既要允许自由折行，又要避免额外的EOS（分号），编译器会较为复杂，光靠看token是不能确定语句是否结束的（即换行处有可能是语句结束，也有可能不是）——尽管在实践中只需要很少的规则，人就能一目了然的看清语句是否结束，但是parser要处理一切的极端情况，例如在换行前插入注释到底怎么算。而C的设计是遵循所谓worse is better的哲学，非常强调<strong>实现简单</strong>，一个明确的EOS对于编译器来说绝对是简单的。当初如果有人找K&amp;R去要求应该由编译器判断这里该不该是语句结束，我打包票肯定被K&amp;R扁死。有趣的是，lisp那一帮人更极端，如果你抱怨括号实在太密密麻麻的了，一定有人语重心长的告诉你S表达式才是王道。</p>
+<p>其实像C++编译器也已经复杂到超乎想象，按理说可选分号真是小事一桩，但它因为要保持对C的完全兼容，所以还是必须写分号。</p>
+<p>python和groovy的parser则都是有名的复杂。这并不完全由允许分号可选造成，但是可选的分号其实是整个语法设计哲学的一环。如Groovy的哲学是PHIM——Parse how I mean。</p>
+<p>话说python的语法设计真的非常有意思。它也有问题，比如tab和空格混合，计算机之子@程劭非 曾经惊叹，居然有语言能通过改变注释（注释中可定义tabsize）就改变了语义和行为，真是极品。</p>
+<p>当然后来者会吸取教训，比如coffeescript和jade之类的，也都是依赖缩进，但是都不允许tab和空格混用。</p>
+<p>所以tab/sp这是python的坑。Guido Van Rossum现在就后悔了。从某种程度上说，JavaScript的分号就有点类似python的tab/sp问题。</p>
+<p>正如混合tab/sp是出自GVR的良好初衷（让你们想用啥就用啥），可选分号也是出自BE的良好初衷（随便你写不写）。也如同tab/sp一样，良好的初衷并不代表就没有隐患。之所以python、groovy就没有可选分号的争议，而js就有争议，其实正说明js存在一些问题。</p>
+<p>其实Groovy历史上也是有关于可选分号争议的，参见：Groovy在EOS问题上的痛苦权衡 。不幸的的是，与Groovy早期经过社区激烈的讨论才得到稳定语法不同，JS是一门早熟的语言，一些早期的设计失误没有机会被修复。自动分号插入算法就是其中之一。总体上，自动分号插入算法还算正常，但是在一些小地方留下了不易发觉的坑。比如return语句。</p>
+<p>return<br>{<br>  a:1<br>}</p>
+<p>在return后会自动插入分号，导致完全违背期望的结果。</p>
+<p>这一古怪行为往往被解释为在JS中应采用一行内跟随大括号的书写风格（即Java的风格，或者说是K&amp;R的C的原初风格，而不是C#风格），其实追根述源，问题还是出在分号上。</p>
+<p>不要插分号的地方被插了分号，这挺坑爹了，但更更坑爹的是想要插的结果没插。这就是括号的问题。如果下一行的开始是 ( 、 [ 上一行的结尾不会被加上<code>;</code> 。</p>
+<p>如：<br>a = b<br>(function(){<br>…<br>})()</p>
+<p>会被解释为a = b(function(){…})()</p>
+<p>其实如果我们真想表达上述代码，通常会这样写：<br>a = b(function(){<br> …<br> })()</p>
+<p>再如：<br>a = b<br>[1,2,3].forEach(function(e){<br>  console.log(e)<br>})</p>
+<p>实际效果等价于<br>a = b[3].forEach(function(e){<br>   console.log(e)<br> })</p>
+<p>坑爹的是，搞不好这代码说不定还能运行！你要事后通过调试发现这些错误是相当滴痛苦啊。</p>
+<p>当然这也不能全赖BE。在JS的早期，还没有数组迭代方法 Array.prototype.forEach/map/filter…等，也没有今天常见的(function(){…})()惯用法，所以这个问题其实很不明显。但是到了今天，这些坑爹的问题就都冒出来了。</p>
+<p>实际上，+/-也有问题，但是我们几乎不会在实践中遇到。因为你根本不可能会写行首以 + / - 开始的语句，除了 ++i 之类的语句（但是其实我们都会写成 i++ ）。</p>
+<p>不过这些问题的解决方案其实也很简单。<strong>只要在 <code>[</code>、 <code>(</code> 、 <code>+</code> 、<code>-</code> 、<code>\</code>之前加<code>;</code>就可以了：</strong><br>a = b<br> ;(function(){<br> …<br> })()</p>
+<p> a = b<br> ;[1,2,3].forEach(function(e){<br>   console.log(e)<br> })</p>
+<p> 有些同学觉得这样很丑。没问题，你可以用void替代<code>;</code>。</p>
+<p>也有不少人觉得这是一种“不一致”，需要记住额外的法则。</p>
+<p>我承认采取这样一种方法你必须记住一些特例。但是几乎所有的语言都有一些历史原因导致的坑，并且JS也不止这一个坑。更关键的是即使你采用了总是写<code>;</code>的方法，仍然是有关于EOS的坑，因为造成问题的asi特性仍然存在。比如之前提到的return后面会自动插分号。</p>
+<p>总是写分号，相比不写分号但是edge case要在行首加分号，看上去要更“简单”，但这只是描述简单，实际做起来未必更简单。</p>
+<p>比如你必须要记得，function表达式后面也要写<code>;</code>！</p>
+<p>如：<br>function a() {<br>  …<br>}<br>[1,2,3].forEach(…)</p>
+<p>这代码是没问题的，但是你改成<br>var a = function () {<br>   …<br> }<br> [1,2,3].forEach(…)</p>
+<p>就有问题了！这坑爹！</p>
+<p>对于“始终加分号派”来说，结果就会变成函数后面也一定要加分号。（你分得清函数声明和函数表达式吗？坑爹啊，不如都加！）但是为什么函数就加而 if … {} 或 for (…) {…} 结构里的大括号后面就不加分号呢？这不是也不一致嘛。</p>
+<p>而且，同样是一条特殊规则，行首加分号的规则比函数表达式后面加分号的规则其实要简单！</p>
+<p>var a = function () {<br>   …<br> }<br> [1,2,3].forEach(…)</p>
+<p>还是以上面代码为例。</p>
+<p>行首是否要加分号，我只要看本行的第一个字符就可以了。因为对于object[prop]这样的意图，其实没有程序员会写出<br>object<br>[prop]<br>这样的代码。如果他要折行，一定是写成<br>object[<br>  prop<br>]<br>所以行首第一个字符如果是括号，毋庸置疑的，这一定是一个新语句的开始。</p>
+<p>反过来，你如果要判断 } 后面是否要加<code>;</code>，你得向上回溯，看清楚整段代码是一个结构呢？还是一个函数？如果是函数的话，是函数声明呢？还是函数表达式！</p>
+<p>许多时候，你可能向上翻几页还没找到对应的 { ！或者已经忘记了是几层缩进了！</p>
+<p>人不是机器，总有可能忘记写分号。上面的分析说明，对于人来说，行首特例加分号的策略其实更简单易行。而总是加分号的策略听上去简单，执行起来却难！（除非你的策略最后变成了所有 } 之后都加分号——我真见过有人这么做的。）</p>
+<p> 对人是这样，下面再来看看对机器（引入工具）的情形。特别的，因为有不少人表示他遵循总是写分号的方式是因为他严重依赖jslint。所以我就拿jslint开刀。</p>
+<p>对于总是加分号的策略，你希望工具能提示你哪里缺少分号。但是实际情况是，你必须尽量避免写出有歧义的跨行语句，因为工具很难判断是有意为之，还是忘记写<code>;</code>。</p>
+<p>比如：<br>a = b<br> (function(){<br> …<br> })();</p>
+<p>这代码在jslint的提示是：Expected ‘(‘ at column 5, not column 1.</p>
+<p>请问你是应该真的按照它的提示把括号移动到b后面吗？？</p>
+<p>仔细考虑一下，你就知道这个问题不好回答。因为jslint给出的建议其实是基于“这是合法的代码，只是格式不妥”。虽然我们都知道这更可能是忘记写分号。</p>
+<p>再来一个更坑爹的例子：</p>
+<p>/<em>jslint white: true */<br>var a,b,c,d,e,f,g,h,i,j,k,l,m,o,s;<br>a=b+c</em>d-e<br>    /f/g-h*i/j<br>/f/g.exec(s).map(f);</p>
+<p>这段代码在jslint里是<strong>不报错</strong>的！！！</p>
+<p>但是我们是可以看出来这代码很有可能是缺少分号。</p>
+<p>这里可以看出，如果排除了whitespace的格式提示（这事儿还是挺常见的，毕竟许多人不喜欢被强制加那么多空格规则），jslint其实无法在我们最需要帮助的时候帮到我们！因为它无法判断这个地方到底是有意为之（不用<code>;</code>而跨行），还是忘记写<code>;</code>。</p>
+<p>反过来说，如果采取行首特例加<code>;</code>的习惯，其实工具是很容易判断你是否忘记加了分号。如果加上一些对缩进信息的判断来排除极少数不良的折行习惯（出warn即可），工具甚至能自动把所有这类分号都加上。</p>
+<p>两种策略：</p>
+<ol>
+<li>我总是写分号，让工具告诉我哪里我忘记写了（但是有时候可能还报不出来，或报了个其他信息）</li>
+<li>我总是不写分号，让工具自动把（由于语言设计缺陷所要求的）必须的分号加上去</li>
+</ol>
+<p>哪种更好？</p>
+<p>总结：</p>
+<p>我所推荐的不写分号的方式，其实不仅是不写分号，而是同时采用更严格的跨行策略，即只允许在当前行处于未完成状态时跨行（就像你在jsshell中输入代码一样）。这条规则其实并不需要特别强制，因为绝大多数程序员一直就是这样在执行。诚然，存在少数人习惯写这样有歧义的折行代码：</p>
+<p>a = b + c<br>      + d + e<br>      + f  + g</p>
+<p>但是这个习惯是很容易纠正。并且工具根据缩进等信息是完全能检测到的。</p>
+<p>说到这里，也许有些同志认为这只能说明jslint太挫，不能证明到处写<code>;</code>的风格不好。因为工具也可以同时加上其他限制嘛。不过你仔细想想，可以发现这是一个悖论。如果jslint够智能，引入了其他与分号无关的代码风格要求，比如空格和缩进，还有折行风格，确实也可以更精确的找到所有漏掉分号的地方。<strong>但是那无非再次证明了一点：编译器（代码分析器）完全可以知道哪里应该有EOS。既然所有的分号其实可以由机器自行加上，那么我们自己还要手写所有分号的意义到底在哪里？！</strong></p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/02/20/1504490322/">ANT 通配规则</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/17/1986098977/">Java 与闭包</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/2173211200/">Pojo 与 JavaBean 的理解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/24/3043579305/">合理设计条件分支</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/1593155822/">永远不一致的分布式系统</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/02/21/783285968/">互联网金融产品的科普</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/2921176476/">跟上Java8 Lambda</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/05/28/2418838881/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/05/28/2418838881/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/05/28/2418838881/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 17.138719046365466px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.88278277038701px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 13.579190710287754px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 18.663099397469594px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 16.83043619132363px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 14.090792178724573px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 19.516455404316364px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 18.863540828111127px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 10.961157571045163px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 15.27697934672734px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 10.20539517642056px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 18.88719982960771px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 13.125426494466243px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 11.693466101044343px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 11.48527433377653px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 17.338528677148915px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 10.267813740967561px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 19.368399798311415px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 16.438262346684823px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 11.855018925900588px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 11.641129255632414px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 11.275305002059582px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 17.744786733317667px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 17.186732066365686px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.1743023689146px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.84366129912874px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>微服务与单体应用的故事 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>微服务与单体应用的故事</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/06/04/1923366184/">微服务与单体应用的故事</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-06-04
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/06/04/1923366184/">微服务与单体应用的故事</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-06-04
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/随笔/">随笔</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>一个单体应用程序，通俗来说就是应用程序的全部功能被一起打包作为单个单元或应用程序。 这个单元可以是JAR、WAR、EAR，或其他一些归档格式，但其全部集成在一个单一的单元。 例如在线购物网站通常会包括客户、产品、目录、结帐等功能。 另一个例子是如下的movieplex。这样的应用程序通常由节目预订、添加/删除的电影、票房收入、电影起租点和其他功能组成。在单体应用程序的情况下，所有这些功能的实现和打包在一起作为一个应用程序。</p>
+<p>Movieplex7就是这样一个典型的Java EE7的示例应用程序和主要特点如下：</p>
+<p>图片描述<br>当作为一个WAR打包这个应用程序将是这样的：</p>
+<p>图片描述</p>
+<p>归档包括形成用户界面的一些网页。实现业务逻辑、持久层、后台支持层等类结构，最后还有数据库连接定义，CDI配置等一些配置文件。</p>
+<p>更具体地，WAR的结构如下：</p>
+<p>图片描述</p>
+<p>在这WAR文件结构中，网页在绿色框内，所有的类都是橙色框内，配置文件是蓝色的框内。<br>这个应用程序有点模块化实现，因为包内所有的类都通过不同的功能井然有序的被组织。网页和配置文件也遵循类似的模式。</p>
+<p>单体应用程序的优点</p>
+<p>这种类型应用程序有如下的一些优点:</p>
+<p>众所周知的：这是当前的典型应用架构。它很容易概念化，所有的代码是在一个地方。现有的大部分工具、应用服务器、框架和脚本都是这种应用程序。<br>IDE友好: 大多数开发环境，像NetBeans、Eclipse、IntelliJ这些开发环境都是针对开发、部署、调试这样的单个应用而设计的。方便单步跟踪代码，因为所有的代码都是在一起的。<br>便于共享: 单个归档文件包含所有功能，便于在团队之间以及不同的部署阶段之间共享。<br>易于测试: 单体应用一旦部署，所有的服务或特性就都可以使用了，这简化了测试过程，因为没有额外的依赖，每项测试都可以在部署完成后立刻开始。<br>容易部署: 非常便于部署，典型来说只需将单个归档文件复制到单个目录下即可。<br>单体应用缺陷</p>
+<p>目前为止，单体应用已经很好地服务了我们，未来无疑还会继续发挥重要作用。这里还有像Etsy这样的网站单月访问用户数达到六千万以及15亿页面访问量，也是基于一个大的单体应用构建部署的。他们把单体应用发挥到了极致，他们会每天部署一个庞大的单体应用多达50次。可惜的是，大多数公司不是这样的。</p>
+<p>但是，不管如何模块化，单体应用最终都会因为团队壮大、成员变动、应用范围扩展等出现问题。部署和维护任何一个跨越多年、多团队的单体应用程序的代码库就像是充满bug的泥潭。软件就是这么发展的，尤其是当你面临交付压力时。</p>
+<p>下面让我们来看看单体应用的一些劣势所在：</p>
+<p>不够灵活: 对应用程序做任何细微的修改都需要将整个应用程序重新构建、重新部署。考虑到某些用户案例，只有某个功能的极少部分需要更新，例如：增加/删除电影。这也将导致整个应用程序被重新编译和部署，即使其他部分都没有任何改动。这就意味着开发人员需要等到整个应用程序部署完成后才能看到变化。如果多个开发人员共同开发一个应用程序，那么还要等待其他开发人员完成了各自的开发。这降低了团队的灵活性和功能交付频率。<br>妨碍持续交付: 单体应用可能会比较大，构建和部署时间也相应地比较长，假如任一改动都会导致程序需要被重新编译部署的话，不利于频繁部署，阻碍持续交付。在实际的移动应用开发中，用户总是不停期待最新最cool的功能，这个问题会显得尤为严重。<br>受技术栈限制: 对于这类应用，技术是在开发之前经过慎重评估后选定的，每个团队成员都必须使用相同的开发语言、持久化存储及消息系统，而且要使用类似的工具，无法根据具体的场景做出其它选择。但是这就像在圆孔里装方钉。 MySQL是否是适合的图形存储数据库？是否Java是构建前端互动应用的最合适的语言？它通常不可能在没有放弃或显著重写部分现有应用程序之前改变技术堆栈主线。<br>技术债务: “不坏不修（Not broken，don’t fix）”，这在软件开发中非常常见，单体应用尤其如此。系统设计或写好的代码难以修改，因为应用程序的其它部分可能会以意料之外的方式使用它。随着时间推移、人员更迭，这必然会增加应用程序的技术债务。通常这样的应用程序在历经数年之后，维护和创建代码库的已经是完全不同的团队，这提高了应用程序的技术债务，使得它以后更难被重构。<br>什么是微服务?</p>
+<p>而随着业务需求的快速发展变化，敏捷性、灵活性和可扩展性需求不断增长，迫切需要一种更加快速高效的软件交付方式。</p>
+<p>进一步认识微服务!</p>
+<p>微服务就是一种可以满足这种需求的软件架构风格。单体应用被分解成多个更小的服务，每个服务有自己的归档文件，单独部署，然后共同组成一个应用程序。这里的“微”不是针对代码行数而言，而是说服务的范围限定到单个功能。</p>
+<p>我们都一直在使用微服务几年了。 想想一个简单的移动应用程序可以告诉你酒店的收视率，找出你所在目的地的天气，预订酒店，找到到酒店的方向，找到附近的餐厅，等等。这些应用程序有可能使用不同的服务，如Yelp的，谷歌地图，雅虎天气API等来完成这些任务。每个功能都能够有效地运行作为一个独立的服务，并在这个单一的移动应用程序组织在一起。移动应用的爆炸，以及它们不断增长的业务需求的支持也被Forrester的四层综合平台所强调，并且服务也是一个关键组成部分。</p>
+<p>让我们看看什么是微服务基于应用的特性。</p>
+<p>微服务的特征</p>
+<p>让我们看看使用微服务构建的应用程序的特征。</p>
+<p>领域驱动设计: 应用程序功能分解可以通过Eric Evans在《领域驱动设计》中明确定义的规则实现，领域驱动设计不是分解应用程序的唯一方法，但肯定是很常用的一种；每个团队负责与一个领域或业务功能相关的全部开发；团队遵循全栈开发方法拥有全系列的开发人员，具备用户界面、业务逻辑和持久化存储等方面的开发技能。<br>单一职责原则: 每个服务应该负责该功能的一个单独的部分，这是SOLID原则之一，Unix工具程序很好地证明这一原则的重要性。<br>明确发布接口: 每个服务都会发布一个定义明确的接口，而且保持不变；服务消费者只关心接口，而对于被消费的服务没有任何运行依赖；服务之间就业务模型、API、负载或其他契约达成一致并使用符合契约的方式进行通信。接口可能会产生新版本，但接口的老版本可以继续使用，且新服务保持后续兼容。不可以通过改变契约破坏兼容性。<br>独立部署、升级、扩展和替换: 每个服务都可以单独部署及重新部署而不影响整个系统。这使得服务很容易升级，例如增加更多的功能点。每个服务都可以沿着《Art of Scalability》一书定义的X轴（水平复制）和Z轴（面向查询的分割，数据分区）进行独立扩展；由于其他服务仅依赖发布的接口，只要发布相同的契约，服务实现甚至是底层技术栈都可以修改。<br>可以异构/采用多种语言: 每个服务的实现细节都与其它服务无关，这使得服务之间能够解耦，团队可以针对每个服务选择最合适的开发语言、持久化存储、工具和方法；一个需要在关系型数据库存储数据的服务可以选择MySQL，另一个需要存储文档的服务可以选择MongoDB。不同的团队可以根据自己的需求选择Java EE、NodeJS、Python、Vert.x或其他对本团队最有效的技术。<br>轻量级通信: 服务通信使用轻量级的通信协议，例如在HTTP上承载的REST。由于REST本质是同步的，可能会有某些潜在的瓶颈。另一个可选机制是使用支持异步消息的发布/订阅机制。任何符合需求的消息协议，例如AMQP、STOMP、MQTT或WebSocket，都可以使用。简单消息实现，例如ActiveMQ，提供了可靠的异步组构尤其适用于这种用途。每个开发团队可以根据服务的具体需求对同步还是异步消息做适宜的选择，当然也可以混用。类似的，不同的服务会选择特别的协议，但是团队创建服务时仍然保有极大的自由度和独立性。<br>Netflix是微服务的一个典型应用，这里有几篇文章介绍他们对微服务的应用。对于他们架构中微服务应用影响的更广泛的介绍在这里netflix.github.io.</p>
+<p>微服务的优点</p>
+<p>易于开发、理解和维护: 微服务中的代码仅限于业务的某一功能，因此更易于理解。IDE可以很轻松加载小的代码库，且使开发者保持高效。<br>比单体应用启动快: 微服务的范围比单体应用小得多，应此会有较小的打包文件。其结果就是，更快的部署和启动使开发者保持高效。<br>局部修改很容易部署: 每个服务独立于其他服务进行部署。服务的任何局部修改，例如更改底层实现使服务性能获得提升，无需同同其他组进行协调。其结果就是，保持了微服务敏捷性，同时也有利于持续集成和持续交付。<br>可独立扩展: 每个服务可以根据需求给予X轴（克隆）和Z轴（分区）进行独立扩展。对于单体应用而言，这一点很难做到，且扩展必须一起部署。<br>改善故障隔离: 一个应为异常的服务，例如内存溢出或数据库连接没有关闭，仅影响所提供的服务而不是整个应用，增强了故障隔离能力。这个能力使得每次错误不会使整个应用程序宕机，仅仅是其中一小片。<br>不会受限于任何技术栈: 开发者可以自由选择对所开发服务最适合的开发语言和技术栈。即使组织可能受限于某些技术选型时，你也不会因过去的技术决策而导致不利。这同样赋予你用更先进的技术和语言重写这些服务的能力。这也给予了选择技术、工具、和平台的自由。<br>微服务看上去像一枚银弹，可以解决许多软件开发方面的问题。这看上去很美好，但并不易于实现。微服务会极大地增加运维工作量，InfoWorld在一篇文章中明确指出：</p>
+<p>使用微服务，一些技术债务势必从开发转到运维，因此，你最好有一个一流的开发运维团队。这是非常关键的，像现在你的一个单体应用被多个微服务所分离，它们必须互相通讯。每个微服务可以是使用不同的平台，栈，持久性存储，因而将具有不同的监控和管理的要求。然后，每个服务可以独立地在X轴和Z轴上扩展。每个服务可以一天内被重新多次部署。</p>
+<p>微服务和NoOps</p>
+<p>微服务对基础设施提出了一些额外的需求。通常，我们将它们总称为NoOps，本质上讲，就是一组服务，提供一个更好的应用程序部署流程并确保其运行。</p>
+<p>服务复制: 每个服务都需要复制，一般使用X轴克隆或Z轴分区。是否每个服务都需要创建逻辑可扩展？例如，Kubernetes提供了基于Replication Controller非常简便的方式来复制服务。<br>服务发现: 可能需要多个服务协作提供一个应用的功能。这需要服务能够发现其他服务。在云环境下尤其棘手，因为其上的服务都是短暂的，很有可能扩展或缩减。服务解析是所有其他服务都需要的基础功能。服务需要向中央注册中心注册，其他服务需要查询注册来解析依赖关系。Netflix Eureka, Etcd, Zookeeper 等都是这一领域的可选方案（更多细节）。<br>服务恢复: 不管测试工作做得多努力，软件故障终会发生。关键问题不是如何避免故障而是如何解决故障，对于微服务这样的分布式服务尤其突出。对于服务很重要的一点是能够自动纠正故障，确保用户体验不受影响。Michael Nygard的书引入了断路器的模式来处理软件的弹性。Netflix’s Hystrix 提供这种设计模式的实现（更多细节）。<br>服务监控: 分布系统最重要的一个方面就是服务监控和日志。这使得我们可以采取任意积极的行动，例如：一个服务消耗了预料外的资源。<br>重构成微服务</p>
+<p>微服务并不意味着你可以抛弃现有的程序。在大多数情况下，我们还无法做到抛弃它们。因此，我们要构建一种方法，依据它使用微服务重构现有的应用程序。虽然我们仍需要在某个阶段上引入单体程序，直到它准备好被重构。就像Distributed big balls of mud所强调的:</p>
+<p>假如你甚至不能构建一个单体程序，你真的觉得微服务就是你问题的答案？重构可能是微不足道的，但在长期而言，它的好处在Infoworld的文章中已经被显著阐明了:</p>
+<p>使用微服务重构一个单体应用可以一次性偿还所有的技术债务。一个整体的功能分解是非常重要的，否则重构就成了一个分布式的单体应用而不是相反的一系列微服务为基础的应用集合。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/05/3668064671/">Dart 2.3 踩坑集锦</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/04/2575550749/">Git 提交消息模板规范</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/18/3575145262/">JDK 字符串截取的坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/29/472996778/">Jackson 序列化 Hibernate 对象问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/3798124554/">SpringBoot 使用 Redis 和 StringRedisTemplate</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/09/27/2553549325/">Telnet 与 SSH</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/08/870412291/">解决 Mysql 错误：1045</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/10/24/4110075300/">使用 Swagger2 生成在线文档和 PDF</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/18/2144847318/">RPC 与 Restful</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/06/04/1923366184/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/06/04/1923366184/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/06/04/1923366184/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 16.908786072772383px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 19.58996947266222px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 17.153516091492605px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 11.068070203617374px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 18.394734539239614px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 15.005739733076094px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 9.682459682577768px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 17.3579457691835px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 15.581197298464033px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 18.65826210292598px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 16.515030225227743px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 13.142839711779999px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 11.621333644581583px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.083403053634296px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 19.449357419263507px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 9.491860769537322px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 17.930412642796774px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 13.363169527854343px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 17.536620159083622px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 19.207261369523074px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 13.182743890572407px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 14.766859781917184px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 18.09142757846955px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 13.846926987391836px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 15.154019443373752px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 16.365861012183px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

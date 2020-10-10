@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Vuex 看这一篇就够了 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Vuex 看这一篇就够了</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/08/17/3032275019/">Vuex 看这一篇就够了</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Vue/">Vue</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-08-17
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/08/17/3032275019/">Vuex 看这一篇就够了</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-08-17
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Vue/">Vue</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="什么是Vuex"><a href="#什么是Vuex" class="headerlink" title="什么是Vuex"></a>什么是Vuex</h3><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</p>
+<p>简单来说就是用一个中央状态的仓库<code>state</code>来管理Vue各个组件的状态的工具。</p>
+<h3 id="Vuex解决了什么问题"><a href="#Vuex解决了什么问题" class="headerlink" title="Vuex解决了什么问题"></a>Vuex解决了什么问题</h3><p>由于Vue的状态参数传递由父组件传递到子组件，子组件不能直接修改父组件的状态，需要通过<code>$emit</code>提交事件的方式来通知父组件更新状态。</p>
+<p>这就导致多层嵌套组件和平行组件之前的通信变得非常复杂，而Vuex通过统一的中心状态仓库解决了这个问题。</p>
+<h3 id="Vuex的使用"><a href="#Vuex的使用" class="headerlink" title="Vuex的使用"></a>Vuex的使用</h3><h4 id="挂载-Vuex"><a href="#挂载-Vuex" class="headerlink" title="挂载 Vuex"></a>挂载 Vuex</h4><p>下面是store/index.js</p>
+<p><strong>index.js</strong>为固定的名称，这样可以在使用import语句时直接这样使用<code>import store from &#39;./store/&#39;</code></p>
+<p>store目录名则是为了在<code>main.js</code>中实例化Vue时可以使用缩写。</p>
+<p>例如下面的<code>main.js</code>中挂载Vuex实例</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  store,</span><br><span class="line">  &lt;!-- 等效于 store:store --&gt;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>store/index.js</code> 中配置Vuex</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line">Vue.use(vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  state: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">  getters</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="状态-state"><a href="#状态-state" class="headerlink" title="状态 state"></a>状态 state</h4><p>通过<code>this.$store.state</code>来获取在Store实例中state属性定义的状态信息</p>
+<p>例如获取 count 的值： <code>this.$store.state.count</code></p>
+<p>通常用于组件的computed属性来更新页面上的信息,例如下面</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;tempale&gt;</span><br><span class="line">&lt;div&gt;&#123;&#123;count&#125;&#125;&lt;div&gt;</span><br><span class="line">&lt;temaple/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line"></span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">computed: &#123; </span><br><span class="line">    count() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.$store.state.count</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;script/&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="计算状态-getter"><a href="#计算状态-getter" class="headerlink" title="计算状态 getter"></a>计算状态 getter</h4><p>如果想通过获取的仓库中的某些状态来计算出一个新的状态，则应该使用getter计算状态。</p>
+<p>通过 <code>this.$store.getters</code>来获取在Store实例中getters属性定义的状态计算属性</p>
+<p>例如获取通过状态计算得到的 calculateCount 的值：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;tempale&gt;</span><br><span class="line">&lt;div&gt;&#123;&#123;calculateCount&#125;&#125;&lt;div&gt;</span><br><span class="line">&lt;temaple/&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>&#123;</span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">    calculateCount () &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.$store.getters.calculateCount</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 下面是没有使用getter的代码</span><br><span class="line">computed: &#123;</span><br><span class="line">    calculateCount () &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.$store.state.count.filter(<span class="function"><span class="params">count</span> =&gt;</span> count.done).length</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;script/&gt;</span><br></pre></td></tr></table></figure>
+
+<p>下面是定义在getters中的状态计算属性calculateCount</p>
+<p>每一个定义的 getters 可以接受两个参数 state 和 getters </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    getters: &#123;</span><br><span class="line">        calculateCount: <span class="function">(<span class="params">state, getters</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> state.count.filter(<span class="function"><span class="params">count</span> =&gt;</span> count.done)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="变化-mutation"><a href="#变化-mutation" class="headerlink" title="变化 mutation"></a>变化 mutation</h4><p>state 和 getter 只能获取store中的状态和计算状态，要想改变store中的state就需要使用mutation。</p>
+<p>通过 <code>this.$store.commit</code>来更改stroe中的state</p>
+<p>commit命令有两种提交方式:</p>
+<p>1.外置声明提交</p>
+<p>声明第一个参数为mutation类型名称，第二个参数为向mutation中传入的参数对象来进行提交(也可以使用变量，通常使用对象)</p>
+<p><code>this.$store.commit(&#39;mutation类型名称&#39;,{amount:100})</code></p>
+<p>2.内置声明提交</p>
+<p>使用一个必须包含type属性的对象来进行提交，其他参数也可以包含在该对象中</p>
+<p><code>this.$store.commit({type:mutation类型名称,amount:100})</code></p>
+<p>下面是定义在mutations中的类型为mutations的变化</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    mutations: &#123;</span><br><span class="line">        increment: <span class="function">(<span class="params">state, parms</span>) =&gt;</span> &#123;</span><br><span class="line">            state.count + parms.amount</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>mutations 需要注意的事情</p>
+<ol>
+<li><p>最好初始化相关的state</p>
+</li>
+<li><p>替换或追加属性最好使用ES6的<code>...</code>对象展开符 </p>
+</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">state.obj = &#123; ...state.obj, <span class="attr">newProp</span>: <span class="number">123</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>使用常量来定义mutations类型名称，便于更改和维护，尤其是在大项项目中。</li>
+</ol>
+<p>例如：</p>
+<p>定义在 mutation-types.js 中的mutations类型常量<br><code>export const SOME_MUTATION = &#39;SOME_MUTATION&#39;</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">import</span> &#123; SOME_MUTATION &#125; <span class="keyword">from</span> <span class="string">'./mutation-types'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    mutations: &#123;</span><br><span class="line">        SOME_MUTATION: <span class="function">(<span class="params">state, parms</span>) =&gt;</span> &#123;</span><br><span class="line">            state.count + parms.amount</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="动作-action"><a href="#动作-action" class="headerlink" title="动作 action"></a>动作 action</h4><p>由于mutation只能执行同步操作，当使用Ajax进行操作的时候就不行了<br>这个时候就该action出场了。action没有只能执行同步操作的限制。</p>
+<p>定义一个名为increment的action，它会执行类型名为someMutations的mutation。</p>
+<p>action的基本流程是：</p>
+<p>通过$store.dispath() 触发action 然后再由 action 内执行 commit 来修改state</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    actions: &#123;</span><br><span class="line">        increment : <span class="function">(<span class="params">context</span>) =&gt;</span> &#123;</span><br><span class="line">            context.commit(<span class="string">'someMutations'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>定义的action接受一个参数，该参数与 store 实例具有相同方法和属性的 context 对象，<br>这样就可以通过context对象来获取store实例中的内容。例如:</p>
+<p>context.state 等效于 $store.state<br>context.mutations 等效于 $store.mutations<br>context.getters 等效于 $store.getters<br>context.commit 等效于 $store.commit</p>
+<p>由于通常会通过commit提交mutation来修改store的state，可以通过ES6的解构赋值来进行简写。<br>也就是说下面commit的提交：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    actions: &#123;</span><br><span class="line">        increment : <span class="function">(<span class="params">context</span>) =&gt;</span> &#123;</span><br><span class="line">            context.commit(<span class="string">'someMutations'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以被简写为</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">&lt;!-- 省略部分代码 --&gt;</span><br><span class="line"></span><br><span class="line">    actions: &#123;</span><br><span class="line">        increment : <span class="function">(<span class="params">&#123;commit&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">            commit(<span class="string">'someMutations'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>this.$store.dispath</code>来触发stroe中的action</p>
+<p>和mutation一样，触发action也有两种触发方式：</p>
+<p>1.外置声明触发</p>
+<p>声明第一个参数为action类型名称，第二个参数为向action中传入的参数对象来进行提交(也可以使用变量，通常使用对象)</p>
+<p><code>this.$store.dispath(&#39;action名称&#39;,{amount:100})</code></p>
+<p>2.内置声明触发</p>
+<p>使用一个必须包含type属性的对象来进行提交，其他参数也可以包含在该对象中</p>
+<p><code>this.$store.dispath({type:action名称,amount:100})</code></p>
+<h4 id="辅助函数"><a href="#辅助函数" class="headerlink" title="辅助函数"></a>辅助函数</h4><p>Vuex提供了4个辅助函数配合ES6的扩展运算符来实现函数映射。</p>
+<p><code>mapState</code>、<code>mapGetters</code>、<code>mapMutations</code>、<code>mapActions</code></p>
+<p><code>mapState</code></p>
+<p>mapState()函数可以接受一个对象或者一个字符串数组来进行映射，它返回一个包含尤其生成的computed属性的对象，</p>
+<p>这样就可以不必在computed 中自行定义属性了</p>
+<p>对象参数映射：</p>
+<p>computed: mapState({ count: state =&gt; state.count }) 映射为 computed: { count () { return this.$store.state.count }}</p>
+<p>对象字符串参数映射：</p>
+<p>computed: mapState({ countAlias: ‘count’ }) 映射为 computed: { countAlias () { return this.$store.state.count }}</p>
+<p>字符串数组映射,(需要计算属性名与state属性名相同)：</p>
+<p>computed: mapState([ ‘count’ ]) 映射为 computed: { count () { return this.$store.state.count }}</p>
+<p>映射函数：</p>
+<p>computed: mapState({ countPlusLocalState (state) { return state.count + this.localCount } }) 映射为 </p>
+<p>computed: { countPlusLocalState () { return state.count + this.localCount }}</p>
+<p><code>mapGetters</code></p>
+<p><code>mapMutations</code></p>
+<p><code>mapActions</code></p>
+<h4 id="模块化-model"><a href="#模块化-model" class="headerlink" title="模块化 model"></a>模块化 model</h4>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/2173211200/">Pojo 与 JavaBean 的理解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/23/432974338/">Swagger 注解说明</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/15/1649551711/">Vue 的数据操作总结</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/182889867/">优雅地更新 Github 上 Fork 的项目</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/17/3378556125/">漫画字体魔改增强教程</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/10/517841942/">用多态来编写简洁代码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/29/552068435/">认证 Authentication 和授权 Authorization 的区别</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/13/1754570926/">逃离弱鸡业务循环</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/08/4211700064/">Mybatis 的缺陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/595384478/">技术管理看这一篇就够了</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/08/17/3032275019/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/08/17/3032275019/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/08/17/3032275019/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 8.13518746159566px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 13.776863188042977px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 18.38778584990146px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 19.667283942154743px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 14.82588800913177px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 9.65363311643231px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 17.814649463511422px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 16.27591512371672px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 13.313487220620752px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 15.329455884139108px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 17.205737023122982px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 14.823417575556233px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 18.05076784211149px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.687840469602305px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 19.32089838618016px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 17.997817707668275px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 12.952131083948533px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 12.695956178058896px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 18.671187906320284px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 11.113953415387723px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 12.980849223294285px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 11.161733785530842px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 10.745782548885892px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 16.963507314226398px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 15.94000292210872px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 10.368794435368763px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

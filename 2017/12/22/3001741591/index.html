@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>用文件特征码来检测文件类型 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>用文件特征码来检测文件类型</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/12/22/3001741591/">用文件特征码来检测文件类型</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-12-22
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/12/22/3001741591/">用文件特征码来检测文件类型</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-12-22
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>现有一文件，其扩展名未知或标记错误。假设它是一个正常的、非空的文件，且将扩展名更正后可以正常使用，那么，如何判断它是哪种类型的文件？<br>在后缀未知，或者后缀被修改的文件，依然通过文件头来判断该文件究竟是什么文件类型。我们可以使用一个文本编辑工具如UltraEdit打开文件（16进制模式下），然后看文件头是什么字符，以下是常见文件类型的文件头字符(16进制)，希望对你有帮助：<br>JPEG (jpg)，文件头：FFD8FF<br>PNG (png)，文件头：89504E47<br>GIF (gif)，文件头：47494638<br>TIFF (tif)，文件头：49492A00<br>Windows Bitmap (bmp)，文件头：424D<br>CAD (dwg)，文件头：41433130<br>Adobe Photoshop (psd)，文件头：38425053<br>Rich Text Format (rtf)，文件头：7B5C727466<br>XML (xml)，文件头：3C3F786D6C<br>HTML (html)，文件头：68746D6C3E<br>Email [thorough only] (eml)，文件头：44656C69766572792D646174653A<br>Outlook Express (dbx)，文件头：CFAD12FEC5FD746F<br>Outlook (pst)，文件头：2142444E<br>MS Word/Excel (xls.or.doc)，文件头：D0CF11E0<br>MS Access (mdb)，文件头：5374616E64617264204A<br>WordPerfect (wpd)，文件头：FF575043<br>Postscript (eps.or.ps)，文件头：252150532D41646F6265<br>Adobe Acrobat (pdf)，文件头：255044462D312E<br>Quicken (qdf)，文件头：AC9EBD8F<br>Windows Password (pwl)，文件头：E3828596<br>ZIP Archive (zip)，文件头：504B0304<br>RAR Archive (rar)，文件头：52617221<br>Wave (wav)，文件头：57415645<br>AVI (avi)，文件头：41564920<br>Real Audio (ram)，文件头：2E7261FD<br>Real Media (rm)，文件头：2E524D46<br>MPEG (mpg)，文件头：000001BA<br>MPEG (mpg)，文件头：000001B3<br>Quicktime (mov)，文件头：6D6F6F76<br>Windows Media (asf)，文件头：3026B2758E66CF11<br>MIDI (mid)，文件头：4D546864</p>
+<p>下面在提供一个网上使用java写的根据头文件码判断文件类型</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileType</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> Map&lt;String, String&gt; FILE_TYPE_MAP = <span class="keyword">new</span> HashMap&lt;String, String&gt;();     </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">FileType</span><span class="params">()</span></span>&#123;&#125;     </span><br><span class="line">    <span class="keyword">static</span>&#123;     </span><br><span class="line">        getAllFileType(); <span class="comment">//初始化文件类型信息     </span></span><br><span class="line">    &#125;     </span><br><span class="line">         </span><br><span class="line">    <span class="comment">/**   </span></span><br><span class="line"><span class="comment">     * Discription:[getAllFileType,常见文件头信息] </span></span><br><span class="line"><span class="comment">     */</span>     </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getAllFileType</span><span class="params">()</span>     </span></span><br><span class="line"><span class="function">    </span>&#123;     </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"ffd8ffe000104a464946"</span>, <span class="string">"jpg"</span>); <span class="comment">//JPEG (jpg)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"89504e470d0a1a0a0000"</span>, <span class="string">"png"</span>); <span class="comment">//PNG (png)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"47494638396126026f01"</span>, <span class="string">"gif"</span>); <span class="comment">//GIF (gif)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"49492a00227105008037"</span>, <span class="string">"tif"</span>); <span class="comment">//TIFF (tif)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"424d228c010000000000"</span>, <span class="string">"bmp"</span>); <span class="comment">//16色位图(bmp)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"424d8240090000000000"</span>, <span class="string">"bmp"</span>); <span class="comment">//24位位图(bmp)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"424d8e1b030000000000"</span>, <span class="string">"bmp"</span>); <span class="comment">//256色位图(bmp)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"41433130313500000000"</span>, <span class="string">"dwg"</span>); <span class="comment">//CAD (dwg)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"3c21444f435459504520"</span>, <span class="string">"html"</span>); <span class="comment">//HTML (html)</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"3c21646f637479706520"</span>, <span class="string">"htm"</span>); <span class="comment">//HTM (htm)</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"48544d4c207b0d0a0942"</span>, <span class="string">"css"</span>); <span class="comment">//css</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"696b2e71623d696b2e71"</span>, <span class="string">"js"</span>); <span class="comment">//js</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"7b5c727466315c616e73"</span>, <span class="string">"rtf"</span>); <span class="comment">//Rich Text Format (rtf)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"38425053000100000000"</span>, <span class="string">"psd"</span>); <span class="comment">//Photoshop (psd)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"46726f6d3a203d3f6762"</span>, <span class="string">"eml"</span>); <span class="comment">//Email [Outlook Express 6] (eml)       </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"d0cf11e0a1b11ae10000"</span>, <span class="string">"doc"</span>); <span class="comment">//MS Excel 注意：word、msi 和 excel的文件头一样     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"d0cf11e0a1b11ae10000"</span>, <span class="string">"vsd"</span>); <span class="comment">//Visio 绘图     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"5374616E64617264204A"</span>, <span class="string">"mdb"</span>); <span class="comment">//MS Access (mdb)      </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"252150532D41646F6265"</span>, <span class="string">"ps"</span>);     </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"255044462d312e350d0a"</span>, <span class="string">"pdf"</span>); <span class="comment">//Adobe Acrobat (pdf)   </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"2e524d46000000120001"</span>, <span class="string">"rmvb"</span>); <span class="comment">//rmvb/rm相同  </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"464c5601050000000900"</span>, <span class="string">"flv"</span>); <span class="comment">//flv与f4v相同  </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"00000020667479706d70"</span>, <span class="string">"mp4"</span>); </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"49443303000000002176"</span>, <span class="string">"mp3"</span>); </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"000001ba210001000180"</span>, <span class="string">"mpg"</span>); <span class="comment">//     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"3026b2758e66cf11a6d9"</span>, <span class="string">"wmv"</span>); <span class="comment">//wmv与asf相同    </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"52494646e27807005741"</span>, <span class="string">"wav"</span>); <span class="comment">//Wave (wav)  </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"52494646d07d60074156"</span>, <span class="string">"avi"</span>);  </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"4d546864000000060001"</span>, <span class="string">"mid"</span>); <span class="comment">//MIDI (mid)   </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"504b0304140000000800"</span>, <span class="string">"zip"</span>);    </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"526172211a0700cf9073"</span>, <span class="string">"rar"</span>);   </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"235468697320636f6e66"</span>, <span class="string">"ini"</span>);   </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"504b03040a0000000000"</span>, <span class="string">"jar"</span>); </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"4d5a9000030000000400"</span>, <span class="string">"exe"</span>);<span class="comment">//可执行文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"3c25402070616765206c"</span>, <span class="string">"jsp"</span>);<span class="comment">//jsp文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"4d616e69666573742d56"</span>, <span class="string">"mf"</span>);<span class="comment">//MF文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"3c3f786d6c2076657273"</span>, <span class="string">"xml"</span>);<span class="comment">//xml文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"494e5345525420494e54"</span>, <span class="string">"sql"</span>);<span class="comment">//xml文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"7061636b616765207765"</span>, <span class="string">"java"</span>);<span class="comment">//java文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"406563686f206f66660d"</span>, <span class="string">"bat"</span>);<span class="comment">//bat文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"1f8b0800000000000000"</span>, <span class="string">"gz"</span>);<span class="comment">//gz文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"6c6f67346a2e726f6f74"</span>, <span class="string">"properties"</span>);<span class="comment">//bat文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"cafebabe0000002e0041"</span>, <span class="string">"class"</span>);<span class="comment">//bat文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"49545346030000006000"</span>, <span class="string">"chm"</span>);<span class="comment">//bat文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"04000000010000001300"</span>, <span class="string">"mxp"</span>);<span class="comment">//bat文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"504b0304140006000800"</span>, <span class="string">"docx"</span>);<span class="comment">//docx文件</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"d0cf11e0a1b11ae10000"</span>, <span class="string">"wps"</span>);<span class="comment">//WPS文字wps、表格et、演示dps都是一样的</span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"6431303a637265617465"</span>, <span class="string">"torrent"</span>);</span><br><span class="line">        </span><br><span class="line">          </span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"6D6F6F76"</span>, <span class="string">"mov"</span>); <span class="comment">//Quicktime (mov)  </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"FF575043"</span>, <span class="string">"wpd"</span>); <span class="comment">//WordPerfect (wpd)   </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"CFAD12FEC5FD746F"</span>, <span class="string">"dbx"</span>); <span class="comment">//Outlook Express (dbx)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"2142444E"</span>, <span class="string">"pst"</span>); <span class="comment">//Outlook (pst)      </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"AC9EBD8F"</span>, <span class="string">"qdf"</span>); <span class="comment">//Quicken (qdf)     </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"E3828596"</span>, <span class="string">"pwl"</span>); <span class="comment">//Windows Password (pwl)         </span></span><br><span class="line">        FILE_TYPE_MAP.put(<span class="string">"2E7261FD"</span>, <span class="string">"ram"</span>); <span class="comment">//Real Audio (ram)     </span></span><br><span class="line">    &#125;                       </span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 得到上传文件的文件头</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> src</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">bytesToHexString</span><span class="params">(<span class="keyword">byte</span>[] src)</span> </span>&#123;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">if</span> (src == <span class="keyword">null</span> || src.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; src.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = src[i] &amp; <span class="number">0xFF</span>;</span><br><span class="line">            String hv = Integer.toHexString(v);</span><br><span class="line">            <span class="keyword">if</span> (hv.length() &lt; <span class="number">2</span>) &#123;</span><br><span class="line">                stringBuilder.append(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            stringBuilder.append(hv);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据制定文件的文件头判断其文件类型</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> filePaht</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getFileType</span><span class="params">(String filePaht)</span></span>&#123;</span><br><span class="line">        String res = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            FileInputStream is = <span class="keyword">new</span> FileInputStream(filePaht);</span><br><span class="line">            <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">10</span>];</span><br><span class="line">            is.read(b, <span class="number">0</span>, b.length);</span><br><span class="line">            String fileCode = bytesToHexString(b);    </span><br><span class="line">            </span><br><span class="line">            System.out.println(fileCode);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            <span class="comment">//这种方法在字典的头代码不够位数的时候可以用但是速度相对慢一点</span></span><br><span class="line">            Iterator&lt;String&gt; keyIter = FILE_TYPE_MAP.keySet().iterator();</span><br><span class="line">            <span class="keyword">while</span>(keyIter.hasNext())&#123;</span><br><span class="line">                String key = keyIter.next();</span><br><span class="line">                <span class="keyword">if</span>(key.toLowerCase().startsWith(fileCode.toLowerCase()) || fileCode.toLowerCase().startsWith(key.toLowerCase()))&#123;</span><br><span class="line">                    res = FILE_TYPE_MAP.get(key);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        </span><br><span class="line">        String type = getFileType(<span class="string">"C:/test/eee.WMV"</span>);</span><br><span class="line">        System.out.println(<span class="string">"eee.WMV : "</span>+type);</span><br><span class="line">        System.out.println(); </span><br><span class="line">        </span><br><span class="line">        type = getFileType(<span class="string">"C:/test/350996.wav"</span>);</span><br><span class="line">        System.out.println(<span class="string">"350996.wav : "</span>+type);</span><br><span class="line">        System.out.println(); </span><br><span class="line">                </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个是反向检测读取文件类型的示例</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileType</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">bytesToHexString</span><span class="params">(<span class="keyword">byte</span>[] src)</span> </span>&#123;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">if</span> (src == <span class="keyword">null</span> || src.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; src.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = src[i] &amp; <span class="number">0xFF</span>;</span><br><span class="line">            String hv = Integer.toHexString(v);</span><br><span class="line">            <span class="keyword">if</span> (hv.length() &lt; <span class="number">2</span>) &#123;</span><br><span class="line">                stringBuilder.append(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            stringBuilder.append(hv);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> args</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        FileInputStream is = <span class="keyword">new</span> FileInputStream(<span class="string">"F:\\相册\\微信图片\\03.jpg"</span>);</span><br><span class="line">        <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">3</span>];</span><br><span class="line">        is.read(b, <span class="number">0</span>, b.length);</span><br><span class="line">        String xxx = bytesToHexString(b);</span><br><span class="line">        xxx = xxx.toUpperCase();</span><br><span class="line">        System.out.println(<span class="string">"头文件是："</span> + xxx);</span><br><span class="line">        String ooo = TypeDict.checkType(xxx);</span><br><span class="line">        System.out.println(<span class="string">"后缀名是："</span> + ooo);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/18/450415382/">CSS 中 link 与 @import 的区别</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/24/2553779906/">PL/SQL Developer 连接远程数据库</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/1333242850/">RESTFUL API 中的那些事</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/1177412043/">SpringBoot 读取配置文件中的信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/2218955800/">StringBuilder().append() 方法真的比 + 更快吗</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/1584671401/">一次由 Mysql 驱动引发的 Bug</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/29/2754764057/">喵喵颜文字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/22/2885027022/">简明 ES6/7</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/01/14/2168753306/">太阳可能没有核聚变</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/04/1923366184/">微服务与单体应用的故事</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2017/12/22/3001741591/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/12/22/3001741591/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/12/22/3001741591/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 9.116471569219769px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 12.660057702158388px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 17.70260208234378px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 19.097848650414157px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.114603235956183px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 13.60052845568488px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 14.418937818947864px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 12.012118044461747px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 15.565965967201308px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 10.469019633612255px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 10.111548452161559px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.853876272573489px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 16.902971957517742px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 13.789627964098377px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 10.668628412694783px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 13.148232416313796px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 18.251804427987754px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 10.595096173945272px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 14.672467474952482px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 15.819607094840961px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 15.388515206514652px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 17.120305021401556px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 15.900885823822165px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 19.520906048861388px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.807978913125002px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 17.769612129031408px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

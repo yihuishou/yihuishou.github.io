@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>优雅地使用泛型 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>优雅地使用泛型</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/12/22/4264795803/">优雅地使用泛型</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-12-22
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/12/22/4264795803/">优雅地使用泛型</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-12-22
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>泛型，一个孤独的守门者。</p>
+<p>大家可能会有疑问，我为什么叫做泛型是一个守门者。这其实是我个人的看法而已，我的意思是说泛型没有其看起来那么深不可测，它并不神秘与神奇。泛型是 Java 中一个很小巧的概念，但同时也是一个很容易让人迷惑的知识点，它让人迷惑的地方在于它的许多表现有点违反直觉。</p>
+<p>文章开始的地方，先给大家奉上一道经典的测试题。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; l1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">List&lt;Integer&gt; l2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">System.out.println(l1.getClass() == l2.getClass());</span><br></pre></td></tr></table></figure>
+
+<p>请问，上面代码最终结果输出的是什么？不了解泛型的和很熟悉泛型的同学应该能够答出来，而对泛型有所了解，但是了解不深入的同学可能会答错。</p>
+<p>正确答案是 true。</p>
+<p>上面的代码中涉及到了泛型，而输出的结果缘由是类型擦除。先好好说说泛型。</p>
+<h3 id="泛型是什么？"><a href="#泛型是什么？" class="headerlink" title="泛型是什么？"></a>泛型是什么？</h3><p>泛型的英文是 generics，generic 的意思是通用,而翻译成中文，泛应该意为广泛，型是类型。所以泛型就是能广泛适用的类型。</p>
+<p><strong>但泛型还有一种较为准确的说法就是为了参数化类型，或者说可以将类型当作参数传递给一个类或者是方法。</strong></p>
+<p>那么，如何解释类型参数化呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cache</span> </span>&#123;</span><br><span class="line">    Object value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(Object value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设 Cache 能够存取任何类型的值，于是，我们可以这样使用它。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cache cache = <span class="keyword">new</span> Cache();</span><br><span class="line">cache.setValue(<span class="number">134</span>);</span><br><span class="line"><span class="keyword">int</span> value = (<span class="keyword">int</span>) cache.getValue();</span><br><span class="line">cache.setValue(<span class="string">"hello"</span>);</span><br><span class="line">String value1 = (String) cache.getValue();</span><br></pre></td></tr></table></figure>
+
+<p>使用的方法也很简单，只要我们做正确的强制转换就好了。</p>
+<p>但是，泛型却给我们带来了不一样的编程体验。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Cache</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    T value;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就是泛型，它将 value 这个属性的类型也参数化了，这就是所谓的参数化类型。再看它的使用方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cache&lt;String&gt; cache1 = <span class="keyword">new</span> Cache&lt;String&gt;();</span><br><span class="line">cache1.setValue(<span class="string">"123"</span>);</span><br><span class="line">String value2 = cache1.getValue();</span><br><span class="line"></span><br><span class="line">Cache&lt;Integer&gt; cache2 = <span class="keyword">new</span> Cache&lt;Integer&gt;();</span><br><span class="line">cache2.setValue(<span class="number">456</span>);</span><br><span class="line"><span class="keyword">int</span> value3 = cache2.getValue();</span><br></pre></td></tr></table></figure>
+
+<p>最显而易见的好处就是它不再需要对取出来的结果进行强制转换了。但，还有另外一点不同。<br>这里写图片描述<br>泛型除了可以将类型参数化外，而参数一旦确定好，如果类似不匹配，编译器就不通过。<br>上面代码显示，无法将一个 String 对象设置到 cache2 中，因为泛型让它只接受 Integer 的类型。</p>
+<p>所以，综合上面信息，我们可以得到下面的结论。</p>
+<p>与普通的 Object 代替一切类型这样简单粗暴而言，泛型使得数据的类别可以像参数一样由外部传递进来。它提供了一种扩展能力。它更符合面向抽象开发的软件编程宗旨。<br>当具体的类型确定后，泛型又提供了一种类型检测的机制，只有相匹配的数据才能正常的赋值，否则编译器就不通过。所以说，它是一种类型安全检测机制，一定程度上提高了软件的安全性防止出现低级的失误。<br>泛型提高了程序代码的可读性，不必要等到运行的时候才去强制转换，在定义或者实例化阶段，因为 Cache<string> 这个类型显化的效果，程序员能够一目了然猜测出代码要操作的数据类型。<br>下面的文章，我们正常介绍泛型的相关知识。</string></p>
+<h3 id="泛型的定义和使用"><a href="#泛型的定义和使用" class="headerlink" title="泛型的定义和使用"></a>泛型的定义和使用</h3><p>泛型按照使用情况可以分为 3 种。 </p>
+<ol>
+<li>泛型类。 </li>
+<li>泛型方法。 </li>
+<li>泛型接口。</li>
+</ol>
+<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>我们可以这样定义一个泛型类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    T field1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>尖括号 &lt;&gt; 中的 T 被称作是类型参数，用于指代任何类型。事实上，T 只是一种习惯性写法，如果你愿意。你可以这样写。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">Hello</span>&gt; </span>&#123;</span><br><span class="line">    Hello field1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但出于规范的目的，Java 还是建议我们用单个大写字母来代表类型参数。常见的如： </p>
+<ol>
+<li>T 代表一般的任何类。 </li>
+<li>E 代表 Element 的意思，或者 Exception 异常的意思。 </li>
+<li>K 代表 Key 的意思。 </li>
+<li>V 代表 Value 的意思，通常与 K 一起配合使用。 </li>
+<li>S 代表 Subtype 的意思，文章后面部分会讲解示意。</li>
+</ol>
+<p>如果一个类被 <t> 的形式定义，那么它就被称为是泛型类。</t></p>
+<p>那么对于泛型类怎么样使用呢？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Test&lt;String&gt; test1 = <span class="keyword">new</span> Test&lt;&gt;();</span><br><span class="line">Test&lt;Integer&gt; test2 = <span class="keyword">new</span> Test&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>只要在对泛型类创建实例的时候，在尖括号中赋值相应的类型便是。T 就会被替换成对应的类型，如 String 或者是 Integer。你可以相像一下，当一个泛型类被创建时，内部自动扩展成下面的代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line">    String field1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，泛型类不至接受一个类型参数，它还可以这样接受多个类型参数。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiType</span> &lt;<span class="title">E</span>,<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    E value1;</span><br><span class="line">    T value2;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">getValue1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getValue2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>泛型方法与泛型类稍有不同的地方是，类型参数也就是尖括号那一部分是写在返回值前面的。<t> 中的 T 被称为类型参数，而方法中的 T 被称为参数化类型，它不是运行时真正的参数。</t></p>
+<p>当然，声明的类型参数，其实也是可以当作返回值的类型的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span>  &lt;T&gt; <span class="function">T <span class="title">testMethod1</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="泛型类与泛型方法的共存现象"><a href="#泛型类与泛型方法的共存现象" class="headerlink" title="泛型类与泛型方法的共存现象"></a>泛型类与泛型方法的共存现象</h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">        System.out.println(t.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span>  &lt;T&gt; <span class="function">T <span class="title">testMethod1</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，Test1<t> 是泛型类，testMethod 是泛型类中的普通方法，而 testMethod1 是一个泛型方法。而泛型类中的类型参数与泛型方法中的类型参数是没有相应的联系的，<strong>泛型方法始终以自己定义的类型参数为准。</strong></t></p>
+<p>所以，针对上面的代码，我们可以这样编写测试代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Test1&lt;String&gt; t = <span class="keyword">new</span> Test1();</span><br><span class="line">t.testMethod(<span class="string">"generic"</span>);</span><br><span class="line">Integer i = t.testMethod1(<span class="keyword">new</span> Integer(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>泛型类的实际类型参数是 String，而传递给泛型方法的类型参数是 Integer，两者不想干。</p>
+<p>但是，为了避免混淆，如果在一个泛型类中存在泛型方法，那么两者的类型参数最好不要同名。比如，Test1<t> 代码可以更改为这样</t></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">        System.out.println(t.getClass().getName());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span>  &lt;E&gt; <span class="function">E <span class="title">testMethod1</span><span class="params">(E e)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> e;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><p>泛型接口和泛型类差不多，所以一笔带过。</p>
+<p>public interface Iterable<t> {<br>}</t></p>
+<h3 id="通配符-？"><a href="#通配符-？" class="headerlink" title="通配符 ？"></a>通配符 ？</h3><p>除了用 <t> 表示泛型外，还有 &lt;?&gt; 这种形式。？ 被称为通配符。</t></p>
+<p>可能有同学会想，已经有了 <t> 的形式了，为什么还要引进 &lt;?&gt; 这样的概念呢？</t></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">Sub sub = <span class="keyword">new</span> Sub();</span><br><span class="line">Base base = sub;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码显示，Base 是 Sub 的父类，它们之间是继承关系，所以 Sub 的实例可以给一个 Base 引用赋值，那么</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Sub&gt; lsub = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">List&lt;Base&gt; lbase = lsub;</span><br></pre></td></tr></table></figure>
+
+<p>最后一行代码成立吗？编译会通过吗？</p>
+<p>答案是否定的。</p>
+<p>编译器不会让它通过的。Sub 是 Base 的子类，不代表 List<sub> 和 List<base> 有继承关系。</sub></p>
+<p>但是，在现实编码中，确实有这样的需求，希望泛型能够处理某一范围内的数据类型，比如某个类和它的子类，对此 Java 引入了通配符这个概念。</p>
+<p>所以，通配符的出现是为了指定泛型中的类型范围。</p>
+<p>通配符有 3 种形式。</p>
+<?> 被称作无限定的通配符。
+<? extends T> 被称作有上限的通配符。
+<? super T> 被称作有下限的通配符。
+#### 无限定通配符
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWildCards</span><span class="params">(Collection&lt;?&gt; collection)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+上面的代码中，方法内的参数是被无限定通配符修饰的 Collection 对象，它隐略地表达了一个意图或者可以说是限定，那就是 testWidlCards() 这个方法内部无需关注 Collection 中的真实类型，因为它是未知的。所以，你只能调用 Collection 中与类型无关的方法。 
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWildCards</span><span class="params">(Collection &lt;?&gt; collection)</span> </span>&#123;</span><br><span class="line">        collection.add(<span class="string">"Text"</span>); <span class="comment">// 编译不通过</span></span><br><span class="line">        collection.add(<span class="number">9999999</span>); <span class="comment">// 编译不通过</span></span><br><span class="line">        </span><br><span class="line">        collection.isEmpty(); <span class="comment">// 编译通过</span></span><br><span class="line">        collection.clear(); <span class="comment">// 编译通过</span></span><br><span class="line">        collection.size(); <span class="comment">// 编译通过</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+我们可以看到，当 <?><p> 存在时，Collection 对象丧失了 add() 方法的功能，编译器不通过。<br>我们再看代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;?&gt; wildlist = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">wildlist.add(<span class="number">123</span>);<span class="comment">// 编译不通过</span></span><br></pre></td></tr></table></figure>
+
+<p>有人说，&lt;?&gt; 提供了只读的功能，也就是它删减了增加具体类型元素的能力，只保留与具体类型无关的功能。它不管装载在这个容器内的元素是什么类型，它只关心元素的数量、容器是否为空？我想这种需求还是很常见的吧。</p>
+<p>有同学可能会想，&lt;?&gt; 既然作用这么渺小，那么为什么还要引用它呢？ </p>
+<p>个人认为，提高了代码的可读性，程序员看到这段代码时，就能够迅速对此建立极简洁的印象，能够快速推断源码作者的意图。</p>
+<h4 id="lt-extends-T-gt"><a href="#lt-extends-T-gt" class="headerlink" title="&lt;? extends T&gt;"></a>&lt;? extends T&gt;</h4><p>&lt;?&gt; 代表着类型未知，但是我们的确需要对于类型的描述再精确一点，我们希望在一个范围内确定类别，比如类型 A 及 类型 A 的子类都可以。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSub</span><span class="params">(Collection&lt;? extends Base&gt; para)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，para 这个 Collection 接受 Base 及 Base 的子类的类型。</p>
+<p>但是，它仍然丧失了写操作的能力。也就是说</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">para.add(<span class="keyword">new</span> Sub());</span><br><span class="line">para.add(<span class="keyword">new</span> Base());</span><br></pre></td></tr></table></figure>
+
+<p>仍然编译不通过。</p>
+<p>没有关系，我们不知道具体类型，但是我们至少清楚了类型的范围。</p>
+<h4 id="lt-super-T-gt"><a href="#lt-super-T-gt" class="headerlink" title="&lt;? super T&gt;"></a>&lt;? super T&gt;</h4><p>这个和 &lt;? extends T&gt; 相对应，代表 T 及 T 的超类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSuper</span><span class="params">(Collection&lt;? <span class="keyword">super</span> Sub&gt; para)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&lt;? super T&gt; 神奇的地方在于，它拥有一定程度的写操作的能力。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSuper</span><span class="params">(Collection&lt;? <span class="keyword">super</span> Sub&gt; para)</span></span>&#123;</span><br><span class="line">    para.add(<span class="keyword">new</span> Sub());<span class="comment">//编译通过</span></span><br><span class="line">    para.add(<span class="keyword">new</span> Base());<span class="comment">//编译不通过</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="通配符与类型参数的区别"><a href="#通配符与类型参数的区别" class="headerlink" title="通配符与类型参数的区别"></a>通配符与类型参数的区别</h4><p>一般而言，通配符能干的事情都可以用类型参数替换。<br>比如</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWildCards</span><span class="params">(Collection&lt;?&gt; collection)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以被</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(Collection&lt;T&gt; collection)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>取代。</p>
+<p>值得注意的是，如果用泛型方法来取代通配符，那么上面代码中 collection 是能够进行写操作的。只不过要进行强制转换。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(Collection&lt;T&gt; collection)</span></span>&#123;</span><br><span class="line">    collection.add((T)<span class="keyword">new</span> Integer(<span class="number">12</span>));</span><br><span class="line">    collection.add((T)<span class="string">"123"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>需要特别注意的是，类型参数适用于参数之间的类别依赖关系，举例说明。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test2</span> &lt;<span class="title">T</span>,<span class="title">E</span> <span class="keyword">extends</span> <span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    T value1;</span><br><span class="line">    E value2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> &lt;D,S extends D&gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(D d,S s)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>E 类型是 T 类型的子类，显然这种情况类型参数更适合。<br>有一种情况是，通配符和类型参数一起使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(T t,Collection&lt;? extends T&gt; collection)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个方法的返回类型依赖于参数的类型，那么通配符也无能为力。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">test1</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h3><p>泛型是 Java 1.5 版本才引进的概念，在这之前是没有泛型的概念的，但显然，泛型代码能够很好地和之前版本的代码很好地兼容。</p>
+<p>这是因为，泛型信息只存在于代码编译阶段，在进入 JVM 之前，与泛型相关的信息会被擦除掉，专业术语叫做类型擦除。</p>
+<p>通俗地讲，泛型类和普通类在 java 虚拟机内是没有什么特别的地方。回顾文章开始时的那段代码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;String&gt; l1 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">List&lt;Integer&gt; l2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line">System.out.println(l1.getClass() == l2.getClass());</span><br></pre></td></tr></table></figure>
+
+<p>打印的结果为 true 是因为 List<string> 和 List<integer> 在 jvm 中的 Class 都是 List.class。</integer></string></p>
+<p>泛型信息被擦除了。</p>
+<p>可能同学会问，那么类型 String 和 Integer 怎么办？</p>
+<p>答案是泛型转译。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Erasure</span> &lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    T object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Erasure</span><span class="params">(T object)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Erasure 是一个泛型类，我们查看它在运行时的状态信息可以通过反射。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Erasure&lt;String&gt; erasure = <span class="keyword">new</span> Erasure&lt;String&gt;(<span class="string">"hello"</span>);</span><br><span class="line">Class eclz = erasure.getClass();</span><br><span class="line">System.out.println(<span class="string">"erasure class is:"</span>+eclz.getName());</span><br></pre></td></tr></table></figure>
+
+<p>打印的结果是</p>
+<p>erasure class is:com.frank.test.Erasure</p>
+<p>Class 的类型仍然是 Erasure 并不是 Erasure<t> 这种形式，那我们再看看泛型类中 T 的类型在 jvm 中是什么具体类型。</t></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Field[] fs = eclz.getDeclaredFields();</span><br><span class="line"><span class="keyword">for</span> ( Field f:fs) &#123;</span><br><span class="line">    System.out.println(<span class="string">"Field name "</span>+f.getName()+<span class="string">" type:"</span>+f.getType().getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果是</p>
+<p>Field name object type:java.lang.Object</p>
+<p>那我们可不可以说，泛型类被类型擦除后，相应的类型就被替换成 Object 类型呢？</p>
+<p>这种说法，不完全正确。</p>
+<p>我们更改一下代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Erasure</span> &lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">String</span>&gt;</span>&#123;</span><br><span class="line"><span class="comment">//  public class Erasure &lt;T&gt;&#123;</span></span><br><span class="line">    T object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Erasure</span><span class="params">(T object)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在再看测试结果：</p>
+<p>Field name object type:java.lang.String</p>
+<p>我们现在可以下结论了，在泛型类被类型擦除的时候，之前泛型类中的类型参数部分如果没有指定上限，如 <t> 则会被转译成普通的 Object 类型，如果指定了上限如 <t extends string> 则类型参数就被替换成类型上限。</t></t></p>
+<p>所以，在反射中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Erasure</span> &lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    T object;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Erasure</span><span class="params">(T object)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.object = object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(T object)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>add() 这个方法对应的 Method 的签名应该是 Object.class。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Erasure&lt;String&gt; erasure = <span class="keyword">new</span> Erasure&lt;String&gt;(<span class="string">"hello"</span>);</span><br><span class="line">Class eclz = erasure.getClass();</span><br><span class="line">System.out.println(<span class="string">"erasure class is:"</span>+eclz.getName());</span><br><span class="line"></span><br><span class="line">Method[] methods = eclz.getDeclaredMethods();</span><br><span class="line"><span class="keyword">for</span> ( Method m:methods )&#123;</span><br><span class="line">    System.out.println(<span class="string">" method:"</span>+m.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果是</p>
+<p>method:public void com.frank.test.Erasure.add(java.lang.Object)</p>
+<p>也就是说，如果你要在反射中找到 add 对应的 Method，你应该调用 getDeclaredMethod(“add”,Object.class) 否则程序会报错，提示没有这么一个方法，原因就是类型擦除的时候，T 被替换成 Object 类型了。</p>
+<h4 id="类型擦除带来的局限性"><a href="#类型擦除带来的局限性" class="headerlink" title="类型擦除带来的局限性"></a>类型擦除带来的局限性</h4><p>类型擦除，是泛型能够与之前的 java 版本代码兼容共存的原因。但也因为类型擦除，它会抹掉很多继承相关的特性，这是它带来的局限性。</p>
+<p>理解类型擦除有利于我们绕过开发当中可能遇到的雷区，同样理解类型擦除也能让我们绕过泛型本身的一些限制。比如:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        List &lt;Integer&gt;list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">100</span>);</span><br><span class="line">        list.add(<span class="string">"一百零一"</span>); <span class="comment">//编译错误</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正常情况下，因为泛型的限制，编译器不让最后一行代码编译通过，因为类似不匹配，但是，基于对类型擦除的了解，利用反射，我们可以绕过这个限制。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E e)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面是 List 和其中的 add() 方法的源码定义。</p>
+<p>因为 E 代表任意的类型，所以类型擦除时，add 方法其实等同于</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(Object obj)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>那么，利用反射，我们绕过编译器去调用 add 方法。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToolTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; ls = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">100</span>);</span><br><span class="line">        <span class="comment">// list.add("一百零一"); //编译错误</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Method method = ls.getClass().getDeclaredMethod(<span class="string">"add"</span>,Object.class);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            method.invoke(ls,<span class="string">"test"</span>);</span><br><span class="line">            method.invoke(ls,<span class="number">42.9f</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SecurityException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> ( Object o: ls)&#123;</span><br><span class="line">            System.out.println(o);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果是：</p>
+<p>23<br>test<br>42.9</p>
+<p>可以看到，利用类型擦除的原理，用反射的手段就绕过了正常开发中编译器不允许的操作限制。</p>
+<h3 id="泛型中值得注意的地方"><a href="#泛型中值得注意的地方" class="headerlink" title="泛型中值得注意的地方"></a>泛型中值得注意的地方</h3><h4 id="泛型类或者泛型方法中，不接受-8-种基本数据类型。"><a href="#泛型类或者泛型方法中，不接受-8-种基本数据类型。" class="headerlink" title="泛型类或者泛型方法中，不接受 8 种基本数据类型。"></a>泛型类或者泛型方法中，不接受 8 种基本数据类型。</h4><p>所以，你没有办法进行这样的编码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;<span class="keyword">int</span>&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">List&lt;<span class="keyword">boolean</span>&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>需要使用它们对应的包装类。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; li = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">List&lt;Boolean&gt; li1 = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h4 id="对泛型方法中的困惑"><a href="#对泛型方法中的困惑" class="headerlink" title="对泛型方法中的困惑"></a>对泛型方法中<t>的困惑</t></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">test</span><span class="params">(T t)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有的同学可能对于连续的两个 T 感到困惑，其实 <t> 是为了说明类型参数，是声明,而后面的不带尖括号的 T 是方法的返回值类型。<br>你可以相像一下，如果 test() 这样被调用</t></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">test(<span class="string">"123"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>那么实际上相当于</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(String t)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Java-不能创建具体类型的泛型数组"><a href="#Java-不能创建具体类型的泛型数组" class="headerlink" title="Java 不能创建具体类型的泛型数组"></a>Java 不能创建具体类型的泛型数组</h4><p>这句话可能难以理解，代码说明。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt;[] li2 = <span class="keyword">new</span> ArrayList&lt;Integer&gt;[];</span><br><span class="line">List&lt;Boolean&gt; li3 = <span class="keyword">new</span> ArrayList&lt;Boolean&gt;[];</span><br></pre></td></tr></table></figure>
+
+<p>这两行代码是无法在编译器中编译通过的。原因还是类型擦除带来的影响。</p>
+<p>List<integer> 和 List<boolean> 在 jvm 中等同于List<object> ，所有的类型信息都被擦除，程序也无法分辨一个数组中的元素类型具体是 List<integer>类型还是 List<boolean> 类型。</boolean></integer></object></boolean></integer></p>
+<p>但是，</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">List&lt;?&gt;[] li3 = <span class="keyword">new</span> ArrayList&lt;?&gt;[<span class="number">10</span>];</span><br><span class="line">li3[<span class="number">1</span>] = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">List&lt;?&gt; v = li3[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>借助于无限定通配符却可以，前面讲过 ？ 代表未知类型，所以它涉及的操作都基本上与类型无关，因此 jvm 不需要针对它对类型作判断，因此它能编译通过，但是，只提供了数组中的元素因为通配符原因，它只能读，不能写。比如，上面的 v 这个局部变量，它只能进行 get() 操作，不能进行 add() 操作，这个在前面通配符的内容小节中已经讲过。</p>
+<h3 id="泛型，并不神奇"><a href="#泛型，并不神奇" class="headerlink" title="泛型，并不神奇"></a>泛型，并不神奇</h3><p>我们可以看到，泛型其实并没有什么神奇的地方，泛型代码能做的非泛型代码也能做。</p>
+<p>而类型擦除，是泛型能够与之前的 java 版本代码兼容共存的原因。</p>
+<p>可量也正因为类型擦除导致了一些隐患与局限。</p>
+<p>但，我还是要建议大家使用泛型，如官方文档所说的，如果可以使用泛型的地方，尽量使用泛型。</p>
+<p>毕竟它抽离了数据类型与代码逻辑，本意是提高程序代码的简洁性和可读性，并提供可能的编译时类型转换安全检测功能。</p>
+<p>类型擦除不是泛型的全部，但是它却能很好地检测我们对于泛型这个概念的理解程度。</p>
+<p>我在文章开头将泛型比作是一个守门人，原因就是他本意是好的，守护我们的代码安全，然后在门牌上写着出入的各项规定，及“xxx 禁止出入”的提醒。但是同我们日常所遇到的那些门卫一般，他们古怪偏执，死板守旧，我们可以利用反射基于类型擦除的认识，来绕过泛型中某些限制，现实生活中，也总会有调皮捣蛋者能够基于对门卫们生活作息的规律，选择性地绕开他们的监视，另辟蹊径溜进或者溜出大门，然后扬长而去，剩下守卫者一个孤独的身影。</p>
+<p>所以，我说泛型，并不神秘，也不神奇。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/15/410376202/">RPG Maker MV 状态触发事件以及开关</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/30/4109869837/">SpringBoot 解决无法访问静态资源的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/09/159298361/">Thymeleaf 中JavaScript 如何获取后台传入的值</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/07/1579038364/">三范式与反三范式</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/02/209983386/">好用的 VsCode 插件</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/22/2998191920/">让 SpringBoot 以系统服务方式启动</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/3165008964/">跟上Java8 时间的魔术</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/2921176476/">跟上Java8 Lambda</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2017/12/22/4264795803/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/12/22/4264795803/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/12/22/4264795803/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 14.679653508140614px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 16.58169877100811px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 15.706473622711982px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 11.061802844640745px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 13.891341400324166px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 18.54944299223008px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 16.535403740683954px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 13.476505592933105px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 16.723018661598715px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 12.074826145565691px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 18.576029580895497px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 9.15830721851575px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 15.56507595051351px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.80914804970756px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 18.296723253042025px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 10.475462300932396px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 19.18178220446055px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 10.184893704046885px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 11.63191171499334px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 10.336763493504911px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 8.839031025452908px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 14.071574392565793px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 9.014224566974839px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 19.804990397971324px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.308912674386729px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.940177858249655px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

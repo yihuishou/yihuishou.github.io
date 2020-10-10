@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>永远不一致的分布式系统 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>永远不一致的分布式系统</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/05/24/1593155822/">永远不一致的分布式系统</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-05-24
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/05/24/1593155822/">永远不一致的分布式系统</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-05-24
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>在分布式系统中，我想大家都听过很多的专业名词：强一致性，弱一致性，最终一致性，CAP理论，FLP不可能性，Paxos算法，2阶段提交…</p>
+<p>我们也听说过很多设计系统的策略：比如BASE，缓存，实时计算/离线计算、异步，重写轻读/重读轻写…</p>
+<p>我们也听说过很多的系统衡量指标：性能、可靠性、高可用…</p>
+<p>而所有这些，都绕不开一个话题：“一致性”。而本篇，则试图以自己的理解，来探讨一下这个最常见、最基本、也最容易迷糊的、看似是常识却暗含深刻哲理的问题。</p>
+<p>因为在我看来，从哲学层面，去看透这个问题，很有利于各种计算机理论的理解。</p>
+<p>现实世界的3个例子</p>
+<h3 id="皇帝驾崩"><a href="#皇帝驾崩" class="headerlink" title="皇帝驾崩"></a>皇帝驾崩</h3><p>我们知道在古代，传递信息的交通工具通常是马。当现在皇帝驾崩、新皇登基的时候，这个消息要“马不停蹄”的送往各个州、县。</p>
+<p>马从京城到最南边的海南，可能要好几个月。那在这过渡期的几个月里面，有的州县认为旧的皇帝还在执政，有的州县已经收到新皇帝登基的通知。</p>
+<p>假如新皇版本了一个新的法令，那意味着在这个时期，旧的州县还在执行旧的法令，新的州县在执行新的法令。</p>
+<p>这就是现实世界中的“不一致性“的例子。这个例子反映了一个什么常识性的哲理呢？</p>
+<p>信息的传递需要“时间”。对，是“时间”！！！</p>
+<h3 id="淘宝秒杀"><a href="#淘宝秒杀" class="headerlink" title="淘宝秒杀"></a>淘宝秒杀</h3><p>第2个例子，你正在写代码，你的同事告诉你淘宝现在有一个促销活动，秒杀免费获取一件大衣。</p>
+<p>你收到这个消息，立马打开淘宝网页，等打开，显示活动已结束。</p>
+<p>请问：是因为你同事告诉了一个“假的”，“不正确”的消息吗？可以说是，也可以说不是。</p>
+<p>这个问题背后，反映了另外一个常识性的哲理：</p>
+<p>世界一直是变化的，当你把世界的某1刻的“状态”传给另外一个人、或者另外一个地方的时候，此时世界的“状态”可能已经改变。而对方，收到的就是一个“过时”的消息。</p>
+<p>这也就是人们常说的那句话：</p>
+<p>“人不可能2次踏进同1条河流！！！”</p>
+<h3 id="将军问题"><a href="#将军问题" class="headerlink" title="将军问题"></a>将军问题</h3><p>第3个例子，我想很多人都已经听说过，这个在此处就不再阐述。</p>
+<p>对应到计算机里面，一个通俗的描述就是：客户端给服务器发了条消息，网络失败。请问，此时服务器到底是收到了这条消息呢？还是没有收到？</p>
+<p>答案是：不确定！</p>
+<p>这些算法通常以其弹性t作为特征，t表示算法可以应付的错误。很多经典算法问题只有在 n ≥ 3t+1 时才有解</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上面3个例子，反映了3个基本常识：</p>
+<p>（1）信息的传播，需要“时间”。有“时间”，就有“延迟”；有“延迟”，就有不一致。 </p>
+<p>（2）信息所反映的“世界”一直在变，信息在传播，世界在变化。2者是并行发生的，也就意味着信息的“过时”。</p>
+<p>（3）传递信息的通道，是不可靠的。</p>
+<h3 id="计算机世界-–-随处可见的“不一致性”"><a href="#计算机世界-–-随处可见的“不一致性”" class="headerlink" title="计算机世界 – 随处可见的“不一致性”"></a>计算机世界 – 随处可见的“不一致性”</h3><p>现在就让我们把上面实现世界的3个例子，对应到计算机世界中：</p>
+<p>（1）信息的传播需要“时间” </p>
+<p>例子1：Kafka中，zk选取出Controller。当旧的Controller挂了，新的Controller被选举出来。</p>
+<p>这个过程可能很快，在计算机世界的度量里面，是毫秒、或者微秒级别，但即使再快，也需要“时间”，不是0。</p>
+<p>那么在这个极端的时间内，其他的broker们，有的接受到的是旧Controller发来的消息；有的接受的是新Controller发来的消息。</p>
+<p>或者说，旧的Controller挂了，其发出去的消息，还在网络上游荡呢，此时，新的Controller上台。</p>
+<p>例子2： Kafka中，每个broker都维护了一个全局的Metadata。当topic或者partition变化时，所有broker的这个Metadata都需要更新。</p>
+<p>很显然，这个过程也需要“时间”，网络还会超时，失败。最终结果必然是：所有broker维护的Metadata，是不一致的。</p>
+<p>（2）信息所反映的“世界”在变化</p>
+<p>例子：拿Kafka为例，客户端询问集群中的1个broker，我要发消息的(topic,partition)对应的机器列表是多少？broker回答：机器列表是（b1,b2,b3)。</p>
+<p>这个结果是正确的，当前是正确的！但就在客户端拿到这个正确的消息，正要选择b1往外发送的时候，这个时候，b1挂了，即“世界”变了。此时发送失败。</p>
+<p>（3）2将军问题。 </p>
+<p>这个在计算机科学中，反复提及，此处就不再详述。</p>
+<h3 id="终极结论"><a href="#终极结论" class="headerlink" title="终极结论"></a>终极结论</h3><p>上面说了现实世界的例子，也说了计算机世界对应的例子，最终是想说明一个什么道理呢？</p>
+<p>理论上，世界不存在“强一致性”</p>
+<p>信息的传输需要时间，世界本身也一直在变化。从微观粒度去看，不管计算机的计算时间有多么短：毫秒，微妙，纳秒，时间总是可以细分到一个更细粒度。</p>
+<p>在这个更细粒度来看，世界永远是不一致的！！！</p>
+<p>那我们通常说的“强一致性”，是怎么得来的呢？ 其实是从观察者的角度！！！</p>
+<p>就拿单机版的Mysql转账，一个账号扣钱、一个账号加钱来说，必定存在一个短暂的时间窗口：在这个时间窗口内，1个账号的钱减了，但另1个账号的钱，没有加上。</p>
+<p>只不过这个时间窗口很短，并且对外屏蔽了这个内部的”不一致性“，让客户端看来，是一致的。所以，在这里，客户端看到的是”强一致性“，但从内部来看，你可以认为是”最终一致性“。</p>
+<p>这还只是单机版，如果换成集群，网络时延很大，这个问题就会放大，客户端可能就会明显感知到”不一致性“的存在。</p>
+<p>再拿转账举个反向例子： </p>
+<p>假如跨行转账的时间是2个小时，对于系统来说，这是“最终一致性”</p>
+<p>但对于客户，假设这个客户很忙，好几天才查询一次账户，对于他来说，他看到的永远都是一致的，就是“强一致性”。</p>
+<h3 id="世界上不存在100-可靠的系统"><a href="#世界上不存在100-可靠的系统" class="headerlink" title="世界上不存在100%可靠的系统"></a>世界上不存在100%可靠的系统</h3><p>我们经常会听到某个系统夸耀自己多么多么可靠，多么多么高可用。但从上面的分析，你可以看出，世界上不存在100%可靠的系统。</p>
+<p>机器会宕机h，网络会断，不会断也会有延迟。有延迟，就有不一致。</p>
+<p>所以你经常会听到，某个系统的可靠性，是几个9。</p>
+<p>99%<br>99.9%<br>99.999%</p>
+<p>但无论几个9，永远不可能100%。</p>
+<h3 id="没有永动机存在"><a href="#没有永动机存在" class="headerlink" title="没有永动机存在"></a>没有永动机存在</h3><p>说了这么多，就是想阐述一个最最基本的东西：在计算机世界，追求绝对的“一致性”，就好比在物理学中，追求永动机一样。</p>
+<p>分布式系统之魅力</p>
+<p>通过上面的分析，我们是不是彻底绝望了？我们发现系统中到处都是“坑”，到处都是“漏洞”，到处都是不可靠。那我们还如何设计系统呢？</p>
+<p>而个人认为，分布式系统的魅力就在于：你如何在一个不可靠的、时刻都在变化的网络和硬件环境之上，构建一个相对可靠的软件系统？？</p>
+<p>很显然，因为没有绝对正确答案，才需要各种权衡、妥协。因为各种妥协、折中，才有了CAP理论, 有了BASE原则，有了Paxos…</p>
+<p>下面我们就来看看，我们既然没办法彻底解决问题，那面对不一致性，我们经常都会做哪些策略呢？</p>
+<h3 id="重试"><a href="#重试" class="headerlink" title="重试"></a>重试</h3><p>拿Kafka或者RocketMQ来讲，Metadata的信息不一致，又如何呢？ 多个NameServer的状态，不一致，又如何呢？</p>
+<p>不管这个不一致。客户端拿到Metadata之后，发送失败，重试！！！</p>
+<p>多个局部的不可靠换来整体的可靠</p>
+<p>对1个系统来讲，某个局部是可能出问题。但所有局部，同时出问题，这个概率就大大降低了。</p>
+<p>比如Kakfa，多备份。一个备份的磁盘是可能挂，但多个备份的磁盘，同时挂，这个概率就低多了。</p>
+<p>如果真的同时挂，怎么办呢？</p>
+<p>你就认命吧！！如果老是遇到这种问题，你可以去买彩票了。</p>
+<h3 id="层层校验"><a href="#层层校验" class="headerlink" title="层层校验"></a>层层校验</h3><p>数据不是有可能不一致吗？状态不是有可能随时会过时吗？</p>
+<p>既然没有办法保证全局的、完全的一致，那就在系统的各个局部，多做各种错误校验，以此来修补全局的不一致性。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>上面只是列举了面对这个随处可见的“不一致性”的一些常见思路，具体到不同的系统，不管是业务系统、还是底层架构，侧重点不一样，会有各式各样的针对特定场景的办法，那就是“八仙过海、各显神通”了。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/29/472996778/">Jackson 序列化 Hibernate 对象问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/895793596/">SQL 中 in or 和 exist 区别</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/11/250328113/">SpringBoot 部署 Jar 包时乱码的解决办法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/18/717841595/">前端规范 CSS</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/19/909643994/">数据库连接池到底设置为多大比较合适？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/23/3808206341/">杰克鸡的传送门</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/672772678/">位运算的常用技巧</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/18/2561778058/">用纯注解方式来使用 Mybatis</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/3165008964/">跟上Java8 时间的魔术</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/05/24/1593155822/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/24/1593155822/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/05/24/1593155822/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 8.925687947202093px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 18.54054644674816px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 15.328086761971715px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 11.244612525855256px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 11.184493634613709px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 18.854332090040344px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 11.062893271652403px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.359433224117574px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 17.327868560475153px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 9.012445181923237px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 16.16041228056637px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.426056467392277px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 15.013342630223875px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 8.244196604027742px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 19.960994864575554px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 10.832877288763608px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 10.41687286027959px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 16.4071606681926px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 15.063953144746936px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 16.49974899969368px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 9.32085708600842px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 19.488993677795428px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 15.418066389084775px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 15.250151160670569px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.914425707741835px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 15.291899089622204px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

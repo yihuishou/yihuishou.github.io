@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>SpringDataJPA 效率优化 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>SpringDataJPA 效率优化</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/03/25/1700353500/">SpringDataJPA 效率优化</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-03-25
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/03/25/1700353500/">SpringDataJPA 效率优化</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-03-25
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/SpringBoot/">SpringBoot</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="延迟加载-与-N-1"><a href="#延迟加载-与-N-1" class="headerlink" title="延迟加载 与 N+1"></a>延迟加载 与 N+1</h3><p>JPA 中默认 @ManyToMany 和 @OneToMany 使用延迟加载</p>
+<p>其抓取方式为 Feth.select 会产生 N+1 条查询语句</p>
+<p>这使得对数据库产生很大的压力</p>
+<p>使用立即加载 则不会有 N+1 的问题，单多表关联时，即使仅仅查询某一个表中的数据</p>
+<p>仍然会采用多表关联查询，也会对数据库产生压力</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
+<li><p>使用 JPA 2.1 的 Name的 @NameEntityGraph  @EntityGraph 来动态进行动态抓取</p>
+</li>
+<li><p>使用 JPQL 的 Fetch 语句 或者 单独使用 @EntityGraph ，对一层嵌套进行强制抓取</p>
+</li>
+</ol>
+<p>FetchType 与 @Fetch 比较：</p>
+<p>两者都是设定关联对象的加载策略。前者是JPA标准的通用加载策略注解属性，后者是Hibernate自有加载策略注解属性。</p>
+<p>FetchType可选值意义与区别如下：</p>
+<p>FetchType.LAZY: 懒加载，在访问关联对象的时候加载(即从数据库读入内存)</p>
+<p>FetchType.EAGER:立刻加载，在查询主对象的时候同时加载关联对象。</p>
+<p>FetchMode可选值意义与区别如下：</p>
+<ul>
+<li><p>@Fetch(FetchMode.JOIN)： 始终立刻加载，使用外连(outer join)查询的同时加载关联对象，忽略FetchType.LAZY设定,只产生一条sql语句。</p>
+</li>
+<li><p>@Fetch(FetchMode.SELECT)： 默认懒加载(除非设定关联属性lazy=false)，当访问每一个关联对象时加载该对象，会累计产生N+1条sql语句，FetchType.LAZY设定时默认使用。</p>
+</li>
+<li><p>@Fetch(FetchMode.SUBSELECT)： 默认懒加载(除非设定关联属性lazy=false),在访问第一个关联对象时加载所有的关联对象。会累计产生两条sql语句。且FetchType设定有效。</p>
+</li>
+</ul>
+<h4 id="Fetch"><a href="#Fetch" class="headerlink" title="Fetch"></a>Fetch</h4><p>在 Join 语句后添加 fetch 关键字，可强行抓取关联对象，生成的 sql 语句为 left outer join。</p>
+<p>只对一层关联有效，不能在多层关联中使用。</p>
+<p>示例：</p>
+<p><code>@Query(&quot;select d from Department d join fetch d.bossList where d.id=:id&quot;)</code></p>
+<p>对于 @Query 查询来说，@Query 查询受 fetch 语句 和 FetchType.LAZY/EAGER 影响 不受 @Fetch 影响</p>
+<p><strong>@Query 的 FetchType.EAGER 查询固定使用 select 模式 会产生 N+1 问题 且 不受  @Fetch 影响</strong></p>
+<h4 id="EntityGraph"><a href="#EntityGraph" class="headerlink" title="@EntityGraph"></a>@EntityGraph</h4><p>使用该注解被声明 attributePaths 属性为关联实体属性，同样只支持一层抓取。</p>
+<p>该属性支持一层级抓取多个关联实体属性 attributePaths = {“parm1”,”parm2”} </p>
+<p>示例：</p>
+<p><code>@EntityGraph(attributePaths = &quot;bossList&quot;)</code><br><code>@Query(&quot;select d from Department d where d.id=:id&quot;)</code></p>
+<p>EntityGraphType.LOAD 和 EntityGraphType.FETCH 为该注解可选属性，默认为 EntityGraphType.FETCH</p>
+<p>EntityGraphType.LOAD：在原有Entity的定义的基础上，定义还需要获取什么字段/关系</p>
+<p>EntityGraphType.FETCH：完全放弃原有Entity的定义，定义仅需要获取什么字段/关系</p>
+<p>EntityGraphType.LOAD：被加载的数据为name以及employees</p>
+<p>EntityGraphType.FETC：被加载的数据仅为employees</p>
+<h4 id="NamedEntityGraphs"><a href="#NamedEntityGraphs" class="headerlink" title="@NamedEntityGraphs"></a>@NamedEntityGraphs</h4><p>该注解声明在实体上，必须声明 name 属性，由接口方法中的 @EntityGraph 注解 value 属性调用，默认可省略 value</p>
+<p>示例：</p>
+<p><code>@EntityGraph(&quot;department.all&quot;)</code><br><code>@Query(&quot;select d from Department d where d.id=:id&quot;)</code></p>
+<p>@NamedEntityGraphs 为数组声明多个 @NamedEntityGraph 注解</p>
+<p>@NamedEntityGraph 的 name 属性为调用名 attributeNodes 为定义的抓取的节点属性，包含多个@NamedAttributeNode</p>
+<p>@NamedAttributeNode 包含 value 和 subgraph 两个值，只有 value 时 可省略</p>
+<p>value 为要抓取的关联实体属性 subgraph 则为要抓取的子实体名 对应为 @NamedSubgraph 的 name 属性值</p>
+<p>subgraphs 包含多个 @NamedSubgraph 为抓取子实体关联节点</p>
+<p>@NamedSubgraph 的 name 属性为子实体名 attributeNodes 则可定义嵌套抓取节点，</p>
+<p>功能同 @NamedEntityGraph 的attributeNodes。可嵌套使用</p>
+<p>下面的示例为抓取了 A 关联的实体属性 B 和 B 关联的实体属性 C 和 C 关联的实体属性 D</p>
+<p><strong>多层级抓取 需要使用 @IndexColumn 防止 cannot simultaneously fetch multiple bags 异常</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table</span></span><br><span class="line"><span class="meta">@NamedEntityGraphs</span>(&#123;</span><br><span class="line">    <span class="meta">@NamedEntityGraph</span>(name = <span class="string">"A"</span>, </span><br><span class="line">            attributeNodes = &#123;</span><br><span class="line">            <span class="meta">@NamedAttributeNode</span>(value = <span class="string">"B"</span>,subgraph = <span class="string">"B.name"</span>),</span><br><span class="line">            &#125;,</span><br><span class="line">            subgraphs = &#123;</span><br><span class="line">                    <span class="meta">@NamedSubgraph</span>(name = <span class="string">"B.name"</span>,  <span class="comment">//一层延伸</span></span><br><span class="line">                            attributeNodes = <span class="meta">@NamedAttributeNode</span>(value = <span class="string">"C"</span>, subgraph = <span class="string">"C.name"</span>)),</span><br><span class="line">                    <span class="meta">@NamedSubgraph</span>(name = <span class="string">"C.name"</span>,  <span class="comment">//两层延伸</span></span><br><span class="line">                            attributeNodes = <span class="meta">@NamedAttributeNode</span>(value = <span class="string">"D"</span>)) </span><br><span class="line">                        &#125;) </span><br><span class="line">                &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function">Class <span class="title">A</span> <span class="params">()</span></span>&#123;</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  使用</span></span><br><span class="line"><span class="meta">@EntityGraph</span>(<span class="string">"A"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p><strong>抓取超过一层的实体时，要求多实体一侧必须使用 Set 集合</strong></p>
+<p>当一个实体对象中包含多于一个非延迟加载策略时，比如 @OneToMany，@ManyToMany 或者 @ElementCollection 时，获取策略为(fetch = FetchType.EAGER)</p>
+<p>当(fetch = FetchType.EAGER)多于一个时，持久框架抓取一方的对象时，同时又将多方的对象加载进容器中，多方又可能关联其它对象，</p>
+<p>Hibernate实现的JPA，默认最高抓取深度含本身级为四级(它有个属性配置是0-3),</p>
+<p>若多方(第二级)存在重复值，则第三级中抓取的值就无法映射，就会出现 </p>
+<p>org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags 异常。</p>
+<p>Hibernate 解决方案</p>
+<p>@IndexColumn(name = “二级主键”) 或者次级主键</p>
+<p>其实也可以使用 Set 集合来去重，并配合 @OrderIndex 来实现有序抓取。</p>
+<p>但使用Set集合不能使用索引。优点是 该方法属于 JPA 规范内</p>
+<p>使用 @IndexColumn 指定 唯一索引 属于超出 JPA 规范的方法 为 Hibernate 的专用方法。</p>
+<p>推荐使用 @IndexColumn </p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/17/1986098977/">Java 与闭包</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/2173211200/">Pojo 与 JavaBean 的理解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/15/410376202/">RPG Maker MV 状态触发事件以及开关</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/04/23/3728873280/">扫描登陆流程详解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/22/2885027022/">简明 ES6/7</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/08/870412291/">解决 Mysql 错误：1045</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/13/3733447055/">解决 SpringCloud Fegin 无法传递参数的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/3001741591/">用文件特征码来检测文件类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/4264795803/">优雅地使用泛型</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/03/25/1700353500/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/25/1700353500/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/25/1700353500/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 12.95646119087803px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.40595589964218px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 14.06266691672825px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 13.070564180942817px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.409288486235582px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 16.311447494909718px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 12.736122868910327px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.957776231404658px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 13.86606204971461px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 11.834817758893168px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 11.10453957603654px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.954055088622853px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 19.5618676482233px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 14.228979051520353px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 14.23475834274414px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 8.864453876871442px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 11.482653500974525px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 17.74510386842476px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 13.544864106918986px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 19.153616145246207px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 13.739120513274385px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 18.579974692639098px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 15.868766906502657px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 10.323656550011435px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 9.331102112875147px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 8.68142858197947px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

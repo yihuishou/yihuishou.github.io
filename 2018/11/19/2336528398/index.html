@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>不那么安全的 Raid5 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>不那么安全的 Raid5</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/11/19/2336528398/">不那么安全的 Raid5</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Windows/">Windows</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-11-19
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/11/19/2336528398/">不那么安全的 Raid5</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-11-19
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Windows/">Windows</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="Raid5也不是那么可靠"><a href="#Raid5也不是那么可靠" class="headerlink" title="Raid5也不是那么可靠"></a>Raid5也不是那么可靠</h3><p>很多人遇到过服务器RAID5挂掉，往往掉一个盘后，第二个盘也立刻挂掉。大家都知道RAID5 一次允许一个盘缺失，<br>RAID 5也是以数据的校验位来保证数据的安全，但它不是以单独硬盘来存放数据的校验位，而是将数据段的校验位交互存放于各个硬盘上。这样，任何一个硬盘损坏，都可以根据其它硬盘上的校验位来重建损坏的数据。硬盘的利用率为n-1。如果挂掉两个盘，数据就玩完了。</p>
+<p>理论上两个硬盘同时失效的概率是很低的，但为什么会这样呢？</p>
+<p>从数学角度说，每个磁盘的平均无故障时间 (MTBF) 大约为 50 万至 150 万小时(也就是每 50～150 年发生一次硬盘损坏)。实际往往不能达到这种理想的情况，在大多数散热和机械条件下，都会造成硬盘正常工作的时间大幅减少。考虑到每个磁盘的寿命不同，阵列中的任何磁盘都可能出现问题，从统计学角度说，阵列中 N 个磁盘发生故障的机率比单个磁盘发生故障的机率要大 N 倍。结合上述因素，如果阵列中的磁盘数量合理，且这些磁盘的平均无故障时间 (MTBF) 较短，那么在磁盘阵列的预期使用寿命过程中，就很有可能发生磁盘故障(比方说每几个月或每隔几年就会发生一次故障)。</p>
+<p>两块磁盘同时损坏的几率有多大呢(“同时”就是指一块磁盘尚未完全修复时另一块磁盘也坏掉了)?</p>
+<p>如果说 RAID 5 阵列的MTBF相当于MTBF^2，那么这种几率为每隔10^15个小时发生一次(也就是1万多年才出现一次)，因此不管工作条件如何，发生这种情况的概率是极低的。从数学理论角度来说，是有这种概率，但在现实情况中我们并不用考虑这一问题。不过有时却是会发生两块磁盘同时损坏的情况，我们不能完全忽略这种可能性，实际两块磁盘同时损坏的原因与MTBF基本没有任何关系。</p>
+<p>对这种情况来说，这里首先要引入一个一般人不常接触到的概念：<br><strong>BER 硬盘误码率,英文是BER(Bit Error Rate),是描述硬盘性能的一个非常重要的参数,是衡量硬盘出错可能性的一个参数。</strong><br>这个参数代表你写入硬盘的数据，在读取时遇到不可修复的读错误的概率。<br>(不能恢复的ECC读取错误)从统计角度来说也比较少见，一般来说是指读取多少位后会出现一次读取错误。<br>随着硬盘容量增加，驱动器读取数据的误读率就会增加，而硬盘容量暴涨，误码率的比例一直保持相对增加。<br>一个1TB的驱动器是需要更多读取整个驱动器，这是在RAID重建期间发生错误的概率会比300G 驱动器遇到错误的几率更大。<br>那这个错误的几率到底有多大呢？或者说，我们写入多少GB数据，才会遇到1byte的读取错误呢？<br>对于不同类型的硬盘（以前企业级、服务器、数据中心级硬盘用SCSI/光纤，曾经商用、民用级别是IDE；现在对应的则是SAS/SATA；<br>他们的MRBF（平均无故障时间）是接近的，但是BER便宜的SATA硬盘要比昂贵的SCSI硬盘的误码率（BER）要高得多。<br>也就是说，出现某个sector无法读取的情况，SATA要比SCSI严重得多。<br>这两种硬盘（企业级的SCSI/ FC/ SAS 磁盘）/（商用/民用级的IDE/SATA）BER的差距大概是1-2个数量级。<br>按照文中的计算，一个1TB的硬盘，通常你无法读取所有sector的概率达到了56%，<br>因此你用便宜的大容量SATA盘，在出现硬盘故障的情况下重建RAID的希望是：无法实现。<br>我们回到RAID5的情况来。<br>在RAID5大行其道之初，硬盘的容量基本不超过100GB。<br>在过去，做RAID5一般RAID的磁盘容量都不大，比如72GB。无法恢复一个RAID的概率按照文献是1.1%（注意，1.1%已经很不错了，因为你在硬盘故障之后，才需要去恢复RAID。两个概率是要相乘的。<br>当硬盘容量上升到200GB，假设出现故障的概率是线性增长的。那么失败率有11%，估计负责存储的人就被老板操的厉害了。<br>但是当你用1TB的SATA硬盘做RAID5的话，无法恢复一个RAID的概率将会是56%，当你遇到一个硬盘失效的情况，几乎剩下的两个以上硬盘（RAID5最少组合是3个）铁定会遇到一个硬盘读取错误，从而重建失败。<br>所以，以前小硬盘做RAID5，基本很少遇到同时挂掉两个盘的情况；现在硬盘大了，出问题的概率也越来越大了。<br>有人会问：56%？<br>文章里面这个数据还是显得有些“不可信”。大概是因为下面两个原因，我们才没有怎么听说过这么高的BER吧。<br>首先，我们自己用的硬盘都不会跑RAID。虽然现在我们自己的硬盘容量也变得很大（现在主流台式机SATA硬盘应该就是500G），但是这个量级的硬盘上，你往往不会把500G硬盘全部写满；而大多数数据你都很少去读取它。因此从概率上讲，坏道出现在那些没卵味的电影和音乐上的可能性大很多：大多数电影和音乐都没卵味。<br>但是对于跑RAID的用户，对整个硬盘进行读取的事情经常发生。即使系统足够和谐，知道不对你报告那些出现在你从不读取的文件中的坏道，但是也只是略过了报告这一步：它还是会找到所有的坏道，56%就来了。<br>其次，虽然你丢了一些sector，一般情况下也没啥关系。还是以电影和音乐为例，大多数的压缩算法都从设计上允许有一些这样或者那样的误码。丢了几个sector的数据，也许对你来说就是松岛枫身上一些无名的马赛克而已，你都不知道是硬盘作祟。<br>现在还有所谓的监控专用企业级SATA，其原理就是在固件上做手脚，让硬盘即使遇到写入的数据读取错误，也不管三七二十一直接跳过，不再重试读取（标准硬盘的读取方式是遇到某个扇区CRC错误自动重新再去读，直到读到正确的数据为止）。这对监控数据来说是理所当然的（大多数监控的硬盘都是在不停地写入，但是很少需要读取），除非遇到出现问题需要重现影像时。<br>遇到这种情况概率是很低的，我手头的数十个十六路硬盘摄像机，镜头也过百个，基本上几个月才需要用到回放一次，而即使需要回放，也只需要其中的很小一部分数据（比如某几个摄像头，某一天中一个小时的录像）。<br>但是拿这种硬盘来做RAID5就更糟糕了，当RAID5重建需要数据百分百正确时，你压根不可能读到正确的数据。<br>我们继续来看今天的测试数据：<br>我用FreeBSD 的RAIDZ软阵列创建了一个6X1TB硬盘的RAID5。当然，我没有硬盘损坏，这六个硬盘都是好的；<br>但是我们不管这个，这里用RAIDZ的原因是RAIDZ有数据巡检（scrub）功能，然后又能直观地看到数据巡检的结果。<br>一般的硬件阵列卡，也就是插在主板PCI/PCIX/PCIE/或者主板集成的RAID5，压根就没这项功能；<br>企业级的数据存储，也只有到盘阵级别（比如IBM DS3000/4000/5000，DELL MD3000….etc）才有这类功能，但是你也看不到检查的结果，最多能在日志里看到某个硬盘CRC失败，然后跳红灯掉出来，阵列柜告警通知你换硬盘。你别想知道这个硬盘到底是彻底挂了呢，还是有读取错误，还是有坏道。。。总之两眼一抹黑。<br>ZFS的好处之一就在这里了：你在命令行打个 zpool scrub tank （tank就是你创建的raid的名字），它就开工忠实地开始巡检整个阵列了，读取上面的每个字节数据，并与当初写入时的md5值进行比较，发现错误的话就报告，并尝试用冗余数据修复。这个过程是后台进行的，并且用户可以直观地看到巡检的进度、速度/所需时间以及结果。</p>
+<p>我们也能总结遇到RAID5一次挂掉俩盘的概率：</p>
+<ol>
+<li>使用越大容量的硬盘做RAID5，遇到BER 扇区的概率越大；比如用100G硬盘做RAID5就比用1TB的安全；</li>
+<li>使用越多盘数的硬盘做RAID5，遇到BER 扇区的概率越大；比如用3个盘做的RAID5，比6个盘做的RAID5安全；</li>
+<li>使用越便宜的硬盘做RAID5，遇到BER 扇区的概率越大；比如用SCSI/FC/SAS盘比用IDE/SATA的RAID5安全；</li>
+<li>RAID5里面存放的数据越多，塞得越满，遇到BER 扇区的概率越大；比如存了100G数据的比存了1TB数据的RAID5安全；</li>
+</ol>
+<p>我是下载狂，一定要要放很多数据，数据量以TB计，即将突破三位数；<br>又是穷人，花不起很多钱，只能用最便宜的SATA盘，最好是最便宜又大碗的西数绿盘；<br>技术有差距啊，折腾不起ZFS；<br>胆子又小，担惊受怕不起，看完这篇文章，想到自己RAID里的数据随时会全部莫有，晚上睡觉都睡不着，伤不起啊肿摸办？</p>
+<p>解决方案1. 对于不重要的大量数据，比如可以下载来的影音数据，不要做阵列。直接用单盘，每个盘放一批数据。<br>数据量大到一定程度，目前来说凡是总量在2TB以上的SATA阵列，如果你做了RAID5，不仅数据没保障，万一坏掉一个盘，你有50%以上的概率同时掉第二个盘，那是一定毛都不剩一根。<br>运气好的话，可以通过让第二个挂掉的硬盘强行上线的方式勉强恢复阵列运行，你也必须有同等容量的空间让你腾挪数据；<br>不要说这个数据量的备用空间一般不会有，就算有，来回折腾一次所需要耗费的时间足够让你一个礼拜没个安耽觉睡。<br>有人说不会啊，我这个RAID5读取有300MB/s呢，2TB数据只要两个小时。<br>那是你平时——RAID5缺盘运行时，性能大概只有平时的1/10-1/20，外加上肯定有读不过去的文件需要跳过。。。。再加上读不过去会掉盘，<br>又要重启重新强制上线——这样的事件还不止一次，按照前面的测试，6个1T盘一共遇到24个读取错误，也就是你备份的进度得熄火24次——这些事儿堆一块儿，如果不是一个心理素质非常好的，处理过N起类似事件经验的数据中心老油子，对于第一次遇到这种情况的新手绝对是噩梦般的经历。</p>
+<p>解决方案2. 做RAID1阵列。对于重要的、并且经常变动更新数据，比如财务数据、照片、文档资料，建议用RAID1。<br>RAID1多花了一个盘，但是多了一道保障。</p>
+<p>解决方案3：光磁介质冷备份。通常我们叫做刻盘，呵呵。或者硬盘冷备——我两个硬盘各复制一份，拔掉一个硬盘放抽屉里，最适合照片之类数据。</p>
+<p>解决方案4：RAID6。不过这个需要高级别的RAID卡支持，这个卡通常会很贵，至少贵出1-2个1TB盘的价值；<br>同等容量还要多加一个硬盘，个人觉得在6个硬盘以内，相对RAID1的方案没有优势。既没有经济优势，又没有性能优势——啥都没有，不如老老实实做RAID1。<br>优点当然有咯：即使遇到挂一个盘，它还算是一个RAID5——性能没有大减，数据也还有冗余，我慢慢等硬盘保修回来即可。<br>注意哦，6个1T以上盘。也就是说，你的硬盘总容量少于这个数字，还是不用考虑RAID6了。</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/723704985/">Java 中判断字符串是否为纯数字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/28/381957246/">SpringBoot 在 IDEA 中实现静态资源热部署</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/02/3826197500/">TinyPNG PS 本地插件安装步骤</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/26/1836404574/">Vuter 插件的简单配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/04/3950067579/">优雅地使用枚举</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/20/4151092854/">JavaScript 中的各种简写</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/672772678/">位运算的常用技巧</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/01/14/2168753306/">太阳可能没有核聚变</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/3001741591/">用文件特征码来检测文件类型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/3512719846/">跟上Java8 流中的数据</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/11/19/2336528398/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/11/19/2336528398/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/11/19/2336528398/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 12.60620789121134px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.012065586205694px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 16.706940597068105px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 11.310115113143208px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 10.882185504092321px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 16.148220253784483px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 12.509470990675439px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 14.408977379597975px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.854019681562509px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 14.950363127959474px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 15.365958390463273px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 9.937865418863874px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 16.51741710816478px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 18.833035072323057px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 16.390665812994406px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 17.011862080335323px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 12.823133455387548px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 17.104295906136677px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 18.10826951977628px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 10.135848365224774px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 15.600832905737814px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 10.64181530430023px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 12.78238840991914px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 9.601743364335167px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 12.704373729850694px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 10.778406589688828px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

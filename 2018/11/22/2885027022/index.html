@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>简明 ES6/7 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>简明 ES6/7</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/11/22/2885027022/">简明 ES6/7</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/JavaScript/">JavaScript</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-11-22
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/11/22/2885027022/">简明 ES6/7</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-11-22
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/JavaScript/">JavaScript</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="let-count"><a href="#let-count" class="headerlink" title="let/count"></a>let/count</h3><p>在ES6之前，我们都是用var关键字声明变量。无论声明在何处，都会被视为声明在函数的最顶部(不在函数内即在全局作用域的最顶部)。这就是函数变量提升例如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function aa() &#123;</span><br><span class="line">  if(flag) &#123;</span><br><span class="line">      var test = &apos;hello man&apos;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">      console.log(test)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上的代码实际上是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function aa() &#123;</span><br><span class="line">    var test // 变量提升，函数最顶部</span><br><span class="line">    if(flag) &#123;</span><br><span class="line">        test = &apos;hello man&apos;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //此处访问 test 值为 undefined</span><br><span class="line">        console.log(test)</span><br><span class="line">    &#125;</span><br><span class="line">    //此处访问 test 值为 undefined</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们通常用 let 和 const 来声明，let 表示变量、const 表示常量。let 和 const 都是块级作用域。</p>
+<p>只要在{}花括号内的代码块即可以认为 let 和 const 的作用域</p>
+<p>let 的作用域是在它所在当前代码块，但不会被提升到当前函数的最顶部。</p>
+<p>再来说说 const<br>const 声明的变量必须提供一个值，而且会被认为是常量，意思就是它的值被设置完成后就不能再修改了。</p>
+<p>还有，如果 const 的是一个对象，对象所包含的值是可以被修改的。抽象一点儿说，就是对象所指向的地址不能改变，而变量成员是可以修改的。</p>
+<h3 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h3><p>解构（Destructuring）：是将一个数据结构分解为更小的部分的过程。ES6中，从数组和对象中提取值，对变量进行赋值。</p>
+<p>两种简写</p>
+<p>{name:name,age=age} = {name,age}</p>
+<p>{open:function(){   console.log(“kl”)  }} = {open(){  console.log(“kl”)  }}</p>
+<p>let {对象属性名} = {对象属性名:对象属性}</p>
+<p>let 对象属性名 = 对象属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">const people = &#123;</span><br><span class="line">    name: &apos;lux&apos;,</span><br><span class="line">    age: 20</span><br><span class="line">&#125;</span><br><span class="line">const name = people.name</span><br><span class="line">const age = people.age</span><br><span class="line">console.log(name + &apos; --- &apos; + age)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">const people = &#123;</span><br><span class="line">    name: &apos;lux&apos;,</span><br><span class="line">    age: 20</span><br><span class="line">&#125;</span><br><span class="line">const &#123; name, age &#125; = people</span><br></pre></td></tr></table></figure>
+
+<p>虽然通过解构可以无需声明来赋值一个变量。</p>
+<p>但最好还是使用声明解构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">var people = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: &quot;Mike Smith&quot;,</span><br><span class="line">    family: &#123;</span><br><span class="line">      mother: &quot;Jane Smith&quot;,</span><br><span class="line">      father: &quot;Harry Smith&quot;,</span><br><span class="line">      sister: &quot;Samantha Smith&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    age: 35</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: &quot;Tom Jones&quot;,</span><br><span class="line">    family: &#123;</span><br><span class="line">      mother: &quot;Norah Jones&quot;,</span><br><span class="line">      father: &quot;Richard Jones&quot;,</span><br><span class="line">      brother: &quot;Howard Jones&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    age: 25</span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">for (var &#123;name: n, family: &#123; father: f &#125; &#125; of people) &#123;</span><br><span class="line">  console.log(&quot;Name: &quot; + n + &quot;, Father: &quot; + f);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// &quot;Name: Mike Smith, Father: Harry Smith&quot;</span><br><span class="line">// &quot;Name: Tom Jones, Father: Richard Jones&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="import-export"><a href="#import-export" class="headerlink" title="import/export"></a>import/export</h3><p><code>as</code> 为命名空间别名</p>
+<p>可以导出let var function class const</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">// 导出默认, 有且只有一个默认</span><br><span class="line">export default App =2</span><br><span class="line"></span><br><span class="line">export default function open()&#123;  console.log(alphabets) &#125;</span><br><span class="line"></span><br><span class="line">// 部分导出</span><br><span class="line">export let a = 2;</span><br><span class="line"></span><br><span class="line">export function open()&#123;  console.log(alphabets) &#125;</span><br><span class="line"></span><br><span class="line">let opens =  function ()&#123;  console.log(alphabets) &#125;</span><br><span class="line"></span><br><span class="line">let s = 3</span><br><span class="line"></span><br><span class="line">export &#123;opens,s&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//全部导入</span><br><span class="line">import people from &apos;./example&apos;</span><br><span class="line"></span><br><span class="line">//有一种特殊情况，即允许你将整个模块当作单一对象进行导入</span><br><span class="line">//该模块的所有导出都会作为对象的属性存在</span><br><span class="line">import * as example from &quot;./example.js&quot;</span><br><span class="line">console.log(example.name)</span><br><span class="line">console.log(example.age)</span><br><span class="line">console.log(example.getName())</span><br><span class="line"></span><br><span class="line">//导入部分</span><br><span class="line">import &#123;name, age&#125; from &apos;./example&apos;</span><br></pre></td></tr></table></figure>
+
+<p>1.当用export default people导出时，就用 import people 导入（不带大括号）</p>
+<p>2.一个文件里，有且只能有一个export default。但可以有多个export。</p>
+<p>3.当用export name 时，就用import { name }导入（记得带上大括号）</p>
+<p>4.当一个文件里，既有一个export default people, 又有多个export name 或者 export age时，导入就用 import people, { name, age } </p>
+<p>5.当一个文件里出现n多个 export 导出很多模块，导入时除了一个一个导入，也可以用import * as example</p>
+<h3 id="扩展运算符"><a href="#扩展运算符" class="headerlink" title="扩展运算符"></a>扩展运算符</h3><p><code>...</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  //数组</span><br><span class="line">    const color = [&apos;red&apos;, &apos;yellow&apos;]</span><br><span class="line">    const colorful = [...color, &apos;green&apos;, &apos;pink&apos;]</span><br><span class="line">    console.log(colorful) //[red, yellow, green, pink]</span><br><span class="line">    </span><br><span class="line">    //对象</span><br><span class="line">    const alp = &#123; fist: &apos;a&apos;, second: &apos;b&apos;&#125;</span><br><span class="line">    const alphabets = &#123; ...alp, third: &apos;c&apos; &#125;</span><br><span class="line">    console.log(alphabets) //&#123; &quot;fist&quot;: &quot;a&quot;, &quot;second&quot;: &quot;b&quot;, &quot;third&quot;: &quot;c&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">const first = &#123;</span><br><span class="line">       a: 1,</span><br><span class="line">       b: 2,</span><br><span class="line">       c: 6,</span><br><span class="line">   &#125;</span><br><span class="line">   const second = &#123;</span><br><span class="line">       c: 3,</span><br><span class="line">       d: 4</span><br><span class="line">   &#125;</span><br><span class="line">   const total = &#123; ...first, ...second &#125;</span><br><span class="line">   console.log(total) // &#123; a: 1, b: 2, c: 3, d: 4 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>解构赋值中的剩余模式</p>
+<p>当解构一个数组时，可以使用剩余模式，将数组剩余部分赋值给一个变量。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var [a, ...b] = [1, 2, 3];</span><br><span class="line">console.log(a); // 1</span><br><span class="line">console.log(b); // [2, 3]</span><br></pre></td></tr></table></figure>
+
+<p>剩余元素必须是数组的最后一个元素。<br><strong>…只能在数组最后一个变量</strong></p>
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><p>参数默认值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function action(num = 200) &#123;</span><br><span class="line">        console.log(num)</span><br><span class="line">    &#125;</span><br><span class="line">    action(0) // 0</span><br><span class="line">    action() //200</span><br><span class="line">    action(300) //300</span><br></pre></td></tr></table></figure>
+
+<p>数组对象默认值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let oldArry =[1,2,3,4]</span><br><span class="line"></span><br><span class="line">let [a,b.c=2] = oldArry</span><br><span class="line"></span><br><span class="line">    let ary = &#123; name: &quot;阿里&quot;, age: 18, money: 0 &#125;;</span><br><span class="line"></span><br><span class="line">    let &#123; name ,age=12312,mo=4&#125; = ary;</span><br></pre></td></tr></table></figure>
+
+<h3 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h3><p>ES6很有意思的一部分就是函数的快捷写法。也就是箭头函数。</p>
+<p>箭头函数最直观的三个特点。</p>
+<p>不需要 function 关键字来创建函数<br>省略 return 关键字<br>继承当前上下文的 this 关键字</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">()=&gt; dosomething()</span><br><span class="line"></span><br><span class="line">data =&gt; data++</span><br><span class="line"></span><br><span class="line">(a,b) =&gt; a+b</span><br><span class="line"></span><br><span class="line">data =&gt;&#123;</span><br><span class="line"></span><br><span class="line">dosomething()</span><br><span class="line"></span><br><span class="line">return data++</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h3><p>在promise之前代码过多的回调或者嵌套，可读性差、耦合度高、扩展性低。通过Promise机制，扁平化的代码机构，大大提高了代码可读性；用同步编程的方式来编写异步代码，保存线性的代码逻辑，极大的降低了代码耦合性而提高了程序的可扩展性。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">setTimeout(function() &#123;</span><br><span class="line">    console.log(1)</span><br><span class="line">  &#125;, 0);</span><br><span class="line">  new Promise(function executor(resolve) &#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">    for( var i=0 ; i&lt;10000 ; i++ ) &#123;</span><br><span class="line">      i == 9999 &amp;&amp; resolve();</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(3);</span><br><span class="line">  &#125;).then(function() &#123;</span><br><span class="line">    console.log(4);</span><br><span class="line">  &#125;);</span><br><span class="line">  console.log(5);</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h3><p>基本的字符串格式化。将表达式嵌入字符串中进行拼接。用${}来界定。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">//ES5 </span><br><span class="line">var name = &apos;lux&apos;</span><br><span class="line">console.log(&apos;hello&apos; + name)</span><br><span class="line">//es6</span><br><span class="line">const name = &apos;lux&apos;</span><br><span class="line">console.log(`hello $&#123;name&#125;`) //hello lux</span><br></pre></td></tr></table></figure>
+
+<h3 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h3><p>async function 声明用于定义一个返回 AsyncFunction 对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的 Promise 返回其结果。但是如果你的代码使用了异步函数，它的语法和结构会更像是标准的同步函数。</p>
+<p>当调用一个 async 函数时，会返回一个 Promise 对象。当这个 async 函数返回一个值时，Promise 的 resolve 方法会负责传递这个值；当 async 函数抛出异常时，Promise 的 reject 方法也会传递这个异常值。</p>
+<p>async 函数中可能会有 await 表达式，这会使 async 函数暂停执行，等待 Promise  的结果出来，然后恢复async函数的执行并返回解析值（resolved）。</p>
+<pre><code>注意， await 关键字仅仅在 async function中有效。如果在 async function函数体外使用 await ，你只会得到一个语法错误（SyntaxError）。</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">function resolveAfter2Seconds() &#123;</span><br><span class="line">  return new Promise(resolve =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      resolve(&apos;resolved&apos;);</span><br><span class="line">    &#125;, 2000);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function asyncCall() &#123;</span><br><span class="line">  console.log(&apos;calling&apos;);</span><br><span class="line">  var result = await resolveAfter2Seconds();</span><br><span class="line">  console.log(result);</span><br><span class="line">  // expected output: &apos;resolved&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">asyncCall();</span><br></pre></td></tr></table></figure>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/723704985/">Java 中判断字符串是否为纯数字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/27/2001433166/">PS 快速将多张图片导入到同一图片中</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/18/878159451/">SpringBoot Restful API 的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/15/1954507039/">WinRar 常用自解压路径及命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/07/1579038364/">三范式与反三范式</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/10/09/1453987926/">关于 ShadowSocksR 端口转发</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/01/15/1811952678/">禁止 Opera 升级和搜索引擎更改</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/20/4151092854/">JavaScript 中的各种简写</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/672772678/">位运算的常用技巧</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/24/595384478/">技术管理看这一篇就够了</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/11/22/2885027022/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/11/22/2885027022/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/11/22/2885027022/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 9.443086452733931px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 9.211821333983693px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 17.35721624982007px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 16.840745333054166px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 18.72308776977435px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 16.09473015352966px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 18.705139778237893px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 16.338291574840806px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 18.485749337000303px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 11.067005086846137px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 9.40557589218324px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.34821628380178px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 8.372745808939637px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 8.518283770796486px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 15.22900742571477px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 16.02851083118735px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 19.233776415037063px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 8.216242200208502px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 14.140412422561559px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 14.15426632526191px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 14.995577911964237px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 18.749067306360338px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 8.069408668029698px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 10.383838494332085px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 13.680564385500082px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.76309302606272px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

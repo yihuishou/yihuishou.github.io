@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>用纯注解方式来使用 Mybatis | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>用纯注解方式来使用 Mybatis</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/09/18/2561778058/">用纯注解方式来使用 Mybatis</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-09-18
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/09/18/2561778058/">用纯注解方式来使用 Mybatis</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-09-18
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>####</p>
+<p>@Insert</p>
+<p>编写insert语句，实现数据的新增</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="meta">@Insert</span>(<span class="string">"insert into users(name, age) values(#&#123;name&#125;, #&#123;age&#125;)"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(Users user)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>2、@Update</p>
+<p>编写update语句，实现数据的修改</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="meta">@Update</span>(<span class="string">"update users set name = #&#123;name&#125;, age = #&#123;age&#125; where id = #&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">update</span><span class="params">(Users user)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>3、@Delete</p>
+<p>编写delete语句，实现数据的删除</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="meta">@Delete</span>(<span class="string">"delete from users where id = #&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>4、@Select</p>
+<p>编写select语句，实现数据的查询</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   <span class="meta">@Select</span>(<span class="string">"select * from users where id = #&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Users <span class="title">getUserById</span><span class="params">(<span class="keyword">int</span> id)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>5、@Options</p>
+<p>参数设置<br>常用属性：<br>keyProperty<br>useGeneratedKeys 获取插入成功后自增主键的值 <strong>执行添加操作之后，直接访问对象的主键字段属性即可取得对应值。</strong><br>statementType<br>keyColumn<br>timeout</p>
+<p>6、@ResultType</p>
+<p>标记结果集的数据类型，Class&lt;?&gt;,等价于xml中的resulttype</p>
+<p>7、@Results</p>
+<p>标记结果集的数据类型，等价于xml中的<resultmap></resultmap></p>
+<p>@ResultMap</p>
+<p>标记结果集的数据类型配置文件id，关联对应的XML配置文件中的id属性<resultmap id="xxx"></resultmap></p>
+<p>8、@Result</p>
+<p>结果集的具体的数据对应<br>常用属性：<br>id：id<br>property：映射属性<br>column：数据库列</p>
+<p><strong>property，column属性相同时可省略</strong></p>
+<p>one:一对一或多对一<br>many：集合，一对多<br>javaType:对应的java中数据类型</p>
+<p>9、@One<br>用于@Result注解中<br>实现嵌套查询，一般用于一对一或多对一的关系中<br>常用属性：<br>select：关联查询语句<br>fetchType：抓取策略<br>取值：<br>FetchType.EAGER 急加载<br>FetchType.LAZY 懒加载<br>FetchType.DEFAULT</p>
+<p>使用DEFAULT时可省略该属性</p>
+<p>10、@Many<br>用于@Result注解中<br>实现嵌套查询，一般用于一对多或多对多<br>常用属性：<br>select：关联查询语句<br>fetchType：抓取策略<br>取值：<br>FetchType.EAGER<br>FetchType.LAZY<br>FetchType.DEFAULT</p>
+<p>使用DEFAULT时可省略该属性</p>
+<p>1、FetchType.LAZY：懒加载，加载一个实体时，定义懒加载的属性不会马上从数据库中加载。</p>
+<p>2、FetchType.EAGER：急加载，加载一个实体时，定义急加载的属性会立即从数据库中加载。</p>
+<p><em>注解版联合查询语句需要分开单读写，即两个表单独查询后，合并结果集。</em></p>
+<p>一对一、一对多实例</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TbUserMapper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//嵌套对象：一对一</span></span><br><span class="line">    <span class="comment">//连接查询</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select u.*,c.* from tb_user u left join tb_cart c on u.cid=c.id"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">        <span class="meta">@Result</span>(id=<span class="keyword">true</span>,property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"usename"</span> ,column=<span class="string">"usename"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"password"</span> ,column=<span class="string">"password"</span>),</span><br><span class="line">        <span class="comment">// cart为嵌套对象</span></span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"cart.id"</span>,column=<span class="string">"cid"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"cart.money"</span>,column=<span class="string">"money"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"cart.count"</span>,column=<span class="string">"count"</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">List&lt;TbUser&gt; <span class="title">queryAllByOne1</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//嵌套对象：一对一</span></span><br><span class="line">    <span class="comment">//嵌套查询</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from tb_user"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">        <span class="meta">@Result</span>(id=<span class="keyword">true</span>,property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"usename"</span> ,column=<span class="string">"usename"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"password"</span> ,column=<span class="string">"password"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"cart"</span>,column=<span class="string">"cid"</span>,</span><br><span class="line">        <span class="comment">// column 为关联查询提供查询参数</span></span><br><span class="line">        one=<span class="meta">@One</span>(select=<span class="string">"org.qf.dao.TbCartMapper.queryById"</span>,fetchType=FetchType.EAGER))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">List&lt;TbUser&gt; <span class="title">queryAllByOne2</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//一对多的实现</span></span><br><span class="line">    <span class="comment">//嵌套查询</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select * from tb_user"</span>)</span><br><span class="line">    <span class="meta">@Results</span>(&#123;</span><br><span class="line">        <span class="meta">@Result</span>(id=<span class="keyword">true</span>,property=<span class="string">"id"</span>,column=<span class="string">"id"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"usename"</span> ,column=<span class="string">"usename"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"password"</span> ,column=<span class="string">"password"</span>),</span><br><span class="line">        <span class="meta">@Result</span>(property=<span class="string">"orders"</span>,column=<span class="string">"cid"</span>,</span><br><span class="line">        <span class="comment">// column 为关联查询提供查询参数</span></span><br><span class="line">        many=<span class="meta">@Many</span>(fetchType=FetchType.EAGER,select=<span class="string">"org.qf.dao.TbOrderMapper.queryByUid"</span>))</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function">List&lt;TbUser&gt; <span class="title">queryAllByMany1</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//连接查询</span></span><br><span class="line">    <span class="meta">@Select</span>(<span class="string">"select u.*,o.*,o.id odid from tb_user u left join tb_order o on u.id=o.uid"</span>)</span><br><span class="line">    <span class="meta">@ResultMap</span>(<span class="string">"org.qf.dao.TbUserMapper.rm1"</span>)</span><br><span class="line">    <span class="function">List&lt;TbUser&gt; <span class="title">queryAllByMany2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>org.qf.dao.TbUserMapper</code>关联查询</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Select</span>(<span class="string">"select * from cart where cartid=#&#123;cartid&#125;"</span>)</span><br><span class="line"><span class="function">cart <span class="title">queryByUid</span><span class="params">(String cartid)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>foreach<br>In查询 / 批量操作</p>
+<p>collection：表示传入过来的参数的数据类型。该参数为必选。要做 foreach 的对象，作为入参时，List 对象默认用 list 代替作为键，数组对象有 array 代替作为键，Map 对象没有默认的键。当然在作为入参时可以使用 @Param(“keyName”) 来设置键，设置 keyName 后，list,array 将会失效。 除了入参这种情况外，还有一种作为参数对象的某个字段的时候。举个例子：<br>如果 User 有属性 List ids。入参是 User 对象，那么这个 collection = “ids” 如果 User 有属性 Ids ids;其中 Ids 是个对象，Ids 有个属性 List id;入参是 User 对象，那么 collection = “ids.id”<br>如果传入的是单参数且参数类型是一个 List 的时候，collection 属性值为 list<br>如果传入的是单参数且参数类型是一个 array 数组的时候，collection 的属性值为 array<br>如果传入的参数是多个的时候，我们就需要把它们封装成一个 Map 了，当然单参数也可以封装成 map。<br>item： 循环体中的具体对象。支持属性的点路径访问，如 item.age,item.info.details。具体说明：在 list 和数组中是其中的对象，在 map 中是 value，该参数为必选。（它是每一个元素进行迭代时的别名）<br>index：在 list 和数组中,index 是元素的序号；在 map 中，index 是元素的 key。</p>
+<p>foreach标签主要用于构建in条件，他可以在sql中对集合进行迭代。如下：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">　　<span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteBatch"</span>&gt;</span> </span><br><span class="line"></span><br><span class="line">　　　　delete from user where id in</span><br><span class="line"></span><br><span class="line">　　　　<span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"array"</span> <span class="attr">item</span>=<span class="string">"id"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line"></span><br><span class="line">　　　　　　#&#123;id&#125;</span><br><span class="line"></span><br><span class="line">　　　　<span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"></span><br><span class="line">　　<span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>　　我们假如说参数为—-  int[] ids = {1,2,3,4,5}  —-那么打印之后的SQL如下：</p>
+<p>　　delete form user where id in (1,2,3,4,5)</p>
+<p>　　释义：</p>
+<p>　　　　collection ：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：List、数组、map集合，我在上面传的参数为数组，所以值为array</p>
+<p>　　　　item ： 表示在迭代过程中每一个元素的别名</p>
+<p>　　　　index ：表示在迭代过程中每次迭代到的位置（下标）</p>
+<p>　　　　open ：前缀</p>
+<p>　　　　close ：后缀</p>
+<p>　　　　separator ：分隔符，表示迭代时每个元素之间以什么分隔</p>
+<p>我们通常可以将之用到批量删除、添加等操作中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Select</span>(<span class="string">"&lt;script&gt;"</span></span><br><span class="line">          + <span class="string">"SELECT IDFA FROM t_xxx WHERE IDFA IN "</span></span><br><span class="line">          + <span class="string">"&lt;foreach item='item' index='index' collection='strList' open='(' separator=',' close=')'&gt;"</span></span><br><span class="line">              + <span class="string">"#&#123;item&#125;"</span></span><br><span class="line">          + <span class="string">"&lt;/foreach&gt;"</span></span><br><span class="line">      + <span class="string">"&lt;/script&gt;"</span>)</span><br><span class="line"><span class="meta">@Results</span>(value = &#123; <span class="meta">@Result</span>(column = <span class="string">"user_name"</span>, property = <span class="string">"username"</span>) &#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">getXxxList</span><span class="params">(@Param(<span class="string">"strList"</span>)</span> List&lt;String&gt; strList)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Mybatis 使用懒加载后，JSON 序列化错误</p>
+<p>为SpringMVC里默认序列化使用的 com.fasterxml.jackson.databind.ObjectMapper 设置其属性</p>
+<p>SerializationFeature.FAIL_ON_EMPTY_BEANS 为false。 </p>
+<p>3.配置json转换器属性SerializationFeature.FAIL_ON_EMPTY_BEANS为false</p>
+<p>springboot application.yml</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  jackson:</span></span><br><span class="line"><span class="attr">    serialization:</span> <span class="string">&#123;FAIL_ON_EMPTY_BEANS</span> <span class="string">:</span> <span class="literal">false</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者 闭该查询的懒加载 fetchType=”eager”</p>
+<p>2.返回的类加上注解</p>
+<p>@JsonIgnoreProperties(value = { “handler” })</p>
+<p>参数获取</p>
+<p>有三种方式：<br>1、就是普通写法，在文件中通过arg或param获取<br>2、使用Map集合，在文件中使用#{key}获取<br>3、使用注解@Param，在文件中使用#{名称}</p>
+<p>1、arg或param获取</p>
+<p>接口对应的方法：</p>
+<p>int update1(String xh,int id);</p>
+<p>映射文件的获取：</p>
+<!--多参之一：接口中直接写，使用arg0或param1获取值  -->
+<pre><code>&lt;!-- update tb_car set xh=#{arg0} where id=#{arg1} --&gt;
+&lt;update id=&quot;update1&quot; &gt;
+update tb_car set xh=#{param1} where id=#{param2}
+&lt;/update&gt;</code></pre><p>可以选择使用arg获取也可以使用param获取，但是arg从0开始，而param从1开始。</p>
+<p>2、Map集合传递多参数</p>
+<p>接口对应的方法：</p>
+<pre><code>//第二种：封装成集合
+int update3(Map&lt;String,Object&gt; map);</code></pre><p>映射文件获取</p>
+<pre><code>&lt;!--多参之二：Map集合  --&gt;
+&lt;update id=&quot;update3&quot; parameterType=&quot;map&quot;&gt;
+update tb_car set color=#{c} where id=#{id}
+&lt;/update&gt;</code></pre><p>3、注解@Param传递多参数</p>
+<p>接口对应的方法：</p>
+<p>int update5(@Param(“xh”) String x,@Param(“id”) int i);</p>
+<p>映射文件获取：</p>
+<!--多参之三：注解  -->
+<pre><code>&lt;update id=&quot;update5&quot; &gt;
+update tb_car set xh=#{xh} where id=#{id}
+&lt;/update&gt;</code></pre>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/1615584056/">Java 配置类与 XML</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/28/2937147501/">Markdown 语法简要</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/27/2001433166/">PS 快速将多张图片导入到同一图片中</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/23/618326027/">SpringBoot 整合 Mybatis 爬坑之路</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/30/4109869837/">SpringBoot 解决无法访问静态资源的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/17/3032275019/">Vuex 看这一篇就够了</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/01/17/3654333771/">Windows 电源模式大全</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/03/11/1584671401/">一次由 Mysql 驱动引发的 Bug</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/26/2494496423/">解决 Vue 用 Webpack 打包空白的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/06/05/167649745/">JVM 调优基本垃圾回收</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/09/18/2561778058/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/09/18/2561778058/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/09/18/2561778058/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 16.200901043685157px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 13.828590732950104px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 12.181378506593312px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 10.190867578250746px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 19.981670769388344px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 11.756977337249246px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 16.568653070619977px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 12.060957356380774px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.99220233816098px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 11.070894028775072px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 13.385558480248587px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 19.8442705506806px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 12.781537746757703px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 10.735093504703233px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 17.52078059597831px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 19.476681500461808px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 10.939125802611617px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 18.205077065404787px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 11.147784219426995px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 18.295270296671px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 16.3038950042551px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 12.88904844780125px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 10.588066372643864px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 18.35674279062944px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 14.590871110152822px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 18.618624832943535px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

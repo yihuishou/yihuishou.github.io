@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Java-Jwt 工具详解 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Java-Jwt 工具详解</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/09/01/3864825553/">Java-Jwt 工具详解</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-09-01
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/09/01/3864825553/">Java-Jwt 工具详解</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-09-01
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="JWT是什么？"><a href="#JWT是什么？" class="headerlink" title="JWT是什么？"></a>JWT是什么？</h3><p>JWTs是JSON对象的编码表示。JSON对象由零或多个名称/值对组成，其中名称为字符串，值为任意JSON值。</p>
+<p>JWT有助于在clear(例如在URL中)发送这样的信息，可以被信任为不可读(即加密的)、不可修改的(即签名)和URL – safe(即Base64编码的)。</p>
+<p>JWT的定义:</p>
+<p>JWT是一种用于双方之间传递安全信息的简洁的、URL安全的表述性声明规范。</p>
+<p>JWT作为一个开放的标准（RFC 7519），定义了一种简洁的，自包含的方法用于通信双方之间以Json对象的形式安全的传递信息。</p>
+<p>因为数字签名的存在，这些信息是可信的，JWT可以使用HMAC算法或者是RSA的公私秘钥对进行签名。</p>
+<p>JWT特点：</p>
+<p>简洁(Compact): 可以通过URL，POST参数或者在HTTP header发送，因为数据量小，传输速度也很快</p>
+<p>自包含(Self-contained)：负载中包含了所有用户所需要的信息，避免了多次查询数据库</p>
+<h3 id="JWT构成"><a href="#JWT构成" class="headerlink" title="JWT构成"></a>JWT构成</h3><p>JWT主要包含三个部分之间用英语句号’.’隔开<br>Header 头部<br>Payload 负载<br>Signature 签名<br>注意,顺序是 <code>header.payload.signature</code></p>
+<p>JWT的负载（Payload）</p>
+<p>负载（Payload）为JWT的第二部分。JWT的标准所定义了一下几个基本字段：<br>iss: 该JWT的签发者<br>sub: 该JWT的使用者<br>aud: 该JWT的接收者<br>exp(expires): Unix时间戳 过期时间<br>iat(issued at): Unix时间戳 签发时间</p>
+<p>Java-Jwt中特别定义Payload</p>
+<p>nbf(not before)：Unix时间戳 生效时间<br>jti：JwtID JWT的唯一标识<br>kid： 返回KeyID</p>
+<h3 id="Jwt使用三部曲"><a href="#Jwt使用三部曲" class="headerlink" title="Jwt使用三部曲"></a>Jwt使用三部曲</h3><p>添加依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.auth0<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-jwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="生成Jwt"><a href="#生成Jwt" class="headerlink" title="生成Jwt"></a>生成Jwt</h4><ol>
+<li>创建加密算法实例</li>
+</ol>
+<p><strong>HMAC256</strong> 表示加密算法 参数为加密密钥</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Algorithm algorithm = Algorithm.HMAC256(<span class="string">"securityKey"</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>设置Jwt负载<br>通过withClaim 或 with 相应熟悉来设置头负载和负载</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JWT.create().withClaim(<span class="string">"key"</span>, <span class="string">"value"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>签名<br>通过sign方法进行签名，需要传入加密算法实例</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">   JWT.create().withClaim(<span class="string">"key"</span>, <span class="string">"value"</span>).sign(algorithm);</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">   JWT.create().withClaim(<span class="string">"key"</span>, <span class="string">"value"</span>).sign(Algorithm.HMAC256(<span class="string">"securityKey"</span>));</span><br></pre></td></tr></table></figure>
+
+<h4 id="校验Jwt"><a href="#校验Jwt" class="headerlink" title="校验Jwt"></a>校验Jwt</h4><ol>
+<li>创建加密算法实例</li>
+</ol>
+<p><strong>HMAC256</strong> 表示加密算法 参数为加密密钥</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Algorithm algorithm = Algorithm.HMAC256(<span class="string">"securityKey"</span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建校验器实例<br>通过传入加密算法实例来创建校验器实例</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JWTVerifier jwtVerifier = JWT.require(algorithm).build();</span><br></pre></td></tr></table></figure>
+
+<p>在调用build()方法前可添加指定校验参数</p>
+<p>如withSubject()方法，当sub属性值不为”user”时将抛出异常<code>InvalidClaimException</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">JWTVerifier jwtVerifier = JWT.require(algorithm).withSubject(<span class="string">"user"</span>).build();</span><br></pre></td></tr></table></figure>
+
+<p><strong>需要特别注意关于调整校验签名时间的几个方法</strong></p>
+<p><code>acceptLeeway()、acceptExpiresAt()、acceptNotBefore()、acceptIssuedAt()</code>参数为Long类型参数，<strong>且必须是正整数</strong>，表示调整时间（单位/秒）</p>
+<p><code>acceptLeeway()</code>  nbf、iat 和 exp 延迟时间（单位/秒）</p>
+<p><code>acceptExpiresAt()</code> exp 延迟时间（单位/秒）</p>
+<p><code>acceptNotBefore()</code> nbf 延迟时间（单位/秒）</p>
+<p><code>acceptIssuedAt()</code> iat 延迟时间（单位/秒）</p>
+<ol start="3">
+<li>校验签名</li>
+</ol>
+<p>jwtVerifier.verify() 校验器实例方法返回解码后的结果</p>
+<p>如果签名内容失效则会抛出<code>SignatureVerificationException</code>异常</p>
+<p>当头部信息中包含<code>iat、exp、nbf</code>等属性时，verify()将自动进行校验。不包含的属性不进行校验。</p>
+<p>如JWT时间失效，则会抛出<code>TokenExpiredException</code>异常</p>
+<p>异常的父类为<code>JWTVerificationException</code>，可用于JWT失效处理。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DecodedJWT decodedJWT = jwtVerifier.verify(<span class="string">"JWTString"</span>);</span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">jwtVerifier.verify(<span class="string">"JWTString"</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="解码Jwt"><a href="#解码Jwt" class="headerlink" title="解码Jwt"></a>解码Jwt</h4><p>首先在调用校验方法时即可返回解码后类型为<code>DecodedJWT</code>的解码结果</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DecodedJWT decodedJWT = jwtVerifier.verify(<span class="string">"JWTString"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用decode()方法进行解码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">DecodedJWT decodedJWT = JWT.decode(JwtResoult);</span><br></pre></td></tr></table></figure>
+
+<p>之后便可调用<code>decodedJWT</code>的get方法获取负载的相关内容</p>
+<p><strong>Claim （声明，断言的意思）中的asXXX()方法</strong></p>
+<p>asBoolean(): 返回 Boolean 值,如果不能转换则返回null。<br>asInt():     返回 Int 值,如果不能转换则返回null。<br>asDouble():  返回 Double 值,如果不能转换则返回null。<br>asLong():    返回 Long 值，如果不能转换则返回null。<br>asString():  返回 String值，如果不能转换则返回null。<br>asDate():    返回 Date值，如果不能转换则返回null。 <em>必须是一个数字日期 (Unix 系统时间戳)。</em></p>
+<p><em>注意，JWT标准指定所有的数字日期值必须以秒为单位。</em></p>
+<p>自定义类型和集合:</p>
+<p>要获得作为集合的声明，您需要提供要转换的内容的类类型</p>
+<p>as(class):       返回指定类型的对象。 <em>对于集合，应该使用asArray和asList方法。</em><br>asMap():         返回被转换为 Map&lt;String, Object&gt; 的集合<br>asArray(class):  返回被转换为 Class [] 的数组，如果转换失败则返回null。<br>asList(class):   返回被转换为 List<class> 的集合，如果转换失败则返回null。</class></p>
+<p>由于Java-Jwt默认使用Jackson来处理负载中的Json。所以未进行配置的Jackson可能会由于转义字符的问题而产生下面的异常。</p>
+<p><strong>no String-argument constructor/factory method to deserialize from String value</strong></p>
+<p>解决办法是使用asString()转换为字符串再使用Json工具进行转换或者配置Jackson的以下配置</p>
+<p>允许出现特殊字符和转义符：<br><code>configure(Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);</code></p>
+<p>允许出现单引号：<br><code>configure(Feature.ALLOW_SINGLE_QUOTES, true);</code></p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/18/3575145262/">JDK 字符串截取的坑</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/01/3864825553/">Java-Jwt 工具详解</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/09/28/381957246/">SpringBoot 在 IDEA 中实现静态资源热部署</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/19/1177412043/">SpringBoot 读取配置文件中的信息</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/09/27/2553549325/">Telnet 与 SSH</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/08/17/3032275019/">Vuex 看这一篇就够了</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/3823926681/">巴克斯·诺尔范式语法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/10/2230869343/">我喜欢的排序算法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/02/21/783285968/">互联网金融产品的科普</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/09/01/3864825553/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/09/01/3864825553/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2018/09/01/3864825553/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 19.42060528850677px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 17.057102722486867px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 13.452310586833011px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 8.250454388201995px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 15.372426957661736px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 12.695368943927466px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 17.469645508844263px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 18.022404544126285px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 10.831447395641042px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 18.650192293033964px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 15.794848461586463px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 8.57031915430671px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 15.300073424932684px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 11.576881262833538px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 18.699426469906285px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 14.080803546831422px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 8.825496423006374px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 9.678227861750662px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 10.784317593595144px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 10.326985780191249px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 12.46755236452902px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 12.30536187954089px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 18.677039966211932px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 8.303898573500813px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 18.107180584419137px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 10.891428701186626px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

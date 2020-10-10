@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>Mybatis 的缺陷 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>Mybatis 的缺陷</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2019/03/08/4211700064/">Mybatis 的缺陷</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2019-03-08
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2019/03/08/4211700064/">Mybatis 的缺陷</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2019-03-08
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>Mybatis 的优势是由于采用模板映射，可以更自由的控制SQL语句和映射，可以使用很多的临时解决方案。但也真因为</p>
+<p>采用模板的自由化，导致数据库字段发生变更时会产生很大的问题。</p>
+<p>Mybatis是阿里这种大公司的御用框架，于是理所当然的成了绝大多数公司的标准选择</p>
+<p>（理由很简单＂大公司都在用，我们用，没毛病＂．．．），尤其是这些年，很多人放弃了数据库的范式，极端追求数据库表的＂扁平化＂，</p>
+<p>大量使用扁平的表结构，去掉关联关系，大量使用冗余，很多所谓的架构师还理所当然的说在服务化的场景下这是绝对正确的；</p>
+<p>很多人说java需要分层，什么view，facade，service，dao．．．这还不够，</p>
+<p>于是最终瞄准了DAO层～他们说将SQL拿出来独立出一个mapper层，说这样更容易管理，在代码里拼装SQL是上个世纪的做法，是一种很low的行为；</p>
+<p>反正．．个人无法苟同这种无脑的逻辑；</p>
+<p>我曾经无数次劝说别人放弃Mybatis这个坑；实际上，Mybatis让我的代码变得很糟糕，还让我重复干了好多事情～</p>
+<ol>
+<li>Mybatis是什么？毫不客气的说，这货只是一个＂SQL模板引擎＂，而不是一个完整的DAO解决方案；为什么我要使用DAO框架去处理一些东西？因为我懒啊，如果什么都需要我自己干我还需要它干嘛？？有人说Mybatis generator～Mybatis generator能解决你80％的问题吗？如果Mybatis generator能解决你80％的问题，甚至你说你根本不需要自己写SQL，使用生成的就好，那么．．nutz这种简单轻量的框架不是更好？？？相比直接使用JDBC API，Mybatis没有让事情变得更加单（你甚至可以自己写一个jdbc generator根据数据库去生成DAO代码，我相信这大多数人都能做到）你要写的依然需要自己写，甚至你需要来回维护多份东西（数据库DDL，数据库文档，SQL XML，你的Entity代码，你的dao(或者mapper)接口…）;</li>
+</ol>
+<p>想想当年，直接用hibernate写entity建模，生成DDL和常规通用接口代码，jekins+自己写的数据库文档生成工具，自动根据entity注释和数据库元数据生成markdown文档．．．不要太惬意哦；为什么我还要花那么多时间搞一个半自动的东西？（我的习惯是直接用java代码建模，然后直接生成数据库（物理模型），我甚至不需要手动添加索引，觉得entity哪个字段看着顺眼会用于查询加个注解就完了，然后用自己写得小工具生产通用dao层和数据库文档．．．很多事情只需要做一次就行了，用过hibernate建模的估计都知道我在说什么～）</p>
+<p>很多人拿Mybatis和hibernate比，说Mybatis怎么怎么好．．我只能说，呵呵了；这两者根本不是一个层面的东西好吧～</p>
+<ol start="2">
+<li>mybaties使用XML这种＂非人类的东西（众所周知XML这种东西设计目标就不是给人阅读的）＂作为模板语言，代码可读性可维护性多糟糕你自己打开Mybatis generator生成的东西或者别人写的mapper文件看看你就知道了，你还说好维护？呵呵了，我直接在java里拼接SQL可读性都比他好；XML中对大于＂＞＂＂＜＂这种特殊字符串还需要做转义处理，使得可读性变得更加糟糕；</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">'id != null and id gt 28'</span>&gt;</span><span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//这种方式和拼接字符串本质又有啥区别吗????不明白比在java中拼接字符串高明在哪里~</span><br><span class="line">//对于Java中拼接,还能用Java的语法优势,我甚至不需要熟悉MYBaXXX的XML语法~</span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectUseIf"</span> <span class="attr">parameterType</span>=<span class="string">"com.DynamicTestModel"</span> <span class="attr">resultMap</span>=<span class="string">"userMap"</span>&gt;</span></span><br><span class="line">       select * from t_user where 1=1</span><br><span class="line">       <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">'id != null'</span>&gt;</span></span><br><span class="line">            and id=#&#123;id&#125;</span><br><span class="line">       <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>你们觉得这种代码比拼接字符串高明在哪里？更容易阅读吗？？？？</p>
+<ol start="3">
+<li>无病呻吟的封装；</li>
+</ol>
+<p>一个DAO方法往往有多个参数，有些简单的接口，比如：</p>
+<p>/**</p>
+<ul>
+<li>getUser by username</li>
+<li></li>
+<li>@param username</li>
+<li>用户名,不能为空或者emptyStr</li>
+<li>@param tenantId</li>
+<li>租户ID,不能为空或者emptyStr</li>
+<li>@return 返回租户下username对应的的用户,如果不存在返回null</li>
+<li>/</li>
+</ul>
+<p>User getUser(String username,String tenantId);<br>我一直强调封装是必须有语义的，语义不随接口变化而变化，他在系统中存在单一的语义，同时最好能够复用～</p>
+<p>比如上面这个 User，你一看名称就知道它代表一个用户，这也符合单一功能原则～这个User在其他接口；比如</p>
+<p>List<user> listUsers(int first,int max) ;<br>也能重用~所以我觉得User是一个不错的封装～而下面的GetUserTo 就不是一个好的选择～</user></p>
+<p>这个接口语义很简单（也很明确，调用它的人一看就知道要干嘛）：根据username和租户id（做过多租户saas软件大概明白这是干嘛的）获得一个User对象～</p>
+<p>在mybaties中我们需要怎么办做呢？使用注解标记区分username和tenantId两个参数；</p>
+<p>User getUser(@param(“username”) String username,<br>@param(“tenantId” String tenantId);//多了一个注解,看着也还能接受~<br>或者，使用一个专门的TO或者map进行封装；</p>
+<p>User getUser(GetUserTo to);//个人觉得这不是好的封装<del>他的语义是接口级别的;其他接口而已这个封装几乎没有任何用处<br>User getUser(Map to);//上面的封装还能忍,无非多几个不能复用的,没有语义的,一次性的to对象,<br>//调用者跳入GetUserTo依然还能通过属性上的注释看到接口参数约束,可这个Map真的我就无法忍受了</del><br>再或者放弃干脆放弃命名参数，使用下标～#{0}</p>
+<p>多几行代码是小事情，可，这样真的优雅吗？?因为这个坑，我需要放弃一个优雅的模型和接口，从上到下提供各种蛋疼的封装～</p>
+<p>题外话：实际上，出现这个问题的原因也不能怪mybaties～我们知道我们通过反射可以获得方法的名称，参数类型和返回类型等信息（编译器和连接器通过参数个数和类型区分重载方法，不需要参数名称，所以参数名称在编译后被丢弃了），甚至泛型信息等元数据，但我们无法获得一个接口的＂参数名称＂（至少早期的java版本是这样的），class文件中的参数名称是arg0 arg1；运行时候这些参数名称虚拟机也不会使用和保留;</p>
+<p>那么？除了注解，有什么办法在运行时获得接口参数吗？</p>
+<p>java6的时代（那时候自己在写一个框架，需要获得接口参数名称）我费劲心思找到了一个　paul-hammant/paranamer　；这个东西～</p>
+<p>实际上，（基本思想：你无法从class中获得这些元数据，那么你只能从源代码出发，在编译的时候获取这部分数据了～）你可以解析你的源代码，然后从源代码中抽离出方法的参数名称，生成一个参数名称映射文件，运行的时候读取这个额外生产的映射文件来获取参数名；</p>
+<p>这种方式的好处是在于兼容性；而，问题是在于，每次改变接口你都需要重新生成一遍这个映射文件；</p>
+<p>对于java8可以添加 -parameters 编译参数，让编译器保留参数名称信息；但这依然会带来很多问题，比如字节码变大，兼容性等；</p>
+<p>以上两种方法都不是很好，所以mybaties只能选择用目前提供的三种比较恶心的方式去处理这个问题了～</p>
+<ol start="4">
+<li>很难优雅的管理区分＂手写SQL XML＂和＂自动生成的SQL XML＂；</li>
+</ol>
+<p>很多时候我们使用Mybatis generator生成通用的mapper，如果将自己的SQL也写在里面，重新生成的时候会覆盖掉我们的自定义的东西，或者需要重新合并，非常麻烦；所以对于特殊的需求我们去要用另一个XML文件，分开管理他们～这已经是目前能想到的最优雅的方式；可..真的优雅吗？反正我觉得挺别扭的～</p>
+<p>知乎用户：数据库和ORM如何优雅的添加字段？</p>
+<ol start="5">
+<li>代码生成是＂编译时（实际上是编译前）＂而＂非运行时＂；</li>
+</ol>
+<p>很多小公司往往：ａ，需求不明确；ｂ，开发时间紧，没过多的时间做完善的设计；</p>
+<p>于是，代码写着写着需要添加一个字段两个字段是常有的事儿；于是你需要：ａ，修改数据库增加字段，生成修改SQL；２，运行generator重新生成一遍；３，手动修改自定义部分，往往有多处地方修改（自定义的TO．XML多出地方包括头上的映射信息，手写SQL里面的各种地方），一不小心就改错了或者漏了（我相信任何用过Mybatis的人都遇到过这个问题）～；４，你可能需要维护一份数据库文档，然后你得打开你的word文档，然后添加一个字段～</p>
+<p>．．．．</p>
+<p>老这么折腾，你的时间是多没价值啊？</p>
+<p>我们知道hibernate，包括国产的nutz这种框架在运行时生成SQL的～将SQL的生成推迟到运行的时候；</p>
+<p>这种＂延迟SQL生成＂的方式或许有有那么一点点的性能上代价（生成的SQL是有缓存的～而且你真的无法忍受吗？）</p>
+<p>可带来的好处是很直观的～添加一个字段？我在entity中加个字段就OK了？</p>
+<p>我需要干别的吗？或许也需要写个文档啥的，出数据库文档你自己不能写个工具吗？或者ＰＤ？？</p>
+<ol start="6">
+<li>调试问题／代码重构</li>
+</ol>
+<p>拼接字符串这种丑陋的方式至少能调试的？？？可你告诉我？放在XML中的SQL怎么调试？？？？？？</p>
+<p>用java写的好处是java能在语法级别给出错误提示，当然还有ＩＤＥ强大的重构功能；XML？搜一下关键字然后一行一行改吧～</p>
+<ol start="7">
+<li>手写的SQL未必比hibernate生成的SQL效率高～</li>
+</ol>
+<p>可能因为项目时间的关系，有的人写SQL就不怎么讲究了，比如select * 这种不会出现在hibernate生成的SQL里～</p>
+<ol start="8">
+<li>缓存问题～</li>
+</ol>
+<p>（这里说的是二级缓存，不是thread级别的缓存）</p>
+<p>hibernate缓存？我只需要简单配置一下 ?就像这样?</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Secondary Cache --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.use_second_level_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.use_query_cache"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hibernate.cache.provider_class"</span>&gt;</span></span><br><span class="line">org.hibernate.cache.EhCacheProvider</span><br><span class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我就能简单开启二级缓缓存了～包括查询缓存（KEY是SQL），数据缓存(KEY是实体ID)</p>
+<p>替换掉这个EhCacheProvider，你就可以用你喜欢的任何缓存，比如OSCache,Memcached,或者redis…了～（当然，用的不好还是会出问题的，尤其是那个查询缓存，慎重～）</p>
+<p>mybaties缓存？你自己慢慢写吧～</p>
+<p>事实上～mybaties这种不完备的非实体映射的ＤＡＯ框架限制了你大概只能＂显式＂的调用缓存接口～</p>
+<ol start="9">
+<li>分表分库／审计／全文索引问题～</li>
+</ol>
+<p>hibernate shards；hibernate Envers；hibernate search；．．．</p>
+<p>hibernate有一系列的解决方案帮你做这些事情；</p>
+<p>mybaties？？？你自己慢慢写吧～</p>
+<ol start="10">
+<li>糟糕的实现；</li>
+</ol>
+<p>曾经简单看了一下mybaties的代码～因为时间长了，代码质量好不好已经不太记得了；</p>
+<p>不过：我记得当时为了数据加密需要实现自定义的拦截器，看了一下mybaties拦截器的实现～</p>
+<p>发现拦截方法只有update（还有其他几个），并没有insert和delete（他们都走update逻辑，代码实现也是调用同一个方法）～</p>
+<p>有人提出这是个bug，Mybatis并没有承认这是个bug～（不知道现在什么情况）</p>
+<ol start="11">
+<li>关联查询</li>
+</ol>
+<p>Mybatis 连接多张表？还能自动生成了吗？好吧，我觉得这是噩梦～至少比DBUtils或者手写SQL来说要麻烦的多得多～</p>
+<p>于是你说，我们不需要关联表，面向服务的开发是不需要关联的，不需要任何外键约束的，关联表是不合理的…..balabla….</p>
+<p>好吧，你赢了～或者你的业务足够简单～</p>
+<ol start="12">
+<li>满世界找文件～</li>
+</ol>
+<p>文件多了，很多东西分开或许是好事，或许不是，因为这意味着，你需要这一个东西你得满世界找，本来改一个地方，你现在需要改多出地方；很多东西是有代价的，分层，业务拆分，服务拆分．．．需要找一个平衡点，而非毫无底线，越细越好～好的方式一定是简单的，我们是从实际需求出发，而非从某个完美设计或者构想出发，技术是为人类服务的，而不是折腾人的，很多东西是没必要的，比如XML中写SQL这种东西，你说分开容易管理，我只能呵呵了～</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/10/10/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/546886075/">Java 变量第二个字母大写的问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/1615584056/">Java 配置类与 XML</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/05/3348988487/">SpringBoot 中使用非 Maven 仓库中的 Jar 包</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/07/2218955800/">StringBuilder().append() 方法真的比 + 更快吗</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/01/18/3499735000/">分布式调用的第一原则就是不要分布式</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/13/4032644071/">如何使用 IDEA 打包 JavaFX 为 exe 程序</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/3823926681/">巴克斯·诺尔范式语法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/06/13/1754570926/">逃离弱鸡业务循环</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/11/09/3649790665/">SpringDataJPA 生成表列名的控制选项</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/2921176476/">跟上Java8 Lambda</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2019/03/08/4211700064/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/08/4211700064/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2019/03/08/4211700064/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 13.975007276816658px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/随笔/" style="font-size: 9.070986535119658px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 10.518422773162538px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/大前端/" style="font-size: 13.328553962354755px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 11.853446221098626px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 16.169145756283015px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 10.899429138220796px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.233264619068049px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/Java/" style="font-size: 8.621903436403615px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 12.000526269875802px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 18.87209051647498px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 12.125636974721228px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 16.119192958915878px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 18.04263040660617px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/SQL/" style="font-size: 11.847799967052982px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 16.244509956993372px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 17.55136713795943px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 10.62295430329479px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 12.443365594757672px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 13.756672022467999px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 12.272651298609077px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Docker/" style="font-size: 10.630231206999115px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 15.741358087756037px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 14.261275363560259px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 19.45663433890385px;" class="tag-cloud-link">SpringCloud</a>
+    
+    <a href="/tags/Redis/" style="font-size: 15.26868748353483px;" class="tag-cloud-link">Redis</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>
