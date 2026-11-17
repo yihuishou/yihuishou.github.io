@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="author" content="挥手の骑士">
+    
+    
+    
+    
+    
+    
+    <title>我喜欢的排序算法 | 骑士の物语</title>
+    <link href="https://yihuishou.github.io" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'picHD_1.png,picHD_2.png,picHD_3.png,picHD_4.png,picHD_5.png,picHD_6.png,picHD_7.png,picHD_8.png,picHD_9.png,picHD_10.png,picHD_11.png,picHD_12.png,picHD_13.png,picHD_14.png,picHD_15.png,picHD_16.png,picHD_17.png,picHD_18.png,picHD_19.png,picHD_20.png,picHD_21.png,picHD_22.png,picHD_23.png,picHD_24.png,picHD_25.png,picHD_26.png,picHD_27.png,picHD_28.png,picHD_29.png,picHD_30.png,picHD_31.png,picHD_32.png,picHD_33.png,picHD_34.png,picHD_35.png,picHD_36.png,picHD_37.png,picHD_38.png,picHD_39.png,picHD_40.png,picHD_41.png,picHD_42.png'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://yihuishou.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">骑士の物语</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://yihuishou.github.io">骑士の物语</a>
+        >
+        <span>我喜欢的排序算法</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2017/11/10/2230869343/">我喜欢的排序算法</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2017-11-10
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2017/11/10/2230869343/">我喜欢的排序算法</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2017-11-10
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Java/">Java</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h3 id="鸡尾酒排序（双重冒泡排序）"><a href="#鸡尾酒排序（双重冒泡排序）" class="headerlink" title="鸡尾酒排序（双重冒泡排序）"></a>鸡尾酒排序（双重冒泡排序）</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] <span class="title function_">cocktailSort</span><span class="params">(<span class="type">int</span>[] src)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//将最小值排到队尾</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; src.length/<span class="number">2</span> ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i ; j &lt; src.length-i-<span class="number">1</span> ; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(src[j] &lt; src[j+<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> src[j];</span><br><span class="line">                src[j] = src[j+<span class="number">1</span>];</span><br><span class="line">                src[j+<span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;交换小&quot;</span>+Arrays.toString(src));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将最大值排到队头</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> src.length-<span class="number">1</span>-(i+<span class="number">1</span>); j &gt; i ; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(src[j] &gt; src[j-<span class="number">1</span>])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> src[j];</span><br><span class="line">                src[j] = src[j-<span class="number">1</span>];</span><br><span class="line">                src[j-<span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;交换大&quot;</span>+Arrays.toString(src));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;第&quot;</span>+i+<span class="string">&quot;次排序结果：&quot;</span>+Arrays.toString(src));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><p>希尔排序严格来说是基于插入排序的思想，又被称为缩小增量排序。<br>　　具体流程如下：<br>　　1、将包含n个元素的数组，分成n&#x2F;2个数组序列，第一个数据和第n&#x2F;2+1个数据为一对…<br>　　2、对每对数据进行比较和交换，排好顺序；<br>　　3、然后分成n&#x2F;4个数组序列，再次排序；<br>　　4、不断重复以上过程，随着序列减少并直至为1，排序完成。</p>
+<p>　对于插入排序而言，如果原数组是基本有序的，那排序效率就可大大提高。另外，对于数量较小的序列使用直接插入排序，会因需要移动的数据量少，其效率也会提高。因此，希尔排序具有较高的执行效率。<br>　　希尔排序并不稳定，O(1)的额外空间，时间复杂度为O(N*(logN)^2)。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] arr)</span> &#123;</span><br><span class="line">        <span class="comment">// i表示希尔排序中的第n/2+1个元素（或者n/4+1）</span></span><br><span class="line">        <span class="comment">// j表示希尔排序中从0到n/2的元素（n/4）</span></span><br><span class="line">        <span class="comment">// r表示希尔排序中n/2+1或者n/4+1的值</span></span><br><span class="line">        <span class="type">int</span> i, j, r, tmp;</span><br><span class="line">        <span class="comment">// 划组排序</span></span><br><span class="line">        <span class="keyword">for</span>(r = arr.length / <span class="number">2</span>; r &gt;= <span class="number">1</span>; r = r / <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(i = r; i &lt; arr.length; i++) &#123;</span><br><span class="line">                tmp = arr[i];</span><br><span class="line">                j = i - r;</span><br><span class="line">                <span class="comment">// 一轮排序</span></span><br><span class="line">                <span class="keyword">while</span>(j &gt;= <span class="number">0</span> &amp;&amp; tmp &lt; arr[j]) &#123;</span><br><span class="line">                    arr[j+r] = arr[j];</span><br><span class="line">                    j -= r;</span><br><span class="line">                &#125;</span><br><span class="line">                arr[j+r] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(i + <span class="string">&quot;:&quot;</span> + Arrays.toString(arr));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>算法思想：基于分治的思想，是冒泡排序的改进型。首先在数组中选择一个基准点（该基准点的选取可能影响快速排序的效率，后面讲解选取的方法），然后分别从数组的两端扫描数组，设两个指示标志（lo指向起始位置，hi指向末尾)，首先从后半部分开始，如果发现有元素比该基准点的值小，就交换lo和hi位置的值，然后从前半部分开始扫秒，发现有元素大于基准点的值，就交换lo和hi位置的值，如此往复循环，直到lo&gt;&#x3D;hi,然后把基准点的值放到hi这个位置。一次排序就完成了。以后采用递归的方式分别对前半部分和后半部分排序，当前半部分和后半部分均有序时该数组就自然有序了。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">partition</span><span class="params">(<span class="type">int</span> []array,<span class="type">int</span> lo,<span class="type">int</span> hi)</span>&#123;</span><br><span class="line">        <span class="comment">//固定的切分方式</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">key</span><span class="operator">=</span>array[lo];</span><br><span class="line">        <span class="keyword">while</span>(lo&lt;hi)&#123;</span><br><span class="line">            <span class="keyword">while</span>(array[hi]&gt;=key&amp;&amp;hi&gt;lo)&#123;<span class="comment">//从后半部分向前扫描</span></span><br><span class="line">                hi--;</span><br><span class="line">            &#125;</span><br><span class="line">            array[lo]=array[hi];</span><br><span class="line">            <span class="keyword">while</span>(array[lo]&lt;=key&amp;&amp;hi&gt;lo)&#123;从前半部分向后扫描</span><br><span class="line">                lo++;</span><br><span class="line">            &#125;</span><br><span class="line">            array[hi]=array[lo];</span><br><span class="line">        &#125;</span><br><span class="line">        array[hi]=key;</span><br><span class="line">        <span class="keyword">return</span> hi;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">sort</span><span class="params">(<span class="type">int</span>[] array,<span class="type">int</span> lo ,<span class="type">int</span> hi)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(lo&gt;=hi)&#123;</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> <span class="variable">index</span><span class="operator">=</span>partition(array,lo,hi);</span><br><span class="line">        sort(array,lo,index-<span class="number">1</span>);</span><br><span class="line">        sort(array,index+<span class="number">1</span>,hi); </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            挥手の骑士
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2026/11/17/2/"></a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/08/18/55226946/">Agent v3.2.1 插件激活码</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/2412014068/">干掉 CMS 未来属于 ZGC</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/21/4075219928/">OpenJDK 和 OracleJDK 的抉择</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/20/368594680/">Flutter 音乐播放器开发之路（一）</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/3650854255/">XaaS 到底是什么？</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/14/466733536/">给 Flutter 项目初始化构建提个速</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/4125727764/">JavaScript 中 Splice 函数与数组塌陷</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/06/12/1586694155/">在 Java 中缩写 Lambda 表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/29/472996778/">Jackson 序列化 Hibernate 对象问题</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/21/3764698259/">Mybatis 中注解式多表关联查询</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/24/2553779906/">PL/SQL Developer 连接远程数据库</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/04/23/432974338/">Swagger 注解说明</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/05/22/1391388246/">TeamViewer 在局域网中使用的方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/10/31/3721925788/">敏捷软件开发宣言</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2019/05/14/1042058289/">用 JavaScript 收集用户浏览数据</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/18/2561778058/">用纯注解方式来使用 Mybatis</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2020/07/15/4036766117/">让 Windows 10 开机自动登录</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/09/03/3512719846/">跟上Java8 流中的数据</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2017/11/10/2230869343/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/11/10/2230869343/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                
+                
+                <li>
+                    <a href="/2017/11/10/2230869343/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/SpringSecurity/" style="font-size: 19.984551430233424px;" class="tag-cloud-link">SpringSecurity</a>
+    
+    <a href="/tags/IDEA/" style="font-size: 11.220418828330324px;" class="tag-cloud-link">IDEA</a>
+    
+    <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10.014269690275983px;" class="tag-cloud-link">随笔</a>
+    
+    <a href="/tags/Xml/" style="font-size: 9.813123633506216px;" class="tag-cloud-link">Xml</a>
+    
+    <a href="/tags/%E5%A4%A7%E5%89%8D%E7%AB%AF/" style="font-size: 11.509572900085836px;" class="tag-cloud-link">大前端</a>
+    
+    <a href="/tags/Flutter/" style="font-size: 16.38023500917753px;" class="tag-cloud-link">Flutter</a>
+    
+    <a href="/tags/Dart/" style="font-size: 9.764595793955266px;" class="tag-cloud-link">Dart</a>
+    
+    <a href="/tags/Go/" style="font-size: 16.06572470507562px;" class="tag-cloud-link">Go</a>
+    
+    <a href="/tags/Java/" style="font-size: 19.961632914491517px;" class="tag-cloud-link">Java</a>
+    
+    <a href="/tags/JavaScript/" style="font-size: 17.923168423901433px;" class="tag-cloud-link">JavaScript</a>
+    
+    <a href="/tags/Mysql/" style="font-size: 11.353133800017012px;" class="tag-cloud-link">Mysql</a>
+    
+    <a href="/tags/Oracle/" style="font-size: 17.27231691384061px;" class="tag-cloud-link">Oracle</a>
+    
+    <a href="/tags/Photoshop/" style="font-size: 16.230499523627532px;" class="tag-cloud-link">Photoshop</a>
+    
+    <a href="/tags/Restful/" style="font-size: 13.237591776445692px;" class="tag-cloud-link">Restful</a>
+    
+    <a href="/tags/RPG-Maker-MV/" style="font-size: 15.819485286098987px;" class="tag-cloud-link">RPG Maker MV</a>
+    
+    <a href="/tags/Redis/" style="font-size: 12.659387108178553px;" class="tag-cloud-link">Redis</a>
+    
+    <a href="/tags/SQL/" style="font-size: 15.213473359135708px;" class="tag-cloud-link">SQL</a>
+    
+    <a href="/tags/SpringBoot/" style="font-size: 9.882318243213192px;" class="tag-cloud-link">SpringBoot</a>
+    
+    <a href="/tags/Swagger/" style="font-size: 18.611095418794832px;" class="tag-cloud-link">Swagger</a>
+    
+    <a href="/tags/Windows/" style="font-size: 14.878510494359832px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/Deepleanring/" style="font-size: 16.97806998763052px;" class="tag-cloud-link">Deepleanring</a>
+    
+    <a href="/tags/Vue/" style="font-size: 15.71936827307086px;" class="tag-cloud-link">Vue</a>
+    
+    <a href="/tags/Docker/" style="font-size: 12.568698136043032px;" class="tag-cloud-link">Docker</a>
+    
+    <a href="/tags/Hexo/" style="font-size: 13.031467459508544px;" class="tag-cloud-link">Hexo</a>
+    
+    <a href="/tags/VsCode/" style="font-size: 16.965673029768293px;" class="tag-cloud-link">VsCode</a>
+    
+    <a href="/tags/SpringCloud/" style="font-size: 11.73715344632539px;" class="tag-cloud-link">SpringCloud</a>
+    
+</div>
+                
+                
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://noodlefighter.com" target="_blank">虾包</a>
+    </li>
+    
+    <li>
+        <a href="https://loli.la" target="_blank">超级叫了</a>
+    </li>
+    
+    <li>
+        <a href="https://konata9.github.io" target="_blank">吃土的小此方</a>
+    </li>
+    
+</div>
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/yihuishou" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://gite.com/yihuishou" target="_blank">码云</a>
+    </li>
+    
+    <li>
+        <a href="https://www.zhihu.com/people/hei-yi-tian-shi-48" target="_blank">知乎</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 挥手の骑士 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
